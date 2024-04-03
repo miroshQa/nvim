@@ -5,6 +5,7 @@ return {
 			options = {
 				theme = "catppuccin",
 			},
+      disabled_filetypes = {"NVimTree"}
 		})
 	end,
 }
