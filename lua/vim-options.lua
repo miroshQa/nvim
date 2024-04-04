@@ -1,8 +1,8 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-vim.opt.autowriteall = true
-vim.opt.autochdir = true
+-- vim.opt.autowriteall = true
+-- vim.opt.autochdir = true
 vim.opt.swapfile = false
 
 vim.opt.tabstop = 2

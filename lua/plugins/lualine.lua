@@ -5,7 +5,7 @@ return {
 			options = {
 				theme = "catppuccin",
 			},
-      disabled_filetypes = {"NVimTree"}
+       extensions = {"nvim-tree"}
 		})
 	end,
 }
