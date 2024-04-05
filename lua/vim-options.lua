@@ -4,6 +4,7 @@ vim.g.maplocalleader = ' '
 -- vim.opt.autowriteall = true
 -- vim.opt.autochdir = true
 vim.opt.swapfile = false
+-- vim.opt.autochdir = true
 
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2

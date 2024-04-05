@@ -5,7 +5,7 @@ return {
 			options = {
 				theme = "catppuccin",
 			},
-       extensions = {"nvim-tree"}
+       extensions = {"neo-tree"}
 		})
 	end,
 }
