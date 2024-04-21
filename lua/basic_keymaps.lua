@@ -18,7 +18,7 @@ vim.keymap.set('n', '<right>', '<C-w><C-l>', { desc = 'Move focus to the right w
 vim.keymap.set('n', '<down>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<up>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
---ignore arrow keys. Be in normal mode man!
+--ignore arrow keys. Be in normal mode man
 vim.keymap.set('i', '<left>', '')
 vim.keymap.set('i', '<right>', "")
 vim.keymap.set('i', '<down>', "")

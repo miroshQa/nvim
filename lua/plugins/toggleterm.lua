@@ -26,7 +26,7 @@ return {
       vim.keymap.set("n", "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", {desc = "Terminal float mode"})
       vim.keymap.set("n", "<leader>tt", "<cmd>ToggleTerm direction=tab<cr>", {desc = "Terminal tab mode"})
       vim.keymap.set("n", "<leader>tv", "<cmd>ToggleTerm direction=vertical<cr>", {desc = "Terminal vertical mode"})
-      vim.keymap.set("n", "<leader>th", "<cmd>ToggleTerm direction=horizontal size=18<cr>", {desc = "Terminal horizontal mode"})
+      vim.keymap.set("n", "<leader>th", "<cmd>ToggleTerm direction=horizontal<cr>", {desc = "Terminal horizontal mode"})
     end
   },
 }
