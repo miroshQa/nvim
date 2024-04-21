@@ -7,8 +7,6 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagn
 vim.keymap.set('n', '<leader>le', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-vim.keymap.set('n', '<leader>t', '<cmd>terminal<CR>')
 
 local api = vim.api
 api.nvim_command 'autocmd TermOpen * startinsert' -- starts in insert mode
@@ -20,6 +18,12 @@ vim.keymap.set('n', '<right>', '<C-w><C-l>', { desc = 'Move focus to the right w
 vim.keymap.set('n', '<down>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<up>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+--ignore arrow keys. Be in normal mode man!
+vim.keymap.set('i', '<left>', '')
+vim.keymap.set('i', '<right>', "")
+vim.keymap.set('i', '<down>', "")
+vim.keymap.set('i', '<up>', "")
+
 -- window management
 vim.keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" }) -- split window vertically
 vim.keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" }) -- split window horizontally
@@ -28,3 +32,7 @@ vim.keymap.set("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current spli
 
 vim.keymap.set('v', '<', '<gv', { noremap = true })
 vim.keymap.set('v', '>', '>gv', { noremap = true })
+
+-- easy tabs
+--vim.keymap.set("n", "<tab>", "<cmd>tabn<CR>", {desc = "Go to next tab"})
+--vim.keymap.set("n", "<S-tab>", "<cmd>tabn<CR>", {desc = "Go to prev tab"})

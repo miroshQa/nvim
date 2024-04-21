@@ -52,6 +52,9 @@ vim.opt.scrolloff = 10
 
 vim.opt.hlsearch = true
 
+vim.opt.autoread = true
+-- vim.opt.autochdir = true Выключил после того как установил project telescope
+
 -- turn off auto commenting next line
 vim.opt_local.formatoptions:remove("cro")
 
