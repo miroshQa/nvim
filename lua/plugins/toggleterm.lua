@@ -23,10 +23,6 @@ return {
       })
 
       vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-      vim.keymap.set("n", "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", {desc = "Terminal float mode"})
-      vim.keymap.set("n", "<leader>tt", "<cmd>ToggleTerm direction=tab<cr>", {desc = "Terminal tab mode"})
-      vim.keymap.set("n", "<leader>tv", "<cmd>ToggleTerm direction=vertical<cr>", {desc = "Terminal vertical mode"})
-      vim.keymap.set("n", "<leader>th", "<cmd>ToggleTerm direction=horizontal<cr>", {desc = "Terminal horizontal mode"})
     end
   },
 }
