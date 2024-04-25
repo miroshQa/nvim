@@ -84,6 +84,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[F]ind [D]iagnostics' })
     vim.keymap.set('n', '<leader>f.', builtin.oldfiles, { desc = '[F]ind Recent Files ("." for repeat)' })
     vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = '[F]ind open buffers' })
+    vim.keymap.set("n", '<leader>fd', builtin.diagnostics, {desc = "[F]ind diagnostitcs for project"})
     -- vim.keymap.set("n", "<leader>ft", builtin.colorscheme, {desc = "[F]ind Theme"})
     -- It is just a cool but useless toy, so i don't use it anymore
 
