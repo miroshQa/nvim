@@ -79,14 +79,20 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[F]ind [H]elp' })
     vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[F]ind [K]eymaps' })
     vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[F]ind [F]iles' })
+    vim.keymap.set("n", "<leader>fa", "<cmd>Telescope find_files hidden=true<cr>", {desc = "Find All files"})
     vim.keymap.set('n', '<leader>fs', builtin.builtin, { desc = '[F]ind [S]elect Telescope' })
     vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[F]ind by [G]rep' })
     vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[F]ind [D]iagnostics' })
     vim.keymap.set('n', '<leader>f.', builtin.oldfiles, { desc = '[F]ind Recent Files ("." for repeat)' })
     vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = '[F]ind open buffers' })
     vim.keymap.set("n", '<leader>fd', builtin.diagnostics, {desc = "[F]ind diagnostitcs for project"})
-    -- vim.keymap.set("n", "<leader>ft", builtin.colorscheme, {desc = "[F]ind Theme"})
-    -- It is just a cool but useless toy, so i don't use it anymore
+    vim.keymap.set("n", '<leader>fr', builtin.registers, {desc = "[F]ind registers and paste"})
+    vim.keymap.set("n", "<leader>ls", builtin.lsp_document_symbols, {desc = "Lsp document symbols"})
+    vim.keymap.set("n", "<leader>lS", builtin.lsp_workspace_symbols, {desc = "Lsp lsp_workspace_symbols symbols"})
+
+
+    vim.keymap.set("n", "<leader>ft", builtin.colorscheme, {desc = "[F]ind Theme"})
+    -- It is just a cool but useless toy, so i don't use it anymore. I can do this using <leader>fs : theme
 
     -- Slightly advanced example of overriding default behavior and theme
     vim.keymap.set('n', '<leader>/', function()

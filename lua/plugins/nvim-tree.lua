@@ -1,5 +1,5 @@
 -- https://www.reddit.com/r/neovim/comments/wvcz64/nvimtreelua_how_to_center_floating_window/
-local HEIGHT_RATIO = 0.8 -- You can change this
+local HEIGHT_RATIO = 0.7 -- You can change this
 local WIDTH_RATIO = 0.6  -- You can change this too
 
 return {
@@ -25,6 +25,7 @@ return {
     relativenumber = true,
     float = {
       enable = true,
+      quit_on_focus_loss = true,
       open_win_config = function()
         local screen_w = vim.opt.columns:get()
         local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
