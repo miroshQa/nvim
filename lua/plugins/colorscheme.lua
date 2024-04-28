@@ -5,8 +5,8 @@ return {
     name = "catppuccin",
     priority = 1000,
     config = function()
-      vim.cmd([[colorscheme catppuccin-frappe]])
-    end,
+      vim.cmd.colorscheme "catppuccin-frappe"
+    end
   },
 
   {
@@ -17,5 +17,7 @@ return {
     "Everblush/nvim",
     name = "everblush",
   },
-  { "Mofiqul/dracula.nvim" },
+  { "sainnhe/everforest" },
 }
+
+
