@@ -25,6 +25,7 @@ vim.keymap.set('i', '<up>', "")
 vim.keymap.set('v', '<', '<gv', { noremap = true })
 vim.keymap.set('v', '>', '>gv', { noremap = true })
 
--- easy tabs
---vim.keymap.set("n", "<tab>", "<cmd>tabn<CR>", {desc = "Go to next tab"})
---vim.keymap.set("n", "<S-tab>", "<cmd>tabn<CR>", {desc = "Go to prev tab"})
+-- vim.kemap.set("n", "<leader>q", "<cmd>q<CR>", {desc = "Quit window"})
+
+-- vim.keymap.set("n", "<tab>", "<cmd>tabn<CR>", {desc = "Go to next tab"})
+-- vim.keymap.set("n", "<S-tab>", "<cmd>tabn<CR>", {desc = "Go to prev tab"})
