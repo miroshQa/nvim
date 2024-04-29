@@ -1,23 +1,33 @@
 return {
 
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+	},
+
+	{
+		"rebelot/kanagawa.nvim",
+	},
+
+	{
+		"Everblush/nvim",
+		name = "everblush",
+	},
+	{ "sainnhe/everforest" },
+	{
+		"luisiacc/gruvbox-baby",
     priority = 1000,
-    config = function()
-      vim.cmd.colorscheme "catppuccin-frappe"
-    end
-  },
+		config = function()
+      vim.g.gruvbox_baby_use_original_palette = true
 
-  {
-    "rebelot/kanagawa.nvim",
-  },
-
-  {
-    "Everblush/nvim",
-    name = "everblush",
-  },
-  { "sainnhe/everforest" },
+			require("lualine").setup({
+				options = {
+					-- ... your lualine config,
+					theme = "gruvbox-baby",
+					-- ... your lualine config,
+				},
+			})
+			vim.cmd.colorscheme("gruvbox-baby")
+		end,
+	},
 }
-
-

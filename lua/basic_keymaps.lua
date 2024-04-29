@@ -24,8 +24,5 @@ vim.keymap.set('i', '<up>', "")
 
 vim.keymap.set('v', '<', '<gv', { noremap = true })
 vim.keymap.set('v', '>', '>gv', { noremap = true })
+vim.keymap.set("n", "g.", "<cmd>b#<CR>", {desc = "Go to previous buffer (. - most recent)"})
 
--- vim.kemap.set("n", "<leader>q", "<cmd>q<CR>", {desc = "Quit window"})
-
--- vim.keymap.set("n", "<tab>", "<cmd>tabn<CR>", {desc = "Go to next tab"})
--- vim.keymap.set("n", "<S-tab>", "<cmd>tabn<CR>", {desc = "Go to prev tab"})

@@ -44,9 +44,15 @@ return { -- Fuzzy Finder (files, lsp, etc)
       --  All the info you're looking for is in `:help telescope.setup()`
       --
       defaults = {
+        sorting_strategy = "ascending",
+        layout_strategy = "center",
         layout_config = {
-          horizontal = {
-            preview_cutoff = 0,
+
+          center = {
+            height = 0.4,
+            preview_cutoff = 40,
+            prompt_position = "top",
+            width = 0.5
           },
         },
 
@@ -77,14 +83,15 @@ return { -- Fuzzy Finder (files, lsp, etc)
     -- See `:help telescope.builtin`
     local builtin = require 'telescope.builtin'
     vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[F]ind [H]elp' })
-    vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[F]ind [K]eymaps' })
     vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[F]ind [F]iles' })
     vim.keymap.set("n", "<leader>fa", "<cmd>Telescope find_files hidden=true<cr>", {desc = "Find All files"})
     vim.keymap.set('n', '<leader>fs', builtin.builtin, { desc = '[F]ind [S]elect Telescope' })
     vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[F]ind by [G]rep' })
     vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[F]ind [D]iagnostics' })
     vim.keymap.set('n', '<leader>f.', builtin.oldfiles, { desc = '[F]ind Recent Files ("." for repeat)' })
-    vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[F]ind open buffers' })
+
+    vim.keymap.set('n', '<leader><leader>', "<cmd>lua require('telescope.builtin').buffers{path_display = {'tail'}, sort_mru = true, ignore_current_buffer = true}<CR>", { desc = '[F]ind open buffers' })
+
     vim.keymap.set("n", '<leader>fd', builtin.diagnostics, {desc = "[F]ind diagnostitcs for project"})
     vim.keymap.set("n", '<leader>fr', builtin.registers, {desc = "[F]ind registers and paste"})
     vim.keymap.set("n", "<leader>ls", builtin.lsp_document_symbols, {desc = "Lsp document symbols"})
