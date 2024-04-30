@@ -73,7 +73,7 @@ return { -- LSP Configuration & Plugins
 
         -- Rename the variable under your cursor.
         --  Most Language Servers support renaming across files, etc.
-        map("<leader>lr", vim.lsp.buf.rename, "Lsp [R]e[n]ame")
+        map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
 
         -- Opens a popup that displays documentation about the word under your cursor
         --  See `:help K` for why this keymap.

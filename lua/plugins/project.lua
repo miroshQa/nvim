@@ -10,7 +10,7 @@ return {
         -- lsp, while **"pattern"** uses vim-rooter like glob pattern matching. Here
         -- order matters: if one is not detected, the other is used as fallback. You
         -- can also delete or rearangne the detection methods.
-        detection_methods = { "lsp", "pattern" },
+        detection_methods = {"pattern" },
 
         -- All the patterns used to detect root dir, when **"pattern"** is in
         -- detection_methods
@@ -22,7 +22,7 @@ return {
 
         -- Don't calculate root dir on specific directories
         -- Ex: { "~/.cargo/*", ... }
-        exclude_dirs = {"/cmake.*/*"},
+        exclude_dirs = {"c:", "/cmake.*/*"},
 
         -- Show hidden files in telescope
         show_hidden = false,
