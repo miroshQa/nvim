@@ -52,7 +52,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
             height = 0.4,
             preview_cutoff = 40,
             prompt_position = "top",
-            width = 0.5
+            width = 0.7
           },
         },
 

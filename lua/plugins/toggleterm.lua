@@ -2,8 +2,16 @@ return {
   -- amongst your other plugins
   { 'akinsho/toggleterm.nvim', version = "*",
     config = function()
+      local _shell = ""
+
+      if vim.fn.executable("pwsh") then
+        _shell = "pwsh"
+      else
+        _shell = "bash"
+      end
+
       local powershell_options = {
-        shell = "pwsh",
+        shell = _shell,
         shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;",
         shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait",
         shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode",
