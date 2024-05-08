@@ -22,7 +22,7 @@ return {
 
         -- Don't calculate root dir on specific directories
         -- Ex: { "~/.cargo/*", ... }
-        exclude_dirs = {"c:", "/cmake.*/*"},
+        exclude_dirs = {"/cmake.*/*"},
 
         -- Show hidden files in telescope
         show_hidden = false,

@@ -1,6 +1,6 @@
 -- https://www.reddit.com/r/neovim/comments/wvcz64/nvimtreelua_how_to_center_floating_window/
-local HEIGHT_RATIO = 0.7 -- You can change this
-local WIDTH_RATIO = 0.6  -- You can change this too
+local HEIGHT_RATIO = 0.9 -- You can change this
+local WIDTH_RATIO = 0.8  -- You can change this too
 
 return {
   "nvim-tree/nvim-tree.lua",

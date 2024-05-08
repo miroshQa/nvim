@@ -36,7 +36,7 @@ return {
         lualine_a = { "mode" },
         lualine_b = { "branch", "diff", "diagnostics" },
         lualine_c = {
-          "filename",
+          {"filename", path = 1},
           {
             "macro-recording",
             fmt = show_macro_recording,

@@ -49,7 +49,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 				layout_config = {
 
 					center = {
-						height = 0.4,
+						height = 0.5,
 						preview_cutoff = 40,
 						prompt_position = "top",
 						width = 0.7,
@@ -81,15 +81,28 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		pcall(require("telescope").load_extension, "ui-select")
 		-- See `:help telescope.builtin`
 		local builtin = require("telescope.builtin")
-		vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [H]elp" })
+		vim.keymap.set(
+			"n",
+			"<leader>fh",
+			"<cmd>lua require('telescope.builtin').live_grep({ cwd = vim.fn.expand('%:p:h') })<CR>",
+			{ desc = "Find here (from curr buff dir) by grep" }
+		)
 		vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[F]ind [F]iles" })
-		vim.keymap.set("n", "<leader>fs", builtin.builtin, { desc = "[F]ind [S]elect Telescope" })
+		vim.keymap.set(
+			"n",
+			"<leader>fe",
+			"<cmd>lua require('telescope.builtin').find_files({ no_ignore = true, hidden = true })<CR>",
+			{ desc = "Find everything" }
+		)
+		vim.keymap.set("n", "<leader>fb", builtin.builtin, { desc = "[F]ind builtin Telescope" })
+
 		vim.keymap.set(
 			"n",
 			"<leader>fa",
 			"<cmd>lua require('telescope.builtin').find_files({ cwd = vim.fn.expand('%:p:h') })<CR>",
 			{ desc = "Find adjacent (from curr buff dir)" }
 		)
+
 		vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind by [G]rep" })
 		vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "[F]ind [D]iagnostics" })
 		vim.keymap.set("n", "<leader>f.", builtin.oldfiles, { desc = '[F]ind Recent Files ("." for repeat)' })
@@ -102,12 +115,10 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		)
 
 		vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "[F]ind diagnostitcs for project" })
-		vim.keymap.set("n", "<leader>fr", builtin.registers, { desc = "[F]ind registers and paste" })
-		vim.keymap.set("n", "<leader>ls", builtin.lsp_document_symbols, { desc = "Lsp document symbols" })
-		vim.keymap.set("n", "<leader>lS", builtin.lsp_workspace_symbols, { desc = "Lsp lsp_workspace_symbols symbols" })
+		vim.keymap.set("n", "<leader>fs", builtin.lsp_document_symbols, { desc = "Find symbols" })
+		vim.keymap.set("n", "<leader>fS", builtin.lsp_workspace_symbols, { desc = "Find symbols in workspace" })
 
-		vim.keymap.set("n", "<leader>ft", builtin.colorscheme, { desc = "[F]ind Theme" })
-		-- It is just a cool but useless toy, so i don't use it anymore. I can do this using <leader>fs : theme
+		vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "Find resume" })
 
 		-- Slightly advanced example of overriding default behavior and theme
 		vim.keymap.set("n", "<leader>/", function()
