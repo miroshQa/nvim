@@ -1,5 +1,7 @@
 return {
   "ahmedkhalf/project.nvim",
+  event = "VeryLazy",
+
   config = function()
     require("project_nvim").setup {
         -- Manual mode doesn't automatically change your root directory, so you have

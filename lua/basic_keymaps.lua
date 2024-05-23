@@ -20,9 +20,19 @@ vim.keymap.set('n', '<up>', '<C-w><C-k>', { desc = 'Move focus to the upper wind
 vim.keymap.set('i', '<left>', '')
 vim.keymap.set('i', '<right>', "")
 vim.keymap.set('i', '<down>', "")
-vim.keymap.set('i', '<up>', "")
+  vim.keymap.set('i', '<up>', "")
 
 vim.keymap.set('v', '<', '<gv', { noremap = true })
 vim.keymap.set('v', '>', '>gv', { noremap = true })
 vim.keymap.set("n", "g.", "<cmd>b#<CR>", {desc = "Go to previous buffer (. - most recent)"})
+vim.keymap.set("n", "<leader>1", "<cmd>tabn1<CR>")
+vim.keymap.set("n", "<leader>2", "<cmd>tabn2<CR>")
+vim.keymap.set("n", "<leader>3", "<cmd>tabn3<CR>")
+vim.keymap.set("n", "<leader>4", "<cmd>tabn4<CR>")
+vim.keymap.set("n", "<leader>5", "<cmd>tabn5<CR>")
 
+
+vim.keymap.set("n", "<M-l>", "<c-w>5<")
+vim.keymap.set("n", "<M-h>", "<c-w>5>")
+vim.keymap.set("n", "<M-k>", "<c-w>5+>")
+vim.keymap.set("n", "<M-j>", "<c-w>5->")

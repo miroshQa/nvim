@@ -3,7 +3,7 @@ local plugins = {
     "rcarriga/nvim-dap-ui",
       keys = {
         { "<leader>du", function() require("dapui").toggle({ }) end, desc = "Dap UI" },
-        { "<leader>de", function() require("dapui").eval() end, desc = "Eval", mode = {"n", "v"} },
+        { "<leader>de", function() require("dapui").eval(nil, {enter = true}) end, desc = "Eval", mode = {"n", "v"} },
       },
     event = "VeryLazy",
     dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
@@ -59,8 +59,6 @@ local plugins = {
       vim.keymap.set("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>")
       vim.keymap.set("n", '<leader>di', require("dapui").float_element, {desc = "Hover variable info"})
       vim.keymap.set("n", '<leader>d?', function() local widgets = require "dap.ui.widgets"; widgets.centered_float(widgets.scopes) end)
-      vim.keymap.set("n", '<leader>df', '<cmd>Telescope dap frames<cr>')
-      vim.keymap.set("n", '<leader>dh', '<cmd>Telescope dap commands<cr>')
     end,
   },
 }

@@ -1,6 +1,7 @@
 return {
   -- amongst your other plugins
   { 'akinsho/toggleterm.nvim', version = "*",
+  event = "VeryLazy",
     config = function()
       local _shell = ""
 

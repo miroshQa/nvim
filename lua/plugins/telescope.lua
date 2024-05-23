@@ -18,31 +18,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		{ "nvim-tree/nvim-web-devicons" },
 	},
 	config = function()
-		-- Telescope is a fuzzy finder that comes with a lot of different things that
-		-- it can fuzzy find! It's more than just a "file finder", it can search
-		-- many different aspects of Neovim, your workspace, LSP, and more!
-		--
-		-- The easiest way to use Telescope, is to start by doing something like:
-		--  :Telescope help_tags
-		--
-		-- After running this command, a window will open up and you're able to
-		-- type in the prompt window. You'll see a list of `help_tags` options and
-		-- a corresponding preview of the help.
-		--
-		-- Two important keymaps to use while in Telescope are:
-		--  - Insert mode: <c-/>
-		--  - Normal mode: ?
-		--
-		-- This opens a window that shows you all of the keymaps for the current
-		-- Telescope picker. This is really useful to discover what Telescope can
-		-- do as well as how to actually do it!
-
-		-- [[ Configure Telescope ]]
-		-- See `:help telescope` and `:help telescope.setup()`
 		require("telescope").setup({
-			-- You can put your default mappings / updates / etc. in here
-			--  All the info you're looking for is in `:help telescope.setup()`
-			--
 			defaults = {
 				sorting_strategy = "ascending",
 				layout_strategy = "center",
@@ -79,14 +55,8 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		-- Enable Telescope extensions if they are installed
 		pcall(require("telescope").load_extension, "fzf")
 		pcall(require("telescope").load_extension, "ui-select")
-		-- See `:help telescope.builtin`
+
 		local builtin = require("telescope.builtin")
-		vim.keymap.set(
-			"n",
-			"<leader>fh",
-			"<cmd>lua require('telescope.builtin').live_grep({ cwd = vim.fn.expand('%:p:h') })<CR>",
-			{ desc = "Find here (from curr buff dir) by grep" }
-		)
 		vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[F]ind [F]iles" })
 		vim.keymap.set(
 			"n",
@@ -95,14 +65,6 @@ return { -- Fuzzy Finder (files, lsp, etc)
 			{ desc = "Find everything" }
 		)
 		vim.keymap.set("n", "<leader>fb", builtin.builtin, { desc = "[F]ind builtin Telescope" })
-
-		vim.keymap.set(
-			"n",
-			"<leader>fa",
-			"<cmd>lua require('telescope.builtin').find_files({ cwd = vim.fn.expand('%:p:h') })<CR>",
-			{ desc = "Find adjacent (from curr buff dir)" }
-		)
-
 		vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind by [G]rep" })
 		vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "[F]ind [D]iagnostics" })
 		vim.keymap.set("n", "<leader>f.", builtin.oldfiles, { desc = '[F]ind Recent Files ("." for repeat)' })
@@ -119,6 +81,8 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		vim.keymap.set("n", "<leader>fS", builtin.lsp_workspace_symbols, { desc = "Find symbols in workspace" })
 
 		vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "Find resume" })
+
+    vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, {desc = "Lsp actions"});
 
 		-- Slightly advanced example of overriding default behavior and theme
 		vim.keymap.set("n", "<leader>/", function()

@@ -29,6 +29,7 @@ return { -- LSP Configuration & Plugins
 
         map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
 
+
         map("gi", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
 
         map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
