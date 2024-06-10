@@ -1,19 +1,4 @@
 return {
-
-	{
-		"catppuccin/nvim",
-		name = "catppuccin",
-	},
-
-	{
-		"rebelot/kanagawa.nvim",
-	},
-
-	{
-		"Everblush/nvim",
-		name = "everblush",
-	},
-	{ "sainnhe/everforest" },
 	{
 		"luisiacc/gruvbox-baby",
     priority = 1000,
