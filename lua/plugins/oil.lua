@@ -26,6 +26,36 @@ return {
         use_default_keymaps = false,
       }
     )
-    vim.keymap.set("n", "<leader>e", "<cmd>Oil<CR>", { desc = "Open Oil" })
+
+    vim.api.nvim_create_user_command("OilToggle", function()
+      local current_buf = vim.api.nvim_get_current_buf()
+      local current_filetype = vim.api.nvim_buf_get_option(current_buf, "filetype")
+      local buffers = vim.api.nvim_list_bufs()
+      local buffers_counter = 0
+
+      for _, buffer in pairs(buffers) do
+        if vim.api.nvim_buf_is_loaded(buffer) then
+          buffers_counter = buffers_counter + 1
+
+          if buffers_counter > 1 then
+            break
+          end
+
+        end
+      end
+
+      if current_filetype == "oil" then
+        -- We use a command to go to the previous buffer
+        if buffers_counter > 1 then
+          vim.cmd("b#")
+        end
+      else
+        -- Open oil if not already in an oil buffer
+        vim.cmd("Oil")
+      end
+    end, { nargs = 0 })
+
+
+    vim.keymap.set("n", "<leader>e", "<cmd>OilToggle<CR>", { desc = "Toggle Oil" })
   end
 }

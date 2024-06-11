@@ -29,6 +29,7 @@ return {
       indent = { enable = true, disable = { "ruby" } },
     },
     config = function(_, opts)
+
       ---@diagnostic disable-next-line: missing-fields
       require("nvim-treesitter.configs").setup(opts)
     end,
