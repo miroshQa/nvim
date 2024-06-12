@@ -48,9 +48,6 @@ vim.opt.hlsearch = true
 vim.opt.autoread = true
 vim.opt_local.formatoptions:remove("cro")
 
-vim.cmd([[autocmd FileType * set formatoptions-=ro]])
-vim.cmd("language en_US")
-
 vim.opt.termguicolors = true
 
 vim.opt.wrap = true
