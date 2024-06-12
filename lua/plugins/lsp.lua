@@ -32,7 +32,7 @@ return { -- LSP Configuration & Plugins
 
         map("gi", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
 
-        map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+        map("<leader>lr", vim.lsp.buf.rename, "Lsp rename symbol")
 
         map("K", vim.lsp.buf.hover, "Hover Documentation")
 

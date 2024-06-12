@@ -8,8 +8,12 @@ return {
 		"3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
 	},
 	config = function()
+    vim.g.loaded_netrw = 1
+    vim.g.loaded_netrwPlugin = 1
+
 		require("neo-tree").setup({
-			hijack_netrw_behavior = "disabled",
+
+			hijack_netrw_behavior = "open_current",
 			filesystem = {
 				filtered_items = {
 					visible = false, -- when true, they will just be displayed differently than normal items
@@ -22,11 +26,12 @@ return {
 			window = {
         position = "current",
 				mappings = {
-					["<bs>"] = "navigate_up",
-					["."] = "set_root",
-					["H"] = "toggle_hidden",
 					["/"] = false,
-          ["<esc>"] = false, -- close preview or floating neo-tree window
+					["?"] = false,
+					["g?"] = "show_help",
+          ["q"] = false,
+          ["P"] = { "toggle_preview", config = { use_float = false, use_image_nvim = true } },
+          ["<esc>"] = false,
 				},
 			},
 
