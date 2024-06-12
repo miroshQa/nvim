@@ -16,6 +16,7 @@ return {
         "vim",
         "vimdoc",
         "go",
+        "c_sharp",
       },
       -- Autoinstall languages that are not installed
       auto_install = true,
