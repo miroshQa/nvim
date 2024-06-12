@@ -5,7 +5,7 @@ return {
     config = function()
 
 
-      if vim.fn.has("win32") and not vim.fn.has("wsl") then
+      if vim.loop.os_uname().sysname ~= "Linux" then
         local powershell_options = {
           shell = "pwsh",
           shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;",
