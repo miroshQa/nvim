@@ -68,20 +68,12 @@ return { -- LSP Configuration & Plugins
         },
       },
 
-      emmet_language_server = {
-
-      },
+      emmet_language_server = { },
       neocmakelsp = {},
-
       pyright = {},
-
-      html = {
-
-      },
-      cssls = {
-
-      },
-
+      html = { },
+      cssls = { },
+      lemminx = { },
       lua_ls = {
         settings = {
           Lua = {
@@ -91,6 +83,9 @@ return { -- LSP Configuration & Plugins
           },
         },
       },
+
+
+
     }
 
     require("mason").setup()
