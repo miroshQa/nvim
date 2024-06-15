@@ -69,6 +69,7 @@ return { -- LSP Configuration & Plugins
       },
 
       emmet_language_server = { },
+      marksman = {},
       neocmakelsp = {},
       pyright = {},
       html = { },
