@@ -42,10 +42,7 @@ return {
           }),
         }),
         sources = cmp.config.sources({
-          {
-            name = "nvim_lsp",
-            max_item_count = 15,
-          },              -- lsp
+          { name = "nvim_lsp", max_item_count = 15, },              -- lsp
           { name = 'luasnip' },
           { name = "buffer" }, -- text within current buffer
           { name = "path" }, -- file system paths
