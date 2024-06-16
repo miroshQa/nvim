@@ -7,7 +7,9 @@ return {
 
 			require("lualine").setup({
 				options = {
-					-- ... your lualine config,
+          color_overrides = {
+
+          },
 					theme = "gruvbox-baby",
 					-- ... your lualine config,
 				},
