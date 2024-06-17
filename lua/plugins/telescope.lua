@@ -50,6 +50,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		vim.keymap.set("n", "<leader>fb", builtin.builtin, { desc = "[F]ind builtin Telescope" })
 		vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "[F]ind [D]iagnostics" })
 		vim.keymap.set("n", "<leader>f.", builtin.oldfiles, { desc = '[F]ind Recent Files ("." for repeat)' })
+		vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = '[F]ind resume' })
 
 		vim.keymap.set(
 			"n",
