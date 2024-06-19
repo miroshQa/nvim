@@ -8,7 +8,25 @@ return {
     },
     config = function()
       require("nvim-dap-virtual-text").setup({})
+      local dap = require("dap")
+      local dapui = require("dapui")
 
+      -- Run last: https://github.com/mfussenegger/nvim-dap/issues/1025
+      local last_config = nil
+      ---@param session Session
+      dap.listeners.after.event_initialized["store_config"] = function(session)
+        last_config = session.config
+      end
+
+      local function debug_run_last()
+        if last_config then
+          dap.run(last_config)
+        else
+          dap.continue()
+        end
+      end
+
+      vim.keymap.set('n', '<Leader>dl', function() debug_run_last() end, {desc = "Run last configuration"})
       vim.keymap.set("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", {desc = "Toggle breakpiont"})
       vim.keymap.set("n", "<leader>dB", ":lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", {desc = "Set conditional breakpoint"})
       vim.keymap.set("n", '<leader>dx', "<cmd>lua require'dap'.clear_breakpoints()<cr>")
@@ -20,10 +38,8 @@ return {
       vim.keymap.set("n", "<leader>dj", "<cmd>lua require'dap'.step_over()<cr>")
       vim.keymap.set("n", "<leader>dk", "<cmd>lua require'dap'.step_into()<cr>")
       vim.keymap.set("n", "<leader>do", "<cmd>lua require'dap'.step_out()<cr>")
-      vim.keymap.set("n", '<leader>di', require("dapui").float_element, {desc = "Hover variable info"})
       vim.keymap.set("n", '<leader>dt', function() require('dap').terminate(); require('dapui').close(); end, {desc = "Terminate"})
       vim.keymap.set("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>")
-      vim.keymap.set("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>")
       vim.keymap.set("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<CR>", { desc = "Toggle Repl" })
       vim.keymap.set("n", "<leader>df", "<cmd>Telescope dap frames<CR>", { desc = "Stack frames" })
       vim.keymap.set("n", "<leader>dp", "<cmd>Telescope dap list_breakpoints<CR>", { desc = "All breakpoints" })
@@ -31,8 +47,6 @@ return {
       vim.keymap.set("n", "<leader>du", "<cmd>lua require('dapui').toggle()<CR>", {desc = "Toggle dapui"})
       vim.keymap.set('n', '<leader>de', function() require"dap".set_exception_breakpoints({"all"}) end, {desc = "Add exceptions breakpoints"})
 
-      local dap = require("dap")
-      local dapui = require("dapui")
 
       require('dap').set_log_level('TRACE')
       dap.adapters.gdb = {
@@ -58,11 +72,26 @@ return {
           stopAtBeginningOfMainSubprogram = false,
         },
       }
-
-
-
-
       dap.configurations.c = dap.configurations.cpp
+
+      dap.adapters.coreclr = {
+        type = 'executable',
+        command = 'C:/netcoredbg/netcoredbg',
+        args = {'--interpreter=vscode'},
+      }
+
+      dap.configurations.cs = {
+        {
+          type = "coreclr",
+          name = "launch - netcoredbg",
+          request = "launch",
+          program = function()
+              return vim.fn.input('Path to dll: ', vim.fn.getcwd() .. '/bin/Debug/net8.0/', 'file')
+          end,
+        },
+      }
+
+
 
       vim.api.nvim_command 'autocmd FileType dap-float nnoremap <buffer><silent> q <cmd>close!<CR>'
       vim.api.nvim_command 'autocmd FileType dap-float nnoremap <buffer><silent> <esc> <cmd>close!<CR>'

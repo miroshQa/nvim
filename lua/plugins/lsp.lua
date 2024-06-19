@@ -52,6 +52,18 @@ return { -- LSP Configuration & Plugins
     capabilities.textDocument.completion.completionItem.snippetSupport = false
     capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
+		local signs = {
+				Error = "🤬",
+				Warn = "😤",
+				Info = "🤔",
+				Hint = "🤯",
+			}
+
+			for type, icon in pairs(signs) do
+				local hl = "DiagnosticSign" .. type
+				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+			end
+
     local servers = {
       clangd = {
         cmd = {
