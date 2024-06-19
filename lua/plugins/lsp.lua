@@ -6,13 +6,7 @@ return { -- LSP Configuration & Plugins
     "williamboman/mason-lspconfig.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     "artemave/workspace-diagnostics.nvim",
-
-    -- Useful status updates for LSP.
-    -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
     { "j-hui/fidget.nvim", opts = {} },
-
-    -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
-    -- used for completion, annotations and signatures of Neovim apis
     { "folke/neodev.nvim", opts = {} },
   },
   config = function()
@@ -26,19 +20,15 @@ return { -- LSP Configuration & Plugins
           vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
         end
         map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
-
-        map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-
-
+        map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
         map("gi", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
+        map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
 
         map("<leader>rn", vim.lsp.buf.rename, "Rename symbol")
         map("<leader>li", "<cmd>LspInfo<CR>", "Lsp info")
         map("<leader>lr", "<cmd>LspRestart<CR>", "Lsp restart")
 
         map("K", vim.lsp.buf.hover, "Hover Documentation")
-
-        map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
         map("gl", "<cmd>ClangdSwitchSourceHeader<Cr>", "Go to linked file (src / header)")
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
@@ -70,11 +60,11 @@ return { -- LSP Configuration & Plugins
         },
       },
 
-      emmet_language_server = { },
-      marksman = {},
+      emmet_language_server = {
+        filetypes = {"md", "html"}
+      },
       neocmakelsp = {},
       pyright = {},
-      html = { },
       cssls = { },
       lemminx = { },
       lua_ls = {
