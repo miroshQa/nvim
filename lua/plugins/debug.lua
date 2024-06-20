@@ -29,33 +29,50 @@ return {
 
     local Hydra = require('hydra')
 
-      dap_hydra = Hydra({
+    local hint = [[
+     _u_: Toggle DAP UI           _B_: Set conditional breakpoint   _c_: Continue from breakpoint   _L_: Run last configurations 
+     _b_: Set breakpoint          _o_: Step over                    _i_: Step into                  _O_:  Step Out
+     _X_: Clear all breakpoints   _A_: List all breakpoints         _*_: Run to run to cursor       _T_: Terminate 
+     _r_: Repl toggle             _s_: Scope                        _g?_: Toggle hint   
+     ^
+     ^ ^                                          _<Esc>_: Normal mode             
+    ]]
+
+      DapHydra = Hydra({
          name = "DEBUG",
+         hint = hint,
          config = {
             color = 'pink',
+            desc = "Debug mode",
             invoke_on_body = true,
+            hint = {
+              float_opts = {
+            border = "rounded",
+          },
+              hide_on_load = true,
+              show_name = false,
+            },
          },
 
          mode = 'n',
          body = '<Leader>d',
          heads = {
-            { "u", function() require("dapui").toggle() end, { desc = "Toggles Dap UI", exit = false, private = true, silent = true } },
-            { "b", function() require("dap").toggle_breakpoint() end, { desc = "Set breakpoint", exit = false, private = true, silent = true } },
-            { "B", function() require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, { desc = "Set conditional breakpoint", exit = false, private = true, silent = true } },
-            { "c", function() require("dap").continue() end, { desc = "Continue from breakpoint", exit = false, private = true, silent = true } },
-            { "O", function() require("dap").step_out() end, { desc = "Step Out", exit = false, private = true, silent = true } },
-            { "o", function() require("dap").step_over() end, { desc = "Step over", exit = false, private = true, silent = true } },
-            { "i", function() require("dap").step_into() end, { desc = "Step into", exit = false, private = true, silent = true } },
+            { "u", function() require("dapui").toggle() end, {exit = false, private = true} },
+            { "b", function() require("dap").toggle_breakpoint() end, { exit = false, private = true} },
+            { "B", function() require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, { exit = false, private = true} },
+            { "c", function() require("dap").continue() end, {exit = false, private = true} },
+            { "O", function() require("dap").step_out() end, {exit = false, private = true} },
+            { "o", function() require("dap").step_over() end, {exit = false, private = true} },
+            { "i", function() require("dap").step_into() end, {exit = false, private = true} },
+            { "L", function() require("dap").debug_run_last() end, {exit = false, private = true} },
+            { "X", function() require("dap").clear_breakpoints() end, {exit = false, private = true} },
+            { "A", '<cmd>Telescope dap list_breakpoints<cr>', {exit = false, private = true, silent = true } },
+            { "*", function() require("dap").run_to_cursor() end, {exit = false, private = true} },
+            { "T", function() require("dap").terminate() end, {exit = false, private = true} },
+            { "r", function() require("dap").repl.toggle() end, {exit = false, private = true} },
+            { "s", function() require("dap.ui.widgets").centered_float(require("dap.ui.widgets").scopes) end, {exit = false, private = true} },
+            { "g?", function() if DapHydra.hint.win then DapHydra.hint:close() else DapHydra.hint:show() end end, {exit = false, private = true} },
             { '<Esc>', nil, { exit = true, nowait = true } },
-            { "L", function() require("dap").debug_run_last() end, { desc = "Run last configuration", exit = false, private = true, silent = true } },
-            { "X", function() require("dap").clear_breakpoints() end, { desc = "Clear all breakpoints", exit = false, private = true, silent = true } },
-            { "A", '<cmd>Telescope dap list_breakpoints<cr>', { desc = "All breakpoints", exit = false, private = true, silent = true } },
-            { "*", function() require("dap").run_to_cursor() end, { desc = "All breakpoints", exit = false, private = true, silent = true } },
-            { "T", function() require("dap").terminate() end, { desc = "Terminate", exit = false, private = true, silent = true } },
-            { "r", function() require("dap").repl.toggle() end, { desc = "Repl toggle", exit = false, private = true, silent = true } },
-            { "s", function() require("dap").repl.toggle() end, { desc = "Stack frames", exit = false, private = true, silent = true } },
-            { "w", function() require("dap.ui.widgets").centered_float(require("dap.ui.widgets").scopes, winopts) end, { desc = "View current scope", exit = false, private = true, silent = true } },
-            { "g?", function() require("hydra").hint.show() end, { desc = "Stack frames", exit = false, private = true, silent = true } },
          }
       })
 require('dap').set_log_level('TRACE') dap.adapters.gdb = {
