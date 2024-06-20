@@ -29,7 +29,7 @@ return {
 
     local Hydra = require('hydra')
 
-      Hydra({
+      dap_hydra = Hydra({
          name = "DEBUG",
          config = {
             color = 'pink',
@@ -37,44 +37,28 @@ return {
          },
 
          mode = 'n',
-         body = '<Leader>o',
+         body = '<Leader>d',
          heads = {
-            { "t", function() require("dapui").toggle() end, { desc = "Toggles Dap UI", exit = false, private = true, silent = true } },
+            { "u", function() require("dapui").toggle() end, { desc = "Toggles Dap UI", exit = false, private = true, silent = true } },
             { "b", function() require("dap").toggle_breakpoint() end, { desc = "Set breakpoint", exit = false, private = true, silent = true } },
             { "B", function() require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, { desc = "Set conditional breakpoint", exit = false, private = true, silent = true } },
             { "c", function() require("dap").continue() end, { desc = "Continue from breakpoint", exit = false, private = true, silent = true } },
-            { "o", function() require("dap").step_out() end, { desc = "Step out", exit = false, private = true, silent = true } },
-            { "j", function() require("dap").step_over() end, { desc = "Step over", exit = false, private = true, silent = true } },
-            { "k", function() require("dap").step_into() end, { desc = "Step into", exit = false, private = true, silent = true } },
+            { "O", function() require("dap").step_out() end, { desc = "Step Out", exit = false, private = true, silent = true } },
+            { "o", function() require("dap").step_over() end, { desc = "Step over", exit = false, private = true, silent = true } },
+            { "i", function() require("dap").step_into() end, { desc = "Step into", exit = false, private = true, silent = true } },
             { '<Esc>', nil, { exit = true, nowait = true } },
-            { "l", function() require("dap").debug_run_last() end, { desc = "Run last configuration", exit = false, private = true, silent = true } },
+            { "L", function() require("dap").debug_run_last() end, { desc = "Run last configuration", exit = false, private = true, silent = true } },
+            { "X", function() require("dap").clear_breakpoints() end, { desc = "Clear all breakpoints", exit = false, private = true, silent = true } },
+            { "A", '<cmd>Telescope dap list_breakpoints<cr>', { desc = "All breakpoints", exit = false, private = true, silent = true } },
+            { "*", function() require("dap").run_to_cursor() end, { desc = "All breakpoints", exit = false, private = true, silent = true } },
+            { "T", function() require("dap").terminate() end, { desc = "Terminate", exit = false, private = true, silent = true } },
+            { "r", function() require("dap").repl.toggle() end, { desc = "Repl toggle", exit = false, private = true, silent = true } },
+            { "s", function() require("dap").repl.toggle() end, { desc = "Stack frames", exit = false, private = true, silent = true } },
+            { "w", function() require("dap.ui.widgets").centered_float(require("dap.ui.widgets").scopes, winopts) end, { desc = "View current scope", exit = false, private = true, silent = true } },
+            { "g?", function() require("hydra").hint.show() end, { desc = "Stack frames", exit = false, private = true, silent = true } },
          }
       })
-
-      vim.keymap.set('n', '<Leader>dl', function() debug_run_last() end, {desc = "Run last configuration"})
-      vim.keymap.set("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", {desc = "Toggle breakpiont"})
-      vim.keymap.set("n", "<leader>dB", ":lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", {desc = "Set conditional breakpoint"})
-      vim.keymap.set("n", '<leader>dx', "<cmd>lua require'dap'.clear_breakpoints()<cr>")
-      vim.keymap.set("n", '<leader>da', '<cmd>Telescope dap list_breakpoints<cr>')
-
-      vim.keymap.set("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>")
-      vim.keymap.set("n", "<leader>d*", function() require("dap").run_to_cursor() end, {desc = "Run to Cursor" })
-      vim.keymap.set("n", "<leader>dg", function() require("dap").goto_() end, {desc = "Go to Line (No Execute)" })
-      vim.keymap.set("n", "<leader>dj", "<cmd>lua require'dap'.step_over()<cr>")
-      vim.keymap.set("n", "<leader>dk", "<cmd>lua require'dap'.step_into()<cr>")
-      vim.keymap.set("n", "<leader>do", "<cmd>lua require'dap'.step_out()<cr>")
-      vim.keymap.set("n", '<leader>dt', function() require('dap').terminate(); require('dapui').close(); end, {desc = "Terminate"})
-      vim.keymap.set("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>")
-      vim.keymap.set("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<CR>", { desc = "Toggle Repl" })
-      vim.keymap.set("n", "<leader>df", "<cmd>Telescope dap frames<CR>", { desc = "Stack frames" })
-      vim.keymap.set("n", "<leader>dp", "<cmd>Telescope dap list_breakpoints<CR>", { desc = "All breakpoints" })
-      vim.keymap.set("n", "<leader>ds", "<cmd>lua require'dap.ui.widgets'.centered_float(require'dap.ui.widgets'.scopes)<CR>", { desc = "View current scope" })
-      vim.keymap.set("n", "<leader>du", "<cmd>lua require('dapui').toggle()<CR>", {desc = "Toggle dapui"})
-      vim.keymap.set('n', '<leader>de', function() require"dap".set_exception_breakpoints({"all"}) end, {desc = "Add exceptions breakpoints"})
-
-
-      require('dap').set_log_level('TRACE')
-      dap.adapters.gdb = {
+require('dap').set_log_level('TRACE') dap.adapters.gdb = {
         type = "executable",
         id = "gdb",
         command = "gdb",

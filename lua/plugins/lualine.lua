@@ -24,7 +24,7 @@ return {
           "dap-repl",
         },
         refresh = {
-          statusline = 500,
+          statusline = 250,
         }
       },
       sections = {
