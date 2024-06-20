@@ -41,7 +41,7 @@ vim.opt.inccommand = "split" -- Preview substitutions live, as you type!
 
 vim.opt.cursorline = true
 
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 20
 
 vim.opt.hlsearch = true
 

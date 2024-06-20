@@ -3,8 +3,9 @@ return {
     version = "*",
     dependencies = {
       "theHamsta/nvim-dap-virtual-text",
-       "nvim-neotest/nvim-nio",
+     "nvim-neotest/nvim-nio",
       "rcarriga/nvim-dap-ui",
+      "nvimtools/hydra.nvim",
     },
     config = function()
       require("nvim-dap-virtual-text").setup({})
@@ -25,6 +26,30 @@ return {
           dap.continue()
         end
       end
+
+    local Hydra = require('hydra')
+
+      Hydra({
+         name = "DEBUG",
+         config = {
+            color = 'pink',
+            invoke_on_body = true,
+         },
+
+         mode = 'n',
+         body = '<Leader>o',
+         heads = {
+            { "t", function() require("dapui").toggle() end, { desc = "Toggles Dap UI", exit = false, private = true, silent = true } },
+            { "b", function() require("dap").toggle_breakpoint() end, { desc = "Set breakpoint", exit = false, private = true, silent = true } },
+            { "B", function() require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, { desc = "Set conditional breakpoint", exit = false, private = true, silent = true } },
+            { "c", function() require("dap").continue() end, { desc = "Continue from breakpoint", exit = false, private = true, silent = true } },
+            { "o", function() require("dap").step_out() end, { desc = "Step out", exit = false, private = true, silent = true } },
+            { "j", function() require("dap").step_over() end, { desc = "Step over", exit = false, private = true, silent = true } },
+            { "k", function() require("dap").step_into() end, { desc = "Step into", exit = false, private = true, silent = true } },
+            { '<Esc>', nil, { exit = true, nowait = true } },
+            { "l", function() require("dap").debug_run_last() end, { desc = "Run last configuration", exit = false, private = true, silent = true } },
+         }
+      })
 
       vim.keymap.set('n', '<Leader>dl', function() debug_run_last() end, {desc = "Run last configuration"})
       vim.keymap.set("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", {desc = "Toggle breakpiont"})
@@ -78,12 +103,14 @@ return {
         type = 'executable',
         command = 'C:/netcoredbg/netcoredbg',
         args = {'--interpreter=vscode'},
+        console = "integratedTerminal",
       }
 
       dap.configurations.cs = {
         {
           type = "coreclr",
           name = "launch - netcoredbg",
+        console = "integratedTerminal",
           request = "launch",
           program = function()
               return vim.fn.input('Path to dll: ', vim.fn.getcwd() .. '/bin/Debug/net8.0/', 'file')
@@ -91,11 +118,11 @@ return {
         },
       }
 
-
-
       vim.api.nvim_command 'autocmd FileType dap-float nnoremap <buffer><silent> q <cmd>close!<CR>'
-      vim.api.nvim_command 'autocmd FileType dap-float nnoremap <buffer><silent> <esc> <cmd>close!<CR>'
-       dapui.setup()
+     dapui.setup()
+
+
+
 
     dap.listeners.after.event_initialized["dapui_config"] = function()
       dapui.open()
@@ -106,6 +133,7 @@ return {
     dap.listeners.before.event_exited["dapui_config"] = function()
       dapui.close()
     end
+
 
     end,
 }
