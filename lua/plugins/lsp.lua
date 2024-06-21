@@ -19,15 +19,15 @@ return {
         local map = function(keys, func, desc)
           vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
         end
-        map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
+        map("gd", require("telescope.builtin").lsp_definitions, "Goto Definition")
         map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-        map("gi", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
-        map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-        map("gl", "<cmd>ClangdSwitchSourceHeader<Cr>", "Go to linked file (src / header)")
+        map("gi", require("telescope.builtin").lsp_implementations, "Goto Implementation")
+        map("gr", require("telescope.builtin").lsp_references, "Goto References")
+        map("gl", "<cmd>ClangdSwitchSourceHeader<Cr>", "Goto linked file (src / header)")
 
-        map("<leader>lr", vim.lsp.buf.rename, "Lsp rename symbol")
-        map("<leader>li", "<cmd>LspInfo<CR>", "Lsp info")
-        map("<leader>lR", "<cmd>LspRestart<CR>", "Lsp Restart")
+        map("<leader>lr", vim.lsp.buf.rename, "Rename symbol")
+        map("<leader>li", "<cmd>LspInfo<CR>", "Info")
+        map("<leader>lR", "<cmd>LspRestart<CR>", "Restart")
 
         vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
         vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
@@ -62,13 +62,12 @@ return {
         },
       },
 
-      emmet_language_server = {
-        filetypes = {"md", "html"}
-      },
+      emmet_language_server = { },
       neocmakelsp = {},
       pyright = {},
       cssls = { },
       lemminx = { },
+      marksman = {},
       lua_ls = {
         settings = {
           Lua = {

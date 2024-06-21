@@ -1,4 +1,4 @@
-# My neovim configuration
+# My neovim configuration 🤗
 
 #### To understand some of my settings, you may need to know that I use the following keymaps in the system
 
@@ -64,3 +64,31 @@
         <td></td>
     </tr>
 </table>
+
+
+### Colorscheme 😻 
+![Colorscheme](./imgs/colorscheme.png)
+
+### Debug Mode using Hydra 🐍
+![DebugModeHydra](./imgs/dap-ui.png) 
+![DebugModeHydraHint](./imgs/hydra-hint-debug-mode.png) 
+
+### File Tree 🌳
+![FileTree](./imgs/file-tree.png) 
+
+### Toggle Term 👽
+![ToggleTerm](./imgs/toggle-term.png) 
+
+### Telescope 🔭
+![Telescope](./imgs/telescope.png) 
+### Dashboard 😎
+![Dashboard](./imgs/dashboard.png) 
+
+### Favourite keymaps ✨
+1. \<C-h> and \<C-l> (Switch placeholders snippets)
+2. g. (Goto prev buffer)
+3. \<leader>d (Debug mode. See below)
+
+
+#### TODO ⚒️ 
+- [ ] Add a description and my opinion to each plugin above

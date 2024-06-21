@@ -14,6 +14,7 @@ return {
 
     require("lualine").setup({
       options = {
+        globalstatus = true, -- https://www.youtube.com/watch?v=jH5PNvJIa6o
         ignore_focus = {
           "dapui_watches",
           "dapui_breakpoints",
@@ -27,21 +28,9 @@ return {
       lualine_a = {"mode", },
         lualine_c = {
           {"filename", path = 1},
-          {
-            "macro-recording",
-            fmt = show_macro_recording,
-          },
+          { "macro-recording", fmt = show_macro_recording},
         },
-        lualine_x = {
-          {
-          "tabs",
-          mode = 1,
-         cond = function()
-                  return #vim.fn.gettabinfo() > 1
-                end,
-          },
-
-        },
+        lualine_x = {{"tabs", mode = 1, cond = function() return #vim.fn.gettabinfo() > 1 end}},
         lualine_y = {"encoding", "fileformat", "filetype" },
         lualine_z = {"progress","location" },
       },
@@ -56,7 +45,6 @@ return {
     })
 
     local lualine = require("lualine")
-
     vim.api.nvim_create_autocmd("RecordingEnter", {
       callback = function()
         lualine.refresh({

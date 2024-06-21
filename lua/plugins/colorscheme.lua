@@ -8,7 +8,6 @@ return {
 			require("lualine").setup({
 				options = {
 					theme = "gruvbox-baby",
-					-- ... your lualine config,
 				},
 			})
 			vim.cmd.colorscheme("gruvbox-baby")

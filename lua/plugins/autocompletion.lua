@@ -1,7 +1,6 @@
 return {
   {
     "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
     dependencies = {
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
@@ -10,6 +9,7 @@ return {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
+      "hrsh7th/cmp-emoji"
     },
     config = function()
       local cmp = require("cmp")
@@ -18,7 +18,6 @@ return {
       luasnip.config.setup({ history = true })
 
       cmp.setup({
-
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
@@ -27,14 +26,12 @@ return {
         completion = {
           completeopt = "menu,menuone,noinsert",
         },
-
         mapping = cmp.mapping.preset.insert({
           ["<C-j>"] = cmp.mapping.select_next_item(),
           ["<C-k>"] = cmp.mapping.select_prev_item(),
           ["<C-u>"] = cmp.mapping.scroll_docs(-4),
           ["<C-d>"] = cmp.mapping.scroll_docs(4),
           ["<CR>"] = cmp.mapping.confirm({
-            behavior = cmp.ConfirmBehavior.Replace,
             select = true,
           }),
         }),
@@ -42,7 +39,8 @@ return {
           { name = "nvim_lsp", max_item_count = 15, },
           { name = 'luasnip' },
           { name = "buffer" },
-          { name = "path" },
+          { name = "path" }, -- type ./ to activate
+          {name = "emoji"}, -- type : to activate
         }),
 
         window = {
@@ -51,8 +49,11 @@ return {
           documentation = cmp.config.window.bordered(),
         },
       })
+
     end,
   },
+
+
 
   {
     "L3MON4D3/LuaSnip",
@@ -62,7 +63,7 @@ return {
         config = function()
           require("luasnip.loaders.from_vscode").lazy_load()
         end,
-      },
+  },
       {
         "nvim-cmp",
         dependencies = {
@@ -83,19 +84,11 @@ return {
     },
 
     keys = {
-      {
-        "<tab>",
-        function()
-          return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
-        end,
-        expr = true,
-        silent = true,
-        mode = "i",
-      },
       { "<right>",   function() require("luasnip").jump(1) end,  mode = {"i", "s"}},
       { "<left>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
     },
   },
 }
+
 
 

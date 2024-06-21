@@ -35,12 +35,12 @@ return {
     local Hydra = require('hydra')
 
     local hint = [[
-     _U_: Toggle DAP UI           _A_: Set conditional breakpoint   _c_: Continue from breakpoint   _L_: Run last configurations 
+     _u_: Toggle DAP UI           _A_: Set conditional breakpoint   _c_: Continue from breakpoint   _L_: Run last configurations 
      _a_: Set breakpoint          _o_: Step over                    _i_: Step into                  _O_:  Step Out
      _X_: Clear all breakpoints   _P_: List all breakpoints         _*_: Run to run to cursor       _T_: Terminate 
      _r_: Repl toggle             _s_: Scope                        _g?_: Toggle hint   
      ^
-     ^ ^                                          _<Esc>_: Normal mode             
+     ^ ^                                       _<Esc>_: Back to Normal mode             
     ]]
 
       DapHydra = Hydra({
@@ -62,7 +62,7 @@ return {
          mode = 'n',
          body = '<Leader>d',
          heads = {
-            { "U", function() require("dapui").toggle() end},
+            { "u", function() require("dapui").toggle() end},
             { "a", function() require("dap").toggle_breakpoint() end },
             { "A", function() require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) end },
             { "c", function() if vim.bo.filetype ~= "dap-float" then require("dap").continue() end end},
