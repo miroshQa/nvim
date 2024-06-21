@@ -11,8 +11,8 @@ return {
     vim.g.loaded_netrwPlugin = 1
 
 		require("neo-tree").setup({
-
 			hijack_netrw_behavior = "open_current",
+    popup_border_style = "rounded",
 			filesystem = {
 				filtered_items = {
 					visible = false, -- when true, they will just be displayed differently than normal items

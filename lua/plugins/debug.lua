@@ -35,9 +35,9 @@ return {
     local Hydra = require('hydra')
 
     local hint = [[
-     _u_: Toggle DAP UI           _B_: Set conditional breakpoint   _c_: Continue from breakpoint   _L_: Run last configurations 
-     _b_: Set breakpoint          _o_: Step over                    _i_: Step into                  _O_:  Step Out
-     _X_: Clear all breakpoints   _A_: List all breakpoints         _*_: Run to run to cursor       _T_: Terminate 
+     _U_: Toggle DAP UI           _A_: Set conditional breakpoint   _c_: Continue from breakpoint   _L_: Run last configurations 
+     _a_: Set breakpoint          _o_: Step over                    _i_: Step into                  _O_:  Step Out
+     _X_: Clear all breakpoints   _P_: List all breakpoints         _*_: Run to run to cursor       _T_: Terminate 
      _r_: Repl toggle             _s_: Scope                        _g?_: Toggle hint   
      ^
      ^ ^                                          _<Esc>_: Normal mode             
@@ -62,26 +62,26 @@ return {
          mode = 'n',
          body = '<Leader>d',
          heads = {
-            { "u", function() require("dapui").toggle() end},
-            { "b", function() require("dap").toggle_breakpoint() end },
-            { "B", function() require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) end },
-            { "c", function() require("dap").continue() end},
-            { "O", function() require("dap").step_out() end},
-            { "o", function() require("dap").step_over() end},
-            { "i", function() require("dap").step_into() end},
+            { "U", function() require("dapui").toggle() end},
+            { "a", function() require("dap").toggle_breakpoint() end },
+            { "A", function() require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) end },
+            { "c", function() if vim.bo.filetype ~= "dap-float" then require("dap").continue() end end},
+            { "O", function() if vim.bo.filetype ~= "dap-float" then require("dap").step_out() end end},
+            { "o", function() if vim.bo.filetype ~= "dap-float" then print(vim.bo.filetype) require("dap").step_over() end end},
+            { "i", function() if vim.bo.filetype ~= "dap-float" then require("dap").step_into() end end},
             { "L", function() debug_run_last() end},
             { "X", function() require("dap").clear_breakpoints() end},
-            { "A", '<cmd>Telescope dap list_breakpoints<cr>'},
+            { "P", '<cmd>Telescope dap list_breakpoints<cr>'},
             { "*", function() require("dap").run_to_cursor() end},
             { "T", function() require("dap").terminate() end},
             { "r", function() require("dap").repl.toggle() end},
-            { "s", function() require("dap.ui.widgets").centered_float(require("dap.ui.widgets").scopes) end},
+            { "s", function() if vim.bo.filetype ~= "dap-float" then require("dap.ui.widgets").centered_float(require("dap.ui.widgets").scopes) end end},
             { "g?", function() if DapHydra.hint.win then DapHydra.hint:close() else DapHydra.hint:show() end end},
             { '<Esc>', nil, { exit = true, nowait = true } },
          }
       })
 
-    local hydra_statusline = require("hydra.statusline");
+    local hydra_statusline = require("hydra.statusline")
     require("lualine").setup({
       options = {
         refresh = {
@@ -139,14 +139,12 @@ return {
         type = 'executable',
         command = 'C:/netcoredbg/netcoredbg',
         args = {'--interpreter=vscode'},
-        console = "integratedTerminal",
       }
 
       dap.configurations.cs = {
         {
           type = "coreclr",
           name = "launch - netcoredbg",
-        console = "integratedTerminal",
           request = "launch",
           program = function()
               return vim.fn.input('Path to dll: ', vim.fn.getcwd() .. '/bin/Debug/net8.0/', 'file')
@@ -154,7 +152,7 @@ return {
         },
       }
 
-      vim.api.nvim_command 'autocmd FileType dap-float nnoremap <buffer><silent> q <cmd>close!<CR>'
+      vim.api.nvim_command 'autocmd FileType dap-float nnoremap <buffer><silent> <Esc> <cmd>close!<CR>'
      dapui.setup()
     dap.listeners.after.event_initialized["dapui_config"] = function()
       dapui.open()

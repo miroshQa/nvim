@@ -1,10 +1,7 @@
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
--- Diagnostic keymaps
-
 local api = vim.api
-api.nvim_command 'autocmd TermOpen * startinsert' -- starts in insert mode
-api.nvim_command 'autocmd TermOpen * setlocal nonumber' -- no numbers
-api.nvim_command 'autocmd TermEnter * setlocal signcolumn=no' -- no sign column
+vim.api.nvim_command 'autocmd TermOpen * startinsert' -- starts in insert mode
+vim.api.nvim_command 'autocmd TermOpen * setlocal nonumber' -- no numbers
+vim.api.nvim_command 'autocmd TermEnter * setlocal signcolumn=no' -- no sign column
 
 vim.keymap.set('n', '<left>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<right>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
