@@ -10,6 +10,7 @@ return  { -- Useful plugin to show you pending keybinds.
         ['<leader>f'] = { name = 'Find', _ = 'which_key_ignore' },
         ['<leader>l'] = { name = 'Lsp keymaps', _ = 'which_key_ignore' },
         ['<leader>g'] = { name = 'Git', _ = 'which_key_ignore' },
+        ["<leader>h"] = {name = "Hunk", _ = "which_key_ignore"},
       }
     end,
 }

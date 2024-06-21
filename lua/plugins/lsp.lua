@@ -25,9 +25,9 @@ return {
         map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
         map("gl", "<cmd>ClangdSwitchSourceHeader<Cr>", "Go to linked file (src / header)")
 
-        map("<leader>rn", vim.lsp.buf.rename, "Rename symbol")
+        map("<leader>lr", vim.lsp.buf.rename, "Lsp rename symbol")
         map("<leader>li", "<cmd>LspInfo<CR>", "Lsp info")
-        map("<leader>lr", "<cmd>LspRestart<CR>", "Lsp restart")
+        map("<leader>lR", "<cmd>LspRestart<CR>", "Lsp Restart")
 
         vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
         vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
