@@ -12,7 +12,7 @@
     <tr>
         <td>CAPS</td>
         <td>ESC</td>
-        <td></td>
+        <td>Game changer. Every vim user has to do this</td>
     <tr>
         <td>CTRL</td>
         <td>ALT</td>
@@ -25,8 +25,8 @@
     </tr>
     <tr>
         <td>CTRL + M</td>
-        <td>ESC</td>
-        <td>Here and below, I press alt instead of ctrl because of the keymap above</td>
+        <td>CAPS</td>
+        <td>Here and below, I press alt physically on the keyboard instead of ctrl because of the above keymaps</td>
         <td></td>
     </tr>
     <tr> <td>CTRL + TAB</td>
@@ -45,7 +45,7 @@
     </tr>
     <tr>
         <td>CTRL + H</td>
-        <td></td>
+        <td>←</td>
         <td></td>
     </tr>
     <tr>
@@ -60,7 +60,7 @@
     </tr>
     <tr>
         <td>CTRL + E</td>
-        <td>CTRL + ←</td>
+        <td>CTRL + →</td>
         <td></td>
     </tr>
 </table>
