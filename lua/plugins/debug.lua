@@ -11,7 +11,7 @@ return {
     config = function()
 
       require("nvim-dap-virtual-text").setup({
-        -- virt_text_pos = "eol",
+         virt_text_pos = "eol",
       })
 
       local dap = require("dap")
