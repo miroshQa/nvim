@@ -23,13 +23,15 @@ return {
         map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
         map("gi", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
         map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+        map("gl", "<cmd>ClangdSwitchSourceHeader<Cr>", "Go to linked file (src / header)")
 
         map("<leader>rn", vim.lsp.buf.rename, "Rename symbol")
         map("<leader>li", "<cmd>LspInfo<CR>", "Lsp info")
         map("<leader>lr", "<cmd>LspRestart<CR>", "Lsp restart")
 
+        vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
+        vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
         map("K", vim.lsp.buf.hover, "Hover Documentation")
-        map("gl", "<cmd>ClangdSwitchSourceHeader<Cr>", "Go to linked file (src / header)")
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         require("workspace-diagnostics").populate_workspace_diagnostics(client, event.buf)

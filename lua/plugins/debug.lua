@@ -6,9 +6,14 @@ return {
      "nvim-neotest/nvim-nio",
       "rcarriga/nvim-dap-ui",
       "nvimtools/hydra.nvim",
+      "nvim-lualine/lualine.nvim",
     },
     config = function()
-      require("nvim-dap-virtual-text").setup({})
+
+      require("nvim-dap-virtual-text").setup({
+        -- virt_text_pos = "eol",
+      })
+
       local dap = require("dap")
       local dapui = require("dapui")
 
@@ -57,25 +62,55 @@ return {
          mode = 'n',
          body = '<Leader>d',
          heads = {
-            { "u", function() require("dapui").toggle() end, {exit = false, private = true} },
-            { "b", function() require("dap").toggle_breakpoint() end, { exit = false, private = true} },
-            { "B", function() require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, { exit = false, private = true} },
-            { "c", function() require("dap").continue() end, {exit = false, private = true} },
-            { "O", function() require("dap").step_out() end, {exit = false, private = true} },
-            { "o", function() require("dap").step_over() end, {exit = false, private = true} },
-            { "i", function() require("dap").step_into() end, {exit = false, private = true} },
-            { "L", function() require("dap").debug_run_last() end, {exit = false, private = true} },
-            { "X", function() require("dap").clear_breakpoints() end, {exit = false, private = true} },
-            { "A", '<cmd>Telescope dap list_breakpoints<cr>', {exit = false, private = true, silent = true } },
-            { "*", function() require("dap").run_to_cursor() end, {exit = false, private = true} },
-            { "T", function() require("dap").terminate() end, {exit = false, private = true} },
-            { "r", function() require("dap").repl.toggle() end, {exit = false, private = true} },
-            { "s", function() require("dap.ui.widgets").centered_float(require("dap.ui.widgets").scopes) end, {exit = false, private = true} },
-            { "g?", function() if DapHydra.hint.win then DapHydra.hint:close() else DapHydra.hint:show() end end, {exit = false, private = true} },
+            { "u", function() require("dapui").toggle() end},
+            { "b", function() require("dap").toggle_breakpoint() end },
+            { "B", function() require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) end },
+            { "c", function() require("dap").continue() end},
+            { "O", function() require("dap").step_out() end},
+            { "o", function() require("dap").step_over() end},
+            { "i", function() require("dap").step_into() end},
+            { "L", function() debug_run_last() end},
+            { "X", function() require("dap").clear_breakpoints() end},
+            { "A", '<cmd>Telescope dap list_breakpoints<cr>'},
+            { "*", function() require("dap").run_to_cursor() end},
+            { "T", function() require("dap").terminate() end},
+            { "r", function() require("dap").repl.toggle() end},
+            { "s", function() require("dap.ui.widgets").centered_float(require("dap.ui.widgets").scopes) end},
+            { "g?", function() if DapHydra.hint.win then DapHydra.hint:close() else DapHydra.hint:show() end end},
             { '<Esc>', nil, { exit = true, nowait = true } },
          }
       })
-require('dap').set_log_level('TRACE') dap.adapters.gdb = {
+
+    local hydra_statusline = require("hydra.statusline");
+    require("lualine").setup({
+      options = {
+        refresh = {
+          statusline = 250,
+        }
+      },
+      sections = {
+      lualine_a = {
+          {
+            'mode',
+            fmt = function(str)
+              if hydra_statusline.is_active() == true then
+                return hydra_statusline.get_name()
+              end
+              return str
+            end,
+
+            color = function(tb)
+              if hydra_statusline.is_active() == true then
+                return {bg = hydra_statusline.get_color()}
+              end
+              return tb
+            end,
+          }
+        }
+      }
+    })
+
+    dap.adapters.gdb = {
         type = "executable",
         id = "gdb",
         command = "gdb",
@@ -121,10 +156,6 @@ require('dap').set_log_level('TRACE') dap.adapters.gdb = {
 
       vim.api.nvim_command 'autocmd FileType dap-float nnoremap <buffer><silent> q <cmd>close!<CR>'
      dapui.setup()
-
-
-
-
     dap.listeners.after.event_initialized["dapui_config"] = function()
       dapui.open()
     end
@@ -134,7 +165,6 @@ require('dap').set_log_level('TRACE') dap.adapters.gdb = {
     dap.listeners.before.event_exited["dapui_config"] = function()
       dapui.close()
     end
-
 
     end,
 }

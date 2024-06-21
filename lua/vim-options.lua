@@ -40,15 +40,12 @@ vim.opt.splitbelow = true
 vim.opt.inccommand = "split" -- Preview substitutions live, as you type!
 
 vim.opt.cursorline = true
-
 vim.opt.scrolloff = 20
-
 vim.opt.hlsearch = true
-
 vim.opt.autoread = true
 vim.opt_local.formatoptions:remove("cro")
-
 vim.opt.termguicolors = true
+vim.opt.showtabline = 0
 
 vim.opt.wrap = true
 vim.keymap.set("n", "j", "gj")

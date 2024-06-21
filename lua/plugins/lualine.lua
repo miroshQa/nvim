@@ -11,7 +11,6 @@ return {
   "nvim-lualine/lualine.nvim",
   event = "VeryLazy",
   config = function()
-    local hydra_statusline = require("hydra.statusline");
 
     require("lualine").setup({
       options = {
@@ -23,29 +22,9 @@ return {
           "dapui_stacks",
           "dap-repl",
         },
-        refresh = {
-          statusline = 250,
-        }
       },
       sections = {
-      lualine_a = {
-          {
-            'mode',
-            fmt = function(str)
-              if hydra_statusline.is_active() == true then
-                return hydra_statusline.get_name()
-              end
-              return str
-            end,
-
-            color = function(tb)
-              if hydra_statusline.is_active() == true then
-                return {bg = hydra_statusline.get_color()}
-              end
-              return tb
-            end,
-          }
-        },
+      lualine_a = {"mode", },
         lualine_c = {
           {"filename", path = 1},
           {
@@ -53,9 +32,18 @@ return {
             fmt = show_macro_recording,
           },
         },
-        lualine_x = { "encoding", "fileformat", "filetype" },
-        lualine_y = { "progress" },
-        lualine_z = { "location" },
+        lualine_x = {
+          {
+          "tabs",
+          mode = 1,
+         cond = function()
+                  return #vim.fn.gettabinfo() > 1
+                end,
+          },
+
+        },
+        lualine_y = {"encoding", "fileformat", "filetype" },
+        lualine_z = {"progress","location" },
       },
       inactive_sections = {
         lualine_a = {},
