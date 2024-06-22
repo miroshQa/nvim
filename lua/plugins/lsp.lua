@@ -4,34 +4,30 @@ return {
   dependencies = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
     "artemave/workspace-diagnostics.nvim",
     { "j-hui/fidget.nvim", opts = {} },
     { "folke/neodev.nvim", opts = {} },
   },
   config = function()
-    vim.diagnostic.config({
-      float = { border = "rounded" },
-    })
+    vim.diagnostic.config({ float = { border = "rounded" }})
+    vim.keymap.set("n", "<leader>li", "<cmd>LspInfo<CR>", {desc = "Info"})
+
     vim.api.nvim_create_autocmd("LspAttach", {
-      group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
+      group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
       callback = function(event)
-        local map = function(keys, func, desc)
-          vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
-        end
-        map("gd", require("telescope.builtin").lsp_definitions, "Goto Definition")
-        map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-        map("gi", require("telescope.builtin").lsp_implementations, "Goto Implementation")
-        map("gr", require("telescope.builtin").lsp_references, "Goto References")
-        map("gl", "<cmd>ClangdSwitchSourceHeader<Cr>", "Goto linked file (src / header)")
-
-        map("<leader>lr", vim.lsp.buf.rename, "Rename symbol")
-        map("<leader>li", "<cmd>LspInfo<CR>", "Info")
-        map("<leader>lR", "<cmd>LspRestart<CR>", "Restart")
-
+        vim.keymap.set("n", "gd", require("telescope.builtin").lsp_definitions, {desc = "Goto Definition"})
+        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {desc = "[G]oto [D]eclaration"})
+        vim.keymap.set("n", "gi", require("telescope.builtin").lsp_implementations, {desc = "Goto Implementation"})
+        vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, {desc = "Goto References"})
+        vim.keymap.set("n", "gl", "<cmd>ClangdSwitchSourceHeader<Cr>", {desc = "Goto linked file (src / header)"})
+        vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, {desc = "Rename symbol"})
+        vim.keymap.set("n", "<leader>lR", "<cmd>LspRestart<CR>", {desc = "Restart"})
         vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
         vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-        map("K", vim.lsp.buf.hover, "Hover Documentation")
+        vim.keymap.set("n", "H", vim.diagnostic.open_float, {desc = "Open diagnostic float"})
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, {desc = "Hover Documentation"})
+        vim.keymap.set("i", '<up>', vim.lsp.buf.signature_help, {desc = "Hover Signature help"})
+
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         require("workspace-diagnostics").populate_workspace_diagnostics(client, event.buf)
@@ -46,14 +42,15 @@ return {
             buffer = event.buf,
             callback = vim.lsp.buf.clear_references,
           })
+
         end
       end,
     })
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities.textDocument.completion.completionItem.snippetSupport = false
     capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
+    -- 1. help lsp-config 2. /config<CR> (To watch info about server configuration)
     local servers = {
       clangd = {
         cmd = {
@@ -63,7 +60,7 @@ return {
       },
 
       emmet_language_server = { },
-      neocmakelsp = {},
+      neocmake = {},
       pyright = {},
       cssls = { },
       lemminx = { },
@@ -81,18 +78,14 @@ return {
     }
 
     require("mason").setup()
+    require("mason-lspconfig").setup({ ensure_installed = vim.tbl_keys(servers or {})})
 
-    local ensure_installed = vim.tbl_keys(servers or {})
-    require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
-
-    require("mason-lspconfig").setup({
-      handlers = {
+    require("mason-lspconfig").setup_handlers({
         function(server_name)
           local server = servers[server_name] or {}
           server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
           require("lspconfig")[server_name].setup(server)
         end,
-      },
     })
   end,
 }

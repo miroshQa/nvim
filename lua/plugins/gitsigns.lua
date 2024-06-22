@@ -4,8 +4,8 @@ return {
 	config = function()
     vim.keymap.set("n", "<leader>hr", function() require("gitsigns").reset_hunk() end, {desc = "Reset hunk"})
     vim.keymap.set("n", "<leader>hp", function() require("gitsigns").preview_hunk() end, {desc = "Reset hunk"})
-    vim.keymap.set("n", "[g", function() require("gitsigns").prev_hunk() end, {desc = "Prev hunk"})
-    vim.keymap.set("n", "]g", function() require("gitsigns").next_hunk() end, {desc = "Next hunk"})
+    vim.keymap.set("n", "[g", function() require("gitsigns").prev_hunk() require("gitsigns").preview_hunk() end, {desc = "Prev hunk"})
+    vim.keymap.set("n", "]g", function() require("gitsigns").next_hunk() require("gitsigns").preview_hunk() end, {desc = "Next hunk"})
 
 		require("gitsigns").setup({
 			signs = {
