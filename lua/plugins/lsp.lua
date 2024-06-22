@@ -52,33 +52,19 @@ return {
 
     -- 1. help lsp-config 2. /config<CR> (To watch info about server configuration)
     local servers = {
-      clangd = {
-        cmd = {
-          "clangd",
-          "--function-arg-placeholders=0",
-        },
-      },
-
+      clangd = { cmd = { "clangd", "--function-arg-placeholders=0", }, single_file_support = true,},
       emmet_language_server = { },
       neocmake = {},
       pyright = {},
-      cssls = { },
-      lemminx = { },
+      cssls = {},
+      lemminx = {},
       marksman = {},
-      lua_ls = {
-        settings = {
-          Lua = {
-            completion = {
-              callSnippet = "Replace",
-            },
-          },
-        },
-      },
+      lua_ls = {},
 
     }
 
     require("mason").setup()
-    require("mason-lspconfig").setup({ ensure_installed = vim.tbl_keys(servers or {})})
+    require("mason-lspconfig").setup({ ensure_installed = vim.tbl_keys(servers or {}) })
 
     require("mason-lspconfig").setup_handlers({
         function(server_name)

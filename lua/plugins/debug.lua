@@ -2,21 +2,21 @@ return {
     "mfussenegger/nvim-dap",
     version = "*",
     dependencies = {
+      "williamboman/mason.nvim",
+    --This shit doesn't work properly. It is easiest to install adapters manually through Mason
+      --- "jay-babu/mason-nvim-dap.nvim",
       "theHamsta/nvim-dap-virtual-text",
-     "nvim-neotest/nvim-nio",
+      "nvim-neotest/nvim-nio",
       "rcarriga/nvim-dap-ui",
       "nvimtools/hydra.nvim",
       "nvim-lualine/lualine.nvim",
     },
     config = function()
 
-      require("nvim-dap-virtual-text").setup({
-         virt_text_pos = "eol",
-      })
-
+      require("nvim-dap-virtual-text").setup({ virt_text_pos = "eol"})
       local dap = require("dap")
       local dapui = require("dapui")
-
+      dap.set_log_level('TRACE')
       -- Run last: https://github.com/mfussenegger/nvim-dap/issues/1025
       local last_config = nil
       ---@param session Session
@@ -81,6 +81,7 @@ return {
          }
       })
 
+    --Setup status line for Hydra
     local hydra_statusline = require("hydra.statusline")
     require("lualine").setup({
       options = {
@@ -110,59 +111,55 @@ return {
       }
     })
 
-    dap.adapters.gdb = {
-        type = "executable",
-        id = "gdb",
-        command = "gdb",
-        args = {"--interpreter=dap"},
-      }
-
-      dap.configurations.cpp = {
-        {
-          type = "gdb",
-          request = "launch",
-          name = "Launch gdb",
-          program = function()
-            --return "mWeather"
-            -- Оказывается на винде нужен путь формата a//b//b//... Часа три дебажил
-            local cwd_path = string.gsub(vim.fn.getcwd(), "\\", "//")
-            local path = vim.fn.input("Path to executable: ", cwd_path .. "//", "file")
-            return path
-          end,
-          cwd = "${workspaceFolder}",
-          stopAtBeginningOfMainSubprogram = false,
-        },
-      }
-      dap.configurations.c = dap.configurations.cpp
-
-      dap.adapters.coreclr = {
-        type = 'executable',
-        command = 'C:/netcoredbg/netcoredbg',
-        args = {'--interpreter=vscode'},
+      require("mason").setup() -- Function vim.fn.exepath will not work if we do not setup mason first
+     dap.adapters.coreclr = {
+       type = 'executable',
+      command = vim.fn.stdpath("data") .."/mason/packages/netcoredbg/netcoredbg/netcoredbg.exe" ,
+       args = {'--interpreter=vscode'}, -- :lua print(vim.inspect(require("dap").adapters)) VERY USEFUL FOR DEBUG
       }
 
       dap.configurations.cs = {
-        {
-          type = "coreclr",
-          name = "launch - netcoredbg",
-          request = "launch",
-          program = function()
-              return vim.fn.input('Path to dll: ', vim.fn.getcwd() .. '/bin/Debug/net8.0/', 'file')
-          end,
-        },
-      }
+       {
+         type = "coreclr",
+         name = "launch - netcoredbg",
+         request = "launch",
+         program = function()
+             return vim.fn.input('Path to dll (Do not forget recompile your project!): ', vim.fn.getcwd() .. '/bin/Debug/net8.0/', 'file')
+         end,
+       },
+     }
 
-      vim.api.nvim_command 'autocmd FileType dap-float nnoremap <buffer><silent> <Esc> <cmd>close!<CR>'
-     dapui.setup()
-    dap.listeners.after.event_initialized["dapui_config"] = function()
-      dapui.open()
-    end
-    dap.listeners.before.event_terminated["dapui_config"] = function()
-      dapui.close()
-    end
-    dap.listeners.before.event_exited["dapui_config"] = function()
-      dapui.close()
-    end
+    dap.adapters.codelldb = {
+      type = 'server',
+      port = "${port}",
+      executable = {
+        -- CHANGE THIS to your path!
+        command = vim.fn.stdpath("data") .."/mason/packages/codelldb/extension/adapter/codelldb.exe" , -- executable and exepath are different functions!!!
+        args = {"--port", "${port}"},
+        detached = false,
+      }
+    }
+
+dap.configurations.cpp = {
+  {
+    name = "Launch file",
+    type = "codelldb",
+    request = "launch",
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    stopOnEntry = false,
+  },
+}
+
+
+    --- Setup DapUi
+    vim.api.nvim_command 'autocmd FileType dap-float nnoremap <buffer><silent> <Esc> <cmd>close!<CR>'
+    dapui.setup()
+    dap.listeners.after.event_initialized['dapui_config'] = dapui.open
+    dap.listeners.before.event_terminated['dapui_config'] = dapui.close
+    dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
     end,
 }
