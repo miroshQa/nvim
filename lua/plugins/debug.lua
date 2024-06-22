@@ -133,13 +133,17 @@ return {
       type = 'server',
       port = "${port}",
       executable = {
-        -- CHANGE THIS to your path!
         command = vim.fn.stdpath("data") .."/mason/packages/codelldb/extension/adapter/codelldb.exe" , -- executable and exepath are different functions!!!
         args = {"--port", "${port}"},
         detached = false,
       }
     }
 
+  dap.defaults.fallback.external_terminal = {
+    command = 'wt';
+  }
+
+--https://github.com/vadimcn/codelldb/blob/master/MANUAL.md
 dap.configurations.cpp = {
   {
     name = "Launch file",
@@ -150,12 +154,13 @@ dap.configurations.cpp = {
     end,
     cwd = '${workspaceFolder}',
     stopOnEntry = false,
+    terminal = "external",
   },
 }
 
 
     --- Setup DapUi
-    vim.api.nvim_command 'autocmd FileType dap-float nnoremap <buffer><silent> <Esc> <cmd>close!<CR>'
+    vim.api.nvim_command 'autocmd FileType dap-float nnoremap <buffer><silent> <q> <cmd>close!<CR>'
     dapui.setup()
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
