@@ -15,8 +15,14 @@ vim.opt.rtp:prepend(lazypath)
 require("vim-options")
 require("basic_keymaps")
 require("autocommands")
-require("lazy").setup(
-	"plugins",
-	{ checker = { enabled = true, notify = false }, change_detection = { notify = false }}
+require("lazy").setup({
+  spec = {
+    {import = "plugins"},
+    {import = "plugins/dap"}
+  },
+  checker = {
+    notify = false,
+  }
+}
 )
 
