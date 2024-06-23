@@ -1,10 +1,8 @@
 return {
-    "nvimtools/hydra.nvim",
+    "nvim-neotest/nvim-nio",
     dependencies = {
       "mfussenegger/nvim-dap",
-      "nvim-neotest/nvim-nio",
       "rcarriga/nvim-dap-ui",
-      "nvim-lualine/lualine.nvim",
     },
     config = function()
       local dap = require("dap")
@@ -24,58 +22,65 @@ return {
         end
       end
 
-    local Hydra = require('hydra')
+---@param dir "next"|"prev"
+local function gotoBreakpoint(dir)
+	local breakpoints = require("dap.breakpoints").get()
+	if #breakpoints == 0 then
+		vim.notify("No breakpoints set", vim.log.levels.WARN)
+		return
+	end
+	local points = {}
+	for bufnr, buffer in pairs(breakpoints) do
+		for _, point in ipairs(buffer) do
+			table.insert(points, { bufnr = bufnr, line = point.line })
+		end
+	end
 
-    local hint = [[
-         ^ ^Step^ ^ ^      ^ ^     Action
-     ----^-^-^-^--^-^----  ^-^-------------------  
-         ^ ^back^ ^ ^      _z_: toggle breakpoint 
-         ^ ^ _K_^ ^         _Z_: Set conditional breakpoint 
-     out _H_ ^ ^ _L_ into   _>_: Continue
-         ^ ^ _J_ ^ ^        _X_: Terminate
-         ^ ^over ^ ^      ^^_s_: open scope
-                      _U_: UI toggle
-                      _g?_: Hydra hint
-                      _gl_: Run last configuration
-                      _*_: Run to cursor
+	local current = {
+		bufnr = vim.api.nvim_get_current_buf(),
+		line = vim.api.nvim_win_get_cursor(0)[1],
+	}
 
-         ^ ^  _<Esc>_: Normal mode
-    ]]
+	local nextPoint
+	for i = 1, #points do
+		local isAtBreakpointI = points[i].bufnr == current.bufnr and points[i].line == current.line
+		if isAtBreakpointI then
+			local nextIdx = dir == "next" and i + 1 or i - 1
+			if nextIdx > #points then nextIdx = 1 end
+			if nextIdx == 0 then nextIdx = #points end
+			nextPoint = points[nextIdx]
+			break
+		end
+	end
+	if not nextPoint then nextPoint = points[1] end
 
-      DapHydra = Hydra({
-         name = "DEBUG",
-         hint = hint,
-         config = {
-            color = 'pink',
-            desc = "Debug mode",
-            invoke_on_body = true,
-            hint = {
-              float_opts = {
-            border = "rounded",
-          },
-              hide_on_load = true,
-              show_name = false,
-            },
-         },
+	vim.cmd(("buffer +%s %s"):format(nextPoint.line, nextPoint.bufnr))
+end
 
-         mode = 'n',
-         body = '<Leader>d',
-         heads = {
-            { "U", function() require("dapui").toggle() end},
-            { "z", function() require("dap").toggle_breakpoint() end },
-            { "Z", function() require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) end },
-            { ">", function() if vim.bo.filetype ~= "dap-float" then require("dap").continue() end end},
-            { "K", function() if vim.bo.filetype ~= "dap-float" then require("dap").step_back() end end},
-            { "H", function() if vim.bo.filetype ~= "dap-float" then require("dap").step_out() end end},
-            { "J", function() if vim.bo.filetype ~= "dap-float" then print(vim.bo.filetype) require("dap").step_over() end end},
-            { "L", function() if vim.bo.filetype ~= "dap-float" then require("dap").step_into() end end},
-            { "gl", function() debug_run_last() end},
-            { "X", function() require("dap").terminate() end},
-            { "*", function() require("dap").run_to_cursor() end},
-            { "s", function() if vim.bo.filetype ~= "dap-float" then require("dap.ui.widgets").centered_float(require("dap.ui.widgets").scopes) end end},
-            { "g?", function() if DapHydra.hint.win then DapHydra.hint:close() else DapHydra.hint:show() end end},
-            { '<Esc>', nil, { exit = true, nowait = true } },
-         }
-      })
+    vim.keymap.set("n", "K", function() if vim.bo.filetype ~= "dap-float" then require("dap").step_back() end end)
+    vim.keymap.set("n", "H", function() if vim.bo.filetype ~= "dap-float" then require("dap").step_out() end end)
+    vim.keymap.set("n", "J", function() if vim.bo.filetype ~= "dap-float" then require("dap").step_over() end end)
+    vim.keymap.set("n", "L", function() if vim.bo.filetype ~= "dap-float" then require("dap").step_into() end end)
+
+    vim.keymap.set("n", ">", function() if vim.bo.filetype ~= "dap-float" then require("dap").continue() end end)
+    vim.keymap.set("n", "<", function() if vim.bo.filetype ~= "dap-float" then require("dap").reverse_continue() end end)
+    vim.keymap.set("n", "gu", function() require("dapui").toggle() end)
+    vim.keymap.set("n", "gs", function() if vim.bo.filetype ~= "dap-float" then require("dap.ui.widgets").centered_float(require("dap.ui.widgets").scopes) end end)
+    vim.keymap.set("n", "g*", function() if vim.bo.filetype ~= "dap-float" then require("dap").reverse_continue() end end)
+    vim.keymap.set("n", "g-", function() if vim.bo.filetype ~= "dap-float" then require("dap").terminate() end end)
+    vim.keymap.set("n", "<leader>db", function() require("dap").list_breakpoints() end)
+    vim.keymap.set("n", "<leader>dB", function() require("dap").clear_breakpoints() end)
+    vim.keymap.set("n", "gc", function() require("dap").set_exception_breakpoints() end)
+    vim.keymap.set("n", "gp", function() require("dap").focus_frame() end)
+    vim.keymap.set("n", "[b", function() gotoBreakpoint("prev") end)
+    vim.keymap.set("n", "]b", function() gotoBreakpoint("next") end)
+    vim.keymap.set("n", "[s", function() require("dap").down() end)
+    vim.keymap.set("n", "]s", function() require("dap").up() end)
+    vim.keymap.set("n", "ga", function() debug_run_last() end)
+    vim.keymap.set("n", "z", function() require("dap").toggle_breakpoint() end)
+    vim.keymap.set("n", "Z", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end)
+
+
+    vim.api.nvim_command 'autocmd FileType dap-float nnoremap <buffer><silent> q <cmd>close!<CR>'
     end,
 }
