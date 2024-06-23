@@ -37,7 +37,7 @@ return {
         vim.keymap.set("n", "<leader>lR", "<cmd>LspRestart<CR>", {desc = "Restart"})
         vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
         vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-        vim.keymap.set("n", "<C-e>", vim.diagnostic.open_float, {desc = "Open Error / Diagnostic float"})
+        vim.keymap.set("n", "<C-right>", vim.diagnostic.open_float, {desc = "Open Error / Diagnostic float"})
         vim.keymap.set("n", "<C-s>", vim.lsp.buf.hover, {desc = "Hover Signature / Documentation"})
         vim.keymap.set("i", '<C-s>', vim.lsp.buf.signature_help, {desc = "Hover Signature help"})
 
