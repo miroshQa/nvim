@@ -57,30 +57,34 @@ local function gotoBreakpoint(dir)
 	vim.cmd(("buffer +%s %s"):format(nextPoint.line, nextPoint.bufnr))
 end
 
-    vim.keymap.set("n", "K", function() if vim.bo.filetype ~= "dap-float" then require("dap").step_back() end end)
-    vim.keymap.set("n", "H", function() if vim.bo.filetype ~= "dap-float" then require("dap").step_out() end end)
-    vim.keymap.set("n", "J", function() if vim.bo.filetype ~= "dap-float" then require("dap").step_over() end end)
-    vim.keymap.set("n", "L", function() if vim.bo.filetype ~= "dap-float" then require("dap").step_into() end end)
+    local dmap = function(key, func, descritpion)
+      vim.keymap.set("n", key, func, {desc = "DEBUG: " .. descritpion})
+    end
 
-    vim.keymap.set("n", ">", function() if vim.bo.filetype ~= "dap-float" then require("dap").continue() end end)
-    vim.keymap.set("n", "<", function() if vim.bo.filetype ~= "dap-float" then require("dap").reverse_continue() end end)
-    vim.keymap.set("n", "gu", function() require("dapui").toggle() end)
-    vim.keymap.set("n", "gs", function() if vim.bo.filetype ~= "dap-float" then require("dap.ui.widgets").centered_float(require("dap.ui.widgets").scopes) end end)
-    vim.keymap.set("n", "g*", function() if vim.bo.filetype ~= "dap-float" then require("dap").reverse_continue() end end)
-    vim.keymap.set("n", "g-", function() if vim.bo.filetype ~= "dap-float" then require("dap").terminate() end end)
-    vim.keymap.set("n", "<leader>db", function() require("dap").list_breakpoints() end)
-    vim.keymap.set("n", "<leader>dB", function() require("dap").clear_breakpoints() end)
-    vim.keymap.set("n", "gc", function() require("dap").set_exception_breakpoints() end)
-    vim.keymap.set("n", "gp", function() require("dap").focus_frame() end)
-    vim.keymap.set("n", "[b", function() gotoBreakpoint("prev") end)
-    vim.keymap.set("n", "]b", function() gotoBreakpoint("next") end)
-    vim.keymap.set("n", "[s", function() require("dap").down() end)
-    vim.keymap.set("n", "]s", function() require("dap").up() end)
-    vim.keymap.set("n", "ga", function() debug_run_last() end)
-    vim.keymap.set("n", "z", function() require("dap").toggle_breakpoint() end)
-    vim.keymap.set("n", "Z", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end)
+    dmap("K", function() if vim.bo.filetype ~= "dap-float" then require("dap").step_back() end end, "Step back")
+    dmap("H", function() if vim.bo.filetype ~= "dap-float" then require("dap").step_out() end end, "Step out")
+    dmap("J", function() if vim.bo.filetype ~= "dap-float" then require("dap").step_over() end end, "Step over")
+    dmap("L", function() if vim.bo.filetype ~= "dap-float" then require("dap").step_into() end end, "Step into")
+
+    dmap(">", function() if vim.bo.filetype ~= "dap-float" then require("dap").continue() end end, "Continue")
+    dmap("<", function() if vim.bo.filetype ~= "dap-float" then require("dap").reverse_continue() end end, "Reverese continue")
+    dmap("gu", function() require("dapui").toggle() end, "UI toggle")
+    dmap("gs", function() if vim.bo.filetype ~= "dap-float" then require("dap.ui.widgets").centered_float(require("dap.ui.widgets").scopes) end end, "Scopes")
+    dmap("g-", function() if vim.bo.filetype ~= "dap-float" then require("dap").terminate() end end, "Termniate")
+    dmap("<leader>db", function() require("dap").list_breakpoints() end, "Breakpoinst list")
+    dmap("<leader>dB", function() require("dap").clear_breakpoints() end, "Clear breakpoints list")
+    dmap("gc", function() require("dap").set_exception_breakpoints() end, "Set exception breakpont")
+    dmap("gp", function() require("dap").focus_frame() end, "Go to paused")
+    dmap("[b", function() gotoBreakpoint("prev") end, "Prev breakpoint")
+    dmap("]b", function() gotoBreakpoint("next") end, "Next breakpoint")
+    dmap("[s", function() require("dap").down() end, "Stack frame down")
+    dmap("]s", function() require("dap").up() end, "Stack frame up")
+    dmap("ga", function() debug_run_last() end, "Run last configuration")
+    dmap("z", function() require("dap").toggle_breakpoint() end, "Toggle breakpont")
+    dmap("Z", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, "Set conditional breakpoint")
 
 
     vim.api.nvim_command 'autocmd FileType dap-float nnoremap <buffer><silent> q <cmd>close!<CR>'
+    vim.api.nvim_command 'autocmd FileType dap-float nnoremap <buffer><silent> <Esc> <cmd>close!<CR>'
     end,
 }

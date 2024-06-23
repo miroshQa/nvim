@@ -52,6 +52,7 @@ return {
       cwd = '${workspaceFolder}',
       stopOnEntry = false,
       terminal = "external",
+      reverseDebugging = true,
     },
   }
     end,
