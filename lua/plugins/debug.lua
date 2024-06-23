@@ -35,13 +35,22 @@ return {
     local Hydra = require('hydra')
 
     local hint = [[
-     _u_: Toggle DAP UI           _A_: Set conditional breakpoint   _c_: Continue from breakpoint   _L_: Run last configurations 
-     _a_: Set breakpoint          _o_: Step over                    _i_: Step into                  _O_:  Step Out
-     _X_: Clear all breakpoints   _P_: List all breakpoints         _*_: Run to run to cursor       _T_: Terminate 
-     _r_: Repl toggle             _s_: Scope                        _g?_: Toggle hint   
-     ^
-     ^ ^                                       _<Esc>_: Back to Normal mode             
+         ^ ^Step^ ^ ^      ^ ^     Action
+     ----^-^-^-^--^-^----  ^-^-------------------  
+         ^ ^back^ ^ ^      _m_: toggle breakpoint 
+         ^ ^ _K_^ ^         _M_: Set conditional breakpoint 
+     out _H_ ^ ^ _L_ into   _z_: Continue
+         ^ ^ _J_ ^ ^        _X_: Terminate
+         ^ ^over ^ ^      ^^_s_: open scope
+                      _U_: UI toggle
+                      _g?_: Hydra hint
+                      _gl_: Run last configuration
+                      _*_: Run to cursor
+
+         ^ ^  _<Esc>_: Normal mode
     ]]
+
+
 
       DapHydra = Hydra({
          name = "DEBUG",
@@ -62,19 +71,17 @@ return {
          mode = 'n',
          body = '<Leader>d',
          heads = {
-            { "u", function() require("dapui").toggle() end},
-            { "a", function() require("dap").toggle_breakpoint() end },
-            { "A", function() require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) end },
-            { "c", function() if vim.bo.filetype ~= "dap-float" then require("dap").continue() end end},
-            { "O", function() if vim.bo.filetype ~= "dap-float" then require("dap").step_out() end end},
-            { "o", function() if vim.bo.filetype ~= "dap-float" then print(vim.bo.filetype) require("dap").step_over() end end},
-            { "i", function() if vim.bo.filetype ~= "dap-float" then require("dap").step_into() end end},
-            { "L", function() debug_run_last() end},
-            { "X", function() require("dap").clear_breakpoints() end},
-            { "P", '<cmd>Telescope dap list_breakpoints<cr>'},
+            { "U", function() require("dapui").toggle() end},
+            { "m", function() require("dap").toggle_breakpoint() end },
+            { "M", function() require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) end },
+            { "z", function() if vim.bo.filetype ~= "dap-float" then require("dap").continue() end end},
+            { "K", function() if vim.bo.filetype ~= "dap-float" then require("dap").step_back() end end},
+            { "H", function() if vim.bo.filetype ~= "dap-float" then require("dap").step_out() end end},
+            { "J", function() if vim.bo.filetype ~= "dap-float" then print(vim.bo.filetype) require("dap").step_over() end end},
+            { "L", function() if vim.bo.filetype ~= "dap-float" then require("dap").step_into() end end},
+            { "gl", function() debug_run_last() end},
+            { "X", function() require("dap").terminate() end},
             { "*", function() require("dap").run_to_cursor() end},
-            { "T", function() require("dap").terminate() end},
-            { "r", function() require("dap").repl.toggle() end},
             { "s", function() if vim.bo.filetype ~= "dap-float" then require("dap.ui.widgets").centered_float(require("dap.ui.widgets").scopes) end end},
             { "g?", function() if DapHydra.hint.win then DapHydra.hint:close() else DapHydra.hint:show() end end},
             { '<Esc>', nil, { exit = true, nowait = true } },
