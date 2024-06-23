@@ -9,7 +9,20 @@ return {
     { "folke/neodev.nvim", opts = {} },
   },
   config = function()
-    vim.diagnostic.config({ float = { border = "rounded" }})
+
+
+    vim.diagnostic.config({
+      float = { border = "rounded" },
+    signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = " ",
+          [vim.diagnostic.severity.WARN] = " ",
+          [vim.diagnostic.severity.HINT] = " ",
+          [vim.diagnostic.severity.INFO] = " ",
+        },
+      },
+    })
+
     vim.keymap.set("n", "<leader>li", "<cmd>LspInfo<CR>", {desc = "Info"})
 
     vim.api.nvim_create_autocmd("LspAttach", {

@@ -50,8 +50,6 @@ return {
          ^ ^  _<Esc>_: Normal mode
     ]]
 
-
-
       DapHydra = Hydra({
          name = "DEBUG",
          hint = hint,
@@ -101,14 +99,14 @@ return {
           {
             'mode',
             fmt = function(str)
-              if hydra_statusline.is_active() == true then
+              if hydra_statusline.is_active() == true and vim.fn.mode() == "n" then
                 return hydra_statusline.get_name()
               end
               return str
             end,
 
             color = function(tb)
-              if hydra_statusline.is_active() == true then
+              if hydra_statusline.is_active() == true and vim.fn.mode() == "n" then
                 return {bg = hydra_statusline.get_color()}
               end
               return tb
@@ -118,7 +116,14 @@ return {
       }
     })
 
-      require("mason").setup() -- Function vim.fn.exepath will not work if we do not setup mason first
+      vim.fn.sign_define('DapBreakpoint',          { text='', texthl='red'})
+      vim.fn.sign_define('DapBreakpointCondition', { text='', texthl='blue'})
+      vim.fn.sign_define('DapBreakpointRejected',  { text='', texthl='orange'})
+      vim.fn.sign_define('DapStopped',             { text='󰁕', texthl='green'})
+      vim.fn.sign_define('DapLogPoint',            { text='.>', texthl='yellow', linehl='DapBreakpoint', numhl='DapBreakpoint' })
+
+
+     require("mason").setup() -- Function vim.fn.exepath will not work if we do not setup mason first
      dap.adapters.coreclr = {
        type = 'executable',
       command = vim.fn.stdpath("data") .."/mason/packages/netcoredbg/netcoredbg/netcoredbg.exe" ,
