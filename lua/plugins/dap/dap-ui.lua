@@ -8,7 +8,6 @@ return {
     config = function()
 
     require("nvim-dap-virtual-text").setup({ virt_text_pos = "eol"})
-    --
     local dapui = require("dapui")
     local dap = require("dap")
 

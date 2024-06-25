@@ -1,7 +1,3 @@
-local api = vim.api
-vim.api.nvim_command 'autocmd TermOpen * startinsert' -- starts in insert mode
-vim.api.nvim_command 'autocmd TermOpen * setlocal nonumber' -- no numbers
-vim.api.nvim_command 'autocmd TermEnter * setlocal signcolumn=no' -- no sign column
 
 vim.keymap.set('n', '<left>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<right>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
@@ -14,9 +10,3 @@ vim.keymap.set("n", "g.", "<cmd>b#<CR>", {desc = "Go to previous buffer (. - mos
 vim.keymap.set("n", "<tab>", "gt")
 vim.keymap.set("n", "<S-tab>", "gT")
 
-
-vim.keymap.set("n", "<M-l>", "<c-w>5<")
-vim.keymap.set("n", "<M-h>", "<c-w>5>")
-vim.keymap.set("n", "<M-k>", "<c-w>5+>")
-vim.keymap.set("n", "<M-j>", "<c-w>5->")
-vim.keymap.set("n", "<C-y>", "<cmd>join<CR>") -- BECAUSE I USE J for step over (debug)

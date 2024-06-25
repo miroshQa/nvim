@@ -23,12 +23,15 @@ return {
 
 
       require("toggleterm").setup({
-        open_mapping = "<c-t>",
+        open_mapping = "<C-t>",
         autochdir = true,
         terminal_mappings = true,
         direction = "float",
       })
 
+      vim.api.nvim_command 'autocmd TermOpen * startinsert' -- starts in insert mode
+      vim.api.nvim_command 'autocmd TermOpen * setlocal nonumber' -- no numbers
+      vim.api.nvim_command 'autocmd TermEnter * setlocal signcolumn=no' -- no sign column
       vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
     end
   },

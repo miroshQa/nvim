@@ -9,25 +9,18 @@ vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.backspace = "indent,eol,start"
 vim.opt.smartindent = true -- Подстравивать новые строки под предыдущий отступ
-
 vim.opt.wrap = false
 vim.opt.number = true
 vim.opt.relativenumber = true
-
 vim.opt.mouse = "a"
 
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
-
 vim.opt.clipboard = "unnamedplus"
-
 vim.opt.breakindent = true
-
 vim.opt.undofile = true
-
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-
 vim.opt.signcolumn = "yes"
 -- https://stackoverflow.com/questions/18464038/is-it-possible-to-make-vim-use-forward-slashes-on-windows 
 -- Helpful for DAP
@@ -64,3 +57,14 @@ if vim.g.neovide then
 	map.set({ "n", "v" }, "<C-->", "<cmd>lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<CR>")
 	map.set({ "n", "v" }, "<C-0>", "<cmd>lua vim.g.neovide_scale_factor = 1<CR>")
 end
+
+-- Highlight when yanking (copying) text
+--  Try it with `yap` in normal mode
+--  See `:help vim.highlight.on_yank()`
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})

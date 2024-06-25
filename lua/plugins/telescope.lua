@@ -7,17 +7,20 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		{ "nvim-telescope/telescope-ui-select.nvim" },
 		{ "nvim-tree/nvim-web-devicons" },
     "nvim-telescope/telescope-dap.nvim",
+    {"nvim-telescope/telescope-fzf-native.nvim", build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"},
 	},
 	config = function()
 		require("telescope").setup({
 			defaults = {
         file_ignore_patterns = {
-          "%.png"
+          "%.png",
+          "%.pdf",
         },
 
 				mappings = {
 					i = {
 						["<esc>"] = require("telescope.actions").close,
+            ["<C-h>"] = function() vim.api.nvim_input("<C-w>") end -- for backpace
 					},
 				},
 
@@ -36,6 +39,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 			},
 		})
 
+    require('telescope').load_extension('fzf')
     require("telescope").load_extension("ui-select")
     require("telescope").load_extension("dap")
 
@@ -57,11 +61,5 @@ return { -- Fuzzy Finder (files, lsp, etc)
 			"<cmd>lua require('telescope.builtin').buffers{path_display = {'tail'}, sort_mru = true, ignore_current_buffer = true}<CR>",
 			{ desc = "Find open buffers" }
 		)
-
-
-		-- Shortcut for searching your Neovim configuration files
-		vim.keymap.set("n", "<leader>fn", function()
-			builtin.find_files({ cwd = vim.fn.stdpath("config") })
-		end, { desc = "Find Neovim files" })
 	end,
 }

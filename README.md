@@ -14,14 +14,13 @@
         <td>ESC</td>
         <td>Game changer. Every vim user has to do this</td>
     <tr>
-        <td>CTRL</td>
-        <td>ALT</td>
-        <td> It is very easy to use CTRL + D/U/R and other combinations with CTRL in vim with without leaving home row </td>
-    </tr>
-    <tr>
         <td>ALT</td>
         <td>CTRL</td>
-        <td> Of course, I had to retrain CTRL + V, CTRL + C, CTRL + A, but it was worth it </td>
+        <td>
+            Of course, I had to relearn CTRL + V, CTRL + C, CTRL + A, etc but it was worth it. But what about the alt?
+            I did not change the left control to the alt. Instead, I use the right alt. It's more ergonomic because I don't have to leave homerow.
+            So, I use the left alt as a control, and the right alt as the actual alt
+        </td>
     </tr>
     <tr>
         <td>CTRL + M</td>
@@ -69,10 +68,6 @@
 ### Colorscheme 😻 
 ![Colorscheme](./imgs/colorscheme.png)
 
-### Debug Mode using Hydra 🐍
-![DebugModeHydra](./imgs/dap-ui.png) 
-![DebugModeHydraHint](./imgs/hydra-hint-debug-mode.png) 
-
 ### File Tree 🌳
 ![FileTree](./imgs/file-tree.png) 
 
@@ -81,6 +76,7 @@
 
 ### Telescope 🔭
 ![Telescope](./imgs/telescope.png) 
+
 ### Dashboard 😎
 ![Dashboard](./imgs/dashboard.png) 
 

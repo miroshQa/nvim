@@ -23,13 +23,14 @@ return {
           completeopt = "menu,menuone,noinsert",
         },
         mapping = cmp.mapping.preset.insert({
-          ["<C-j>"] = cmp.mapping.select_next_item(),
-          ["<C-k>"] = cmp.mapping.select_prev_item(),
+          ["<down>"] = cmp.mapping.select_next_item(),
+          ["<up>"] = cmp.mapping.select_prev_item(),
           ["<C-u>"] = cmp.mapping.scroll_docs(-4),
           ["<C-d>"] = cmp.mapping.scroll_docs(4),
-          ["<CR>"] = cmp.mapping.confirm({
+          ["<CR>"] = cmp.mapping.confirm({ -- Select (Не париться с C-s или C-i. Это удобнее но есть случаи когда не очень. Тем более <CR> - это дефолт везде (Chrome, pwsh, ...);
             select = true,
-          }),
+          }), -- Короче я потестил M-s и если и есть улучшение то оно вообще не заметно. Иногда только неудобнее. В общем не стоить заниматься этой дичью. Лишний оверхед. Тем более <CR> везде по дефолту. Не стоит создавать лишние шорткаты в памяти. Тем более я очень быстро печатаю и использую дополнение редко. Тем более <CR> расположен более чем удобно. По фатку это левосторонний CAPS который я так часто использую)
+          -- Перфекционизм меня до психушки доведет...
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp", max_item_count = 15, },
@@ -40,7 +41,6 @@ return {
         }),
 
         window = {
-          -- Add borders to completions popups
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
         },

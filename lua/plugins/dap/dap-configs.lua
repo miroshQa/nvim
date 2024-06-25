@@ -27,33 +27,5 @@ return {
          end,
        },
      }
-
-    dap.adapters.codelldb = {
-      type = 'server',
-      port = "${port}",
-      executable = {
-        command = vim.fn.stdpath("data") .."/mason/packages/codelldb/extension/adapter/codelldb.exe" , -- executable and exepath are different functions!!!
-        args = {"--port", "${port}"},
-        detached = false,
-      }
-    }
-
-  dap.defaults.fallback.external_terminal = { command = 'wt'}
-
---https://github.com/vadimcn/codelldb/blob/master/MANUAL.md
-  dap.configurations.cpp = {
-    {
-      name = "Launch file",
-      type = "codelldb",
-      request = "launch",
-      program = function()
-        return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-      end,
-      cwd = '${workspaceFolder}',
-      stopOnEntry = false,
-      terminal = "external",
-      reverseDebugging = true,
-    },
-  }
     end,
 }

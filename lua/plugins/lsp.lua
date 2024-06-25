@@ -1,5 +1,6 @@
 return {
   "neovim/nvim-lspconfig",
+  priority = 1001,
   event = "VimEnter",
   dependencies = {
     "williamboman/mason.nvim",
@@ -24,6 +25,7 @@ return {
     })
 
     vim.keymap.set("n", "<leader>li", "<cmd>LspInfo<CR>", {desc = "Info"})
+    vim.keymap.set("n", "<leader>ll", "<cmd>LspLog<CR>", {desc = "Info"})
 
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
@@ -37,9 +39,8 @@ return {
         vim.keymap.set("n", "<leader>lR", "<cmd>LspRestart<CR>", {desc = "Restart"})
         vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
         vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-        vim.keymap.set("n", "<C-right>", vim.diagnostic.open_float, {desc = "Open Error / Diagnostic float"})
-        vim.keymap.set("n", "<C-s>", vim.lsp.buf.hover, {desc = "Hover Signature / Documentation"})
-        vim.keymap.set("i", '<C-s>', vim.lsp.buf.signature_help, {desc = "Hover Signature help"})
+        vim.keymap.set("n", "H", vim.diagnostic.open_float, {desc = "Open Error / Diagnostic float"}) 
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, {desc = "Hover Signature / Documentation"}) -- Легче войти в normal mode если забыл сигнатуру. (Не надо создавать <C-s>. Лишний overhead)
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         require("workspace-diagnostics").populate_workspace_diagnostics(client, event.buf)
@@ -64,15 +65,13 @@ return {
 
     -- 1. help lsp-config 2. /config<CR> (To watch info about server configuration)
     local servers = {
-      clangd = { cmd = { "clangd", "--function-arg-placeholders=0", }, single_file_support = true,},
       emmet_language_server = { },
-      neocmake = {},
-      pyright = {},
       cssls = {},
       lemminx = {},
       marksman = {},
       lua_ls = {},
       jsonls = {},
+      pyright = {}, -- Нужно сначала запусить neovim (nvim .) и только затем заходить в файл
 
     }
 
@@ -83,6 +82,7 @@ return {
         function(server_name)
           local server = servers[server_name] or {}
           server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+          server.capabilities.workspace.didChangeWatchedFiles.dynamicRegirsation = true
           require("lspconfig")[server_name].setup(server)
         end,
     })
