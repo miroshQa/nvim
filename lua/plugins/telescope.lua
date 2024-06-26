@@ -20,7 +20,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 				mappings = {
 					i = {
 						["<esc>"] = require("telescope.actions").close,
-            ["<C-h>"] = function() vim.api.nvim_input("<C-w>") end -- for backpace
+            ["<left>"] = require("telescope.actions").select_horizontal, -- ctrl + h
 					},
 				},
 

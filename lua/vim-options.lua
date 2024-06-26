@@ -22,9 +22,6 @@ vim.opt.undofile = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.signcolumn = "yes"
--- https://stackoverflow.com/questions/18464038/is-it-possible-to-make-vim-use-forward-slashes-on-windows 
--- Helpful for DAP
--- vim.opt.shellslash = true THIS SETTING BROKE NVIM FUCK
 vim.opt.updatetime = 250
 
 vim.opt.timeoutlen = 500
