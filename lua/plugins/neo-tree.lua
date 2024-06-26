@@ -31,6 +31,9 @@ return {
           ["q"] = false,
           ["P"] = { "toggle_preview", config = { use_float = false, use_image_nvim = true } },
           ["<esc>"] = false,
+          ["#"] = false,
+          ["<"] = false,
+          [">"] = false,
 				},
 			},
 

@@ -26,6 +26,7 @@ return {
 
     vim.keymap.set("n", "<leader>li", "<cmd>LspInfo<CR>", {desc = "Info"})
     vim.keymap.set("n", "<leader>ll", "<cmd>LspLog<CR>", {desc = "Info"})
+    vim.keymap.set("n", "<leader>lR", "<cmd>LspRestart<CR>", {desc = "Restart"})
 
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
@@ -36,7 +37,6 @@ return {
         vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, {desc = "Goto References"})
         vim.keymap.set("n", "gl", "<cmd>ClangdSwitchSourceHeader<Cr>", {desc = "Goto linked file (src / header)"})
         vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, {desc = "Rename symbol"})
-        vim.keymap.set("n", "<leader>lR", "<cmd>LspRestart<CR>", {desc = "Restart"})
         vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
         vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
         vim.keymap.set("n", "H", vim.diagnostic.open_float, {desc = "Open Error / Diagnostic float"}) 

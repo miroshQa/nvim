@@ -12,3 +12,7 @@ vim.keymap.set("n", "g.", "<cmd>b#<CR>", {desc = "Go to previous buffer (. - mos
 vim.keymap.set("n", "<tab>", "gt")
 vim.keymap.set("n", "<S-tab>", "gT")
 
+vim.keymap.set("n", "<M-l>", "<c-w>5<")
+vim.keymap.set("n", "<M-h>", "<c-w>5>")
+vim.keymap.set("n", "<M-k>", "<c-w>5+>")
+vim.keymap.set("n", "<M-j>", "<c-w>5->")
