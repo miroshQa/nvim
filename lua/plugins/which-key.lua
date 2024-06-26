@@ -1,7 +1,12 @@
 return  {
     'folke/which-key.nvim',
     event = 'VimEnter',
+    enabled = true,
+    dependecies = {"Wansmer/langmapper.nvim"},
     config = function()
+
+
+
       require('which-key').setup({
     })
 
