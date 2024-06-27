@@ -34,6 +34,7 @@ return {
           ["#"] = false,
           ["<"] = false,
           [">"] = false,
+          ["s"] = false,
 				},
 			},
 
