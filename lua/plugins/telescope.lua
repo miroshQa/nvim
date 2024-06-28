@@ -7,7 +7,10 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		{ "nvim-telescope/telescope-ui-select.nvim" },
 		{ "nvim-tree/nvim-web-devicons" },
     "nvim-telescope/telescope-dap.nvim",
-    {"nvim-telescope/telescope-fzf-native.nvim", build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"},
+    {
+      "nvim-telescope/telescope-fzf-native.nvim",
+      build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
+    },
 	},
 	config = function()
 		require("telescope").setup({
@@ -39,7 +42,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 			},
 		})
 
-    require('telescope').load_extension('fzf')
+    pcall(require('telescope').load_extension, 'fzf')
     require("telescope").load_extension("ui-select")
     require("telescope").load_extension("dap")
 
