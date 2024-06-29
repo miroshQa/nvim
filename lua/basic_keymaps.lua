@@ -16,3 +16,23 @@ vim.keymap.set("n", "<M-l>", "<c-w>5<")
 vim.keymap.set("n", "<M-h>", "<c-w>5>")
 vim.keymap.set("n", "<M-k>", "<c-w>5+>")
 vim.keymap.set("n", "<M-j>", "<c-w>5->")
+
+
+local diagnostics_active = true
+Toggle_diagnostics = function()
+  diagnostics_active = not diagnostics_active
+  if diagnostics_active then
+    vim.api.nvim_echo({ { "Show diagnostics" } }, false, {})
+    vim.diagnostic.enable()
+  else
+    vim.api.nvim_echo({ { "Disable diagnostics" } }, false, {})
+    vim.diagnostic.enable(false)
+  end
+end
+
+vim.api.nvim_set_keymap(
+    'n',
+    '<Leader>ud',
+    '<Cmd>lua Toggle_diagnostics()<CR>',
+    {silent=true, noremap=true}
+)

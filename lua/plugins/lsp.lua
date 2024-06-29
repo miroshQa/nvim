@@ -72,7 +72,7 @@ return {
       lua_ls = {},
       jsonls = {},
       pyright = {}, -- Нужно сначала запусить neovim (nvim .) и только затем заходить в файл
-
+      tsserver = {},
     }
 
     require("mason").setup()

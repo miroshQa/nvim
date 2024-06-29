@@ -1,5 +1,7 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+vim.opt.autowriteall = true
+vim.keymap.set("i", "<esc>", "<esc><cmd>update<CR>", {silent = true, noremap = true})
 
 vim.opt.swapfile = false
 
@@ -65,3 +67,5 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+
+-- Autowriteall test

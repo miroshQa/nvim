@@ -17,6 +17,8 @@ return {
         "vimdoc",
         "go",
         "c_sharp",
+        "javascript",
+        "typescript"
       },
       -- Autoinstall languages that are not installed
       auto_install = true,

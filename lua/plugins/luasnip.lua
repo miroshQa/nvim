@@ -1,5 +1,6 @@
 return {
 	"L3MON4D3/LuaSnip",
+  dependencies = { "rafamadriz/friendly-snippets" },
 	config = function()
     local ls = require "luasnip"
     local s = ls.snippet
@@ -12,10 +13,9 @@ return {
     local f = ls.function_node
     local d = ls.dynamic_node
     local sn = ls.snippet_node
+    require("luasnip.loaders.from_vscode").load { include = { "javascript", "typescript", "csharp"}, }
     ls.config.setup({ history = true, })
-
-    ls.add_snippets("cs", {
-    })
+    ls.add_snippets("cs", { })
 
 
   end,
