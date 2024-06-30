@@ -4,6 +4,7 @@ vim.opt.autowriteall = true
 vim.keymap.set("i", "<esc>", "<esc><cmd>update<CR>", {silent = true, noremap = true})
 
 vim.opt.swapfile = false
+vim.opt.showcmd = false -- symbols in the bottom right corner
 
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2 -- Установка количества пробельных символов при сдвиге с "<", ">"
