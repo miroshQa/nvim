@@ -12,7 +12,7 @@ return {
     }
   },
   keys = {
-    { "s", mode = {"x", "o", "n"}, function() require("flash").jump() end},
+    { "s", mode = {"x", "o", "n"}, function() require("flash").jump() end}, -- use xi instead
     { "<leader>s", mode = {"x", "o", "n"}, function() require("flash").treesitter() end},
   },
 }

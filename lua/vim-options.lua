@@ -42,8 +42,8 @@ vim.opt.termguicolors = true
 vim.opt.showtabline = 0
 
 vim.opt.wrap = true
-vim.keymap.set("n", "j", "gj")
-vim.keymap.set("n", "k", "gk")
+vim.keymap.set("n", "j", "gj", {silent = true})
+vim.keymap.set("n", "k", "gk", {silent = true})
 
 -- Fix kitty Enter key
 vim.api.nvim_set_keymap("n", "<kEnter>", "<Enter>", {})

@@ -24,6 +24,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 					i = {
 						["<esc>"] = require("telescope.actions").close,
             ["<left>"] = require("telescope.actions").select_horizontal, -- ctrl + h
+            ["<right>"] = require("telescope.actions").complete_tag, -- Ctrl + l
 					},
 				},
 
@@ -54,10 +55,13 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		vim.keymap.set("n", "<leader>f.", builtin.oldfiles, { desc = 'Find Recent Files ("." for repeat)' })
 		vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = 'Find resume' })
 		vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = 'Find help tags' })
-		vim.keymap.set("n", "<leader>fs", builtin.lsp_document_symbols, { desc = "Find symbols" })
-		vim.keymap.set("n", "<leader>fS", builtin.lsp_workspace_symbols, { desc = "Find symbols in workspace" })
-    vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, {desc = "Lsp actions"});
 
+    local ignore_symbols = {"variable", "string", "boolean", "object", "field", "enummember", "property"}
+		vim.keymap.set("n", "<leader>fs", function() builtin.lsp_document_symbols({ignore_symbols = ignore_symbols}) end, { desc = "Find symbols" })
+		vim.keymap.set("n", "<leader>fS", function() builtin.lsp_workspace_symbols({ignore_symbols = ignore_symbols}) end , { desc = "Find symbols in workspace" })
+    -- ctrl + l To choose from query type (variables, classess, functions, etc)
+
+    vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, {desc = "Lsp actions"});
 		vim.keymap.set(
 			"n",
 			"<leader><leader>",

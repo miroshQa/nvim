@@ -71,6 +71,7 @@ return {
 
     dmap("<leader>du", function() require("dapui").toggle() end, "UI toggle")
     dmap("<leader>dt", function() if vim.bo.filetype ~= "dap-float" then require("dap").terminate() end end, "Termniate")
+    dmap("<leader>dh", function() require("dap").run_to_cursor() end, "Debug HERE (Run to cursoer)")
     dmap("<leader>db", function() require("dap").list_breakpoints() end, "Breakpoinst list")
     dmap("<leader>dB", function() require("dap").clear_breakpoints() end, "Clear breakpoints list")
     dmap("<leader>df", function() require("dap").focus_frame() end, "Go to paused")
