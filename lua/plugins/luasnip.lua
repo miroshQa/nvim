@@ -15,7 +15,48 @@ return {
     local sn = ls.snippet_node
     require("luasnip.loaders.from_vscode").load { include = { "javascript", "typescript", "csharp"}, }
     ls.config.setup({ history = true, })
-    ls.add_snippets("cs", { })
+
+    ls.add_snippets("cs", {
+
+      s("wr",
+        fmt(
+          [[Console.WriteLine({})]],
+          {i(1, "content")}
+        )
+      )
+
+    })
+
+    ls.add_snippets("lua", {
+      s("key",
+        fmt(
+          [[vim.keymap.set("{}", "{}", {})]],
+          { i(1, "mode"), i(2, "keymap"), i(3, "action")}
+        )
+      ),
+
+      s("set",
+        fmt(
+          [[
+          require("{}").setup({{
+            {}
+          }})]],
+          {i(1), i(2)}
+        )
+      ),
+
+      s("conf",
+        fmt(
+          [[
+          config = function()
+            {}
+          end,
+          ]],
+          {i(1)}
+        )
+      )
+
+    })
 
 
   end,
