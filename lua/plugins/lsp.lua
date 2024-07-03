@@ -4,12 +4,14 @@ return {
   event = "VimEnter",
   dependencies = {
     "williamboman/mason.nvim",
+	"nvim-telescope/telescope.nvim",
     "williamboman/mason-lspconfig.nvim",
     "artemave/workspace-diagnostics.nvim",
     { "j-hui/fidget.nvim", opts = {} },
     { "folke/neodev.nvim", opts = {} },
   },
   config = function()
+		local builtin = require("telescope.builtin")
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", })
 
     vim.diagnostic.config({
@@ -31,6 +33,7 @@ return {
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
       callback = function(event)
+
         vim.keymap.set("n", "gd", require("telescope.builtin").lsp_definitions, {desc = "Goto Definition"})
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {desc = "[G]oto [D]eclaration"})
         vim.keymap.set("n", "gi", require("telescope.builtin").lsp_implementations, {desc = "Goto Implementation"})
@@ -41,6 +44,10 @@ return {
         vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
         vim.keymap.set("n", "H", vim.diagnostic.open_float, {desc = "Open Error / Diagnostic float"}) 
         vim.keymap.set("n", "K", vim.lsp.buf.hover, {desc = "Hover Signature / Documentation"}) -- Легче войти в normal mode если забыл сигнатуру. (Не надо создавать <C-s>. Лишний overhead)
+        local ignore_symbols = {"variable", "string", "boolean", "object", "field", "enummember", "property", "array"}
+        vim.keymap.set("n", "<leader>fs", function() builtin.lsp_document_symbols({ignore_symbols = ignore_symbols}) end, { desc = "Find symbols" })
+        vim.keymap.set("n", "<leader>fS", function() builtin.lsp_workspace_symbols({ignore_symbols = ignore_symbols}) end , { desc = "Find symbols in workspace" })
+        vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, {desc = "Lsp actions"});
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         require("workspace-diagnostics").populate_workspace_diagnostics(client, event.buf)
