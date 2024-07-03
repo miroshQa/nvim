@@ -81,10 +81,5 @@
 ![Dashboard](./imgs/dashboard.png) 
 
 ### Favourite keymaps ✨
-1. \<C-h> and \<C-l> (Switch placeholders snippets)
-2. g. (Goto prev buffer)
-3. \<leader>d (Debug mode. See below)
+1. g. (Goto prev buffer)
 
-
-#### TODO ⚒️ 
-- [ ] Add a description and my opinion to each plugin above

@@ -60,11 +60,6 @@ return {
 		vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = 'Find help tags' })
 		vim.keymap.set("n", "<leader>gs", function() builtin.git_status({path_display = {"tail"}}) end, { desc = 'Git status (using telescope)' })
 
-    local ignore_symbols = {"variable", "string", "boolean", "object", "field", "enummember", "property", "array"}
-		vim.keymap.set("n", "<leader>fs", function() builtin.lsp_document_symbols({ignore_symbols = ignore_symbols}) end, { desc = "Find symbols" })
-		vim.keymap.set("n", "<leader>fS", function() builtin.lsp_workspace_symbols({ignore_symbols = ignore_symbols}) end , { desc = "Find symbols in workspace" })
-    vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, {desc = "Lsp actions"});
-
 		vim.keymap.set(
 			"n",
 			"<leader><leader>",

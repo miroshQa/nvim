@@ -3,7 +3,7 @@ return {
 	branch = "v3.x",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+		"nvim-tree/nvim-web-devicons",
 		"MunifTanjim/nui.nvim",
 	},
 	config = function()
@@ -12,10 +12,10 @@ return {
 
 		require("neo-tree").setup({
 			hijack_netrw_behavior = "open_current",
-    popup_border_style = "rounded",
+      popup_border_style = "rounded",
 			filesystem = {
 				filtered_items = {
-					visible = false, -- when true, they will just be displayed differently than normal items
+					visible = false,
 					hide_dotfiles = false,
 					hide_gitignored = false,
 					hide_hidden = false,
@@ -40,11 +40,6 @@ return {
 
 		}
     )
-		vim.keymap.set(
-			"n",
-			"<leader>e",
-			"<cmd>Neotree toggle reveal<CR>",
-			{ desc = "Open file explorer" }
-		)
+		vim.keymap.set( "n", "<leader>e", "<cmd>Neotree toggle reveal<CR>", { desc = "Open file explorer" })
 	end,
 }
