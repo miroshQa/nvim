@@ -12,7 +12,9 @@ return {
       vim.g.gruvbox_baby_highlights = {
         IncSearch = { bg = "#ff9e64", fg = "White" },
         CurSearch = {link = "IncSearch"},
-        FlashLabel = {bg = "#0076CE"}
+        FlashLabel = {bg = "#0076CE"},
+        -- for hslens plugin
+        HlSearchLensNear = {bg = "#45923f"}
       }
 
 			require("lualine").setup({
@@ -24,8 +26,4 @@ return {
 			vim.cmd.colorscheme("gruvbox-baby")
 		end,
 	},
-
-  {
-    "sainnhe/gruvbox-material"
-  }
 }

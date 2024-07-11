@@ -12,7 +12,6 @@ return {
   },
   config = function()
 		local builtin = require("telescope.builtin")
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", })
 
     vim.diagnostic.config({
       float = { border = "rounded" },
@@ -43,7 +42,10 @@ return {
         vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
         vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
         vim.keymap.set("n", "H", vim.diagnostic.open_float, {desc = "Open Error / Diagnostic float"}) 
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, {desc = "Hover Signature / Documentation"}) -- Легче войти в normal mode если забыл сигнатуру. (Не надо создавать <C-s>. Лишний overhead)
+
+    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", })
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, {desc = "Hover Signature / Documentation"})
+
         local ignore_symbols = {"variable", "string", "boolean", "object", "field", "enummember", "property", "array"}
         vim.keymap.set("n", "<leader>fs", function() builtin.lsp_document_symbols({ignore_symbols = ignore_symbols}) end, { desc = "Find symbols" })
         vim.keymap.set("n", "<leader>fS", function() builtin.lsp_workspace_symbols({ignore_symbols = ignore_symbols}) end , { desc = "Find symbols in workspace" })
@@ -80,6 +82,12 @@ return {
       jsonls = {},
       pyright = {}, -- Нужно сначала запусить neovim (nvim .) и только затем заходить в файл
       tsserver = {},
+      rust_analyzer = {
+        cargo = {
+          allFeatures = true,
+        }
+      },
+      taplo = {},
     }
 
     require("mason").setup()

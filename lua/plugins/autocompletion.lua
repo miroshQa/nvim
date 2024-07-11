@@ -33,7 +33,7 @@ return {
           -- Перфекционизм меня до психушки доведет...
         }),
         sources = cmp.config.sources({
-          { name = "nvim_lsp", max_item_count = 15, },
+          { name = "nvim_lsp"},
           { name = 'luasnip' },
           { name = "buffer" },
           { name = "path" }, -- type ./ to activate
