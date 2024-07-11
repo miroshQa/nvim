@@ -2,7 +2,7 @@ return {
 	"L3MON4D3/LuaSnip",
   dependencies = { "rafamadriz/friendly-snippets" },
 	config = function()
-    require("luasnip.loaders.from_vscode").load { include = { "javascript", "typescript", "csharp"}, }
+    require("luasnip.loaders.from_vscode").load { include = { "javascript", "typescript", "cs", "rust"}, }
 
     require("luasnip").config.setup({
       history = true,
@@ -15,7 +15,7 @@ return {
     vim.keymap.set("n", "<leader>us",
       function()
         for _, ft_path in ipairs(vim.api.nvim_get_runtime_file("lua/plugins/snippets/*.lua", true)) do
-          loadfile(ft_path)()
+          require("luasnip.loaders").reload_file(ft_path)
         end
       end,
       {desc = "Update snippets"}

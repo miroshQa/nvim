@@ -87,6 +87,5 @@ return {
 
 
     vim.api.nvim_command 'autocmd FileType dap-float nnoremap <buffer><silent> q <cmd>close!<CR>'
-    --- vim.api.nvim_command 'autocmd FileType dap-float nnoremap <buffer><silent> <Esc> <cmd>close!<CR>' НЕ СТОИТ РАСКОМЕНЧИВАТЬ
     end,
 }
