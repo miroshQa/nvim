@@ -14,15 +14,38 @@ return {
           "dapui_stacks",
           "dap-repl",
         },
+      component_separators = {left = '', right = ''},
+      section_separators = {left = '', right = ''},
       },
       sections = {
-      lualine_a = {"mode", },
-        lualine_c = {
-          {"filename", path = 1},
+      lualine_a = {
+          {"mode"},
         },
-        lualine_x = {{"tabs", mode = 1, cond = function() return #vim.fn.gettabinfo() > 1 end}},
-        lualine_y = {"filetype"},
-        lualine_z = {"progress","location" },
+      lualine_b = {
+        },
+      lualine_c = {
+          {"filename", path = 1},
+          {"branch"},
+          {"diff"},
+          {"diagnostics"}
+        },
+        lualine_x = {
+          {"filetype"},
+          {
+          "tabs",
+          mode = 0,
+          cond = function() return #vim.fn.gettabinfo() > 1 end,
+          tabs_color = {
+            active = {bg = "#eebd35", fg = "#FFFFFF"},
+            inactive = {bg = "#8ec07c", fg = "#cad4fc"},
+            },
+          }
+        },
+        lualine_y = {
+          {"progress"},
+          {"location"}
+        },
+        lualine_z = {},
       },
       inactive_sections = {
         lualine_a = {},
