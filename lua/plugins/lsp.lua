@@ -49,7 +49,8 @@ return {
         local ignore_symbols = {"variable", "string", "boolean", "object", "field", "enummember", "property", "array"}
         vim.keymap.set("n", "<leader>fs", function() builtin.lsp_document_symbols({ignore_symbols = ignore_symbols}) end, { desc = "Find symbols" })
         vim.keymap.set("n", "<leader>fS", function() builtin.lsp_workspace_symbols({ignore_symbols = ignore_symbols}) end , { desc = "Find symbols in workspace" })
-        vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, {desc = "Lsp actions"});
+        vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, {desc = "Lsp actions"})
+        vim.keymap.set("n", "<leader>ua", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, {desc = "Toggle inlay_hints (Annotations)"})
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         require("workspace-diagnostics").populate_workspace_diagnostics(client, event.buf)

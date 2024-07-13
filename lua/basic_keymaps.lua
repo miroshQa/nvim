@@ -3,6 +3,8 @@ vim.keymap.set('n', '<right>', '<C-w><C-l>', { desc = 'Move focus to the right w
 vim.keymap.set('n', '<down>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<up>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+vim.keymap.set("n", "<leader>Q", ":quitall!<CR>", {desc = "Force quit all (Be careful!)"})
+
 vim.keymap.set('v', '<', '<gv', { noremap = true })
 vim.keymap.set('v', '>', '>gv', { noremap = true })
 vim.keymap.set("n", "g.", "<cmd>b#<CR>", {desc = "Go to previous buffer (. - most recent)"})

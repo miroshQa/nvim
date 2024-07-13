@@ -16,13 +16,6 @@ return {
         -- for hslens plugin
         HlSearchLensNear = {bg = "#45923f"}
       }
-
-			require("lualine").setup({
-				options = {
-					theme = "gruvbox-baby",
-				},
-			})
-
 			vim.cmd.colorscheme("gruvbox-baby")
 		end,
 	},
