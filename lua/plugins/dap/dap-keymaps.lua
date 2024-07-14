@@ -61,10 +61,11 @@ return {
       vim.keymap.set("n", key, func, {desc = "DEBUG: " .. descritpion})
     end
 
-    dmap("<C-p>", function() if vim.bo.filetype ~= "dap-float" then require("dap").step_back() end end, "Step back")
-    dmap("<C-n>", function() if vim.bo.filetype ~= "dap-float" then require("dap").step_over() end end, "Step over")
-    dmap("<M-,>", function() if vim.bo.filetype ~= "dap-float" then print("step out") require("dap").step_out() end end, "Step out") -- Require bindings in powertosy
-    dmap("<M-.>", function() if vim.bo.filetype ~= "dap-float" then print("step into") require("dap").step_into() end end, "Step into")
+    -- ESDF control like in cs go (instead wasd)
+    dmap("<M-e>", function() if vim.bo.filetype ~= "dap-float" then require("dap").step_back() end end, "Step back")
+    dmap("<M-d>", function() if vim.bo.filetype ~= "dap-float" then require("dap").step_over() end end, "Step over")
+    dmap("<M-s>", function() if vim.bo.filetype ~= "dap-float" then print("step out") require("dap").step_out() end end, "Step out")
+    dmap("<M-f>", function() if vim.bo.filetype ~= "dap-float" then print("step into") require("dap").step_into() end end, "Step into")
     dmap(">", function() if vim.bo.filetype ~= "dap-float" then require("dap").continue() end end, "Continue")
     dmap("<", function() if vim.bo.filetype ~= "dap-float" then require("dap").reverse_continue() end end, "Reverese continue")
 
