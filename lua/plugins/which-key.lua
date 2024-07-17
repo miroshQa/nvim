@@ -4,7 +4,11 @@ return  {
     enabled = true,
     config = function()
 
-      require('which-key').setup({ })
+      require('which-key').setup({
+        modes = {
+        s = false,
+      }
+    })
 
       require('which-key').add {
         { "<leader>d", group = "DEBUG" },
