@@ -88,7 +88,7 @@ return {
           allFeatures = true,
         }
       },
-      taplo = {},
+      clangd = {},
     }
 
     require("mason").setup()

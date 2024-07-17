@@ -15,6 +15,7 @@ vim.keymap.set("i", "<esc>", "<esc><cmd>write<CR>", {silent = true, noremap = tr
 
 -- For convinience when use snippets
 vim.keymap.del("s", "<")
+-- vim.keymap.del("s", '"')
 vim.keymap.del("s", ">")
 
 vim.keymap.set("i", "<up>", "")
