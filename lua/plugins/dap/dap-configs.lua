@@ -12,7 +12,11 @@ return {
     dap.set_log_level('TRACE')
     -- https://github.com/jay-babu/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
     require("mason-nvim-dap").setup({
-      ensure_installed = { "coreclr", "node2", "cppdbg" },
+      ensure_installed = {
+        "coreclr",
+        "node2",
+        "cppdbg"
+      },
       handlers = {
 
         function(config)
