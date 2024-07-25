@@ -11,11 +11,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 
-local function clear_cmdarea()
-  vim.defer_fn(function()
-    vim.api.nvim_echo({}, false, {})
-  end, 800)
-end
 
 vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
   callback = function()
@@ -26,3 +21,26 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
   end,
 })
 
+-- https://github.com/Alexis12119/nvim-config/blob/main/lua/core/autocommands.lua
+local autocmd = vim.api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup
+
+-- General Settings
+local general = augroup("General", { clear = true })
+
+autocmd("VimEnter", {
+  callback = function(data)
+    -- buffer is a directory
+    local directory = vim.fn.isdirectory(data.file) == 1
+
+    -- change to the directory
+    if directory then
+      vim.cmd.cd(data.file)
+      vim.cmd("lua require('neo-tree')")
+      vim.cmd("Neotree")
+      vim.cmd("Telescope find_files")
+    end
+  end,
+  group = general,
+  desc = "Open Telescope when it's a Directory",
+})

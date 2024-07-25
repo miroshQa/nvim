@@ -12,7 +12,7 @@ return {
       if vim.loop.os_uname().sysname ~= "Linux" then
         local powershell_options = {
           shell = "pwsh",
-          shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;",
+          shellcmdflag = "-NoLogo -NoProfile -NoExit -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;",
           shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait",
           shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode",
           shellquote = "",
@@ -23,7 +23,6 @@ return {
           vim.opt[option] = value
         end
       end
-
 
 
       require("toggleterm").setup({

@@ -10,8 +10,6 @@ return {
     "MunifTanjim/nui.nvim",
   },
   config = function()
-    vim.g.loaded_netrw = 1
-    vim.g.loaded_netrwPlugin = 1
 
     require("neo-tree").setup({
       hijack_netrw_behavior = "open_current",
