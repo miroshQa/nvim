@@ -1,7 +1,11 @@
+vim.keymap.set("n", "<C-t>", "<cmd>lua require('toggleterm') vim.cmd('ToggleTerm')<CR>", {desc = "description"})
+
 return {
   -- amongst your other plugins
-  { 'akinsho/toggleterm.nvim', version = "*",
-    event = "VeryLazy",
+  {
+    'akinsho/toggleterm.nvim',
+    version = "*",
+    lazy = true,
     config = function()
 
 

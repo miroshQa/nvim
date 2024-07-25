@@ -1,13 +1,11 @@
 return  {
     'folke/which-key.nvim',
     event = "VeryLazy",
+    version = "3.x.x",
     config = function()
       require('which-key').setup({
         notify = false,
-        modes = {
-        s = false,
-        x = false,
-      }
+        triggers = { "<auto>", mode = "niotc" },
     })
 
       require('which-key').add {

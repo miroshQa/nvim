@@ -1,7 +1,8 @@
 -- 19:00. Короче, в итоге я решил что лучше это на отдельный кеймап вообще поместить, а конкретно на s. Потому что тогда вообще получается что ? а также n и N как таковые вообще не нужны. Так что лучше конкретно одну клавишу для flash выделить, а / и ? пуская остаюстя самостоятельными для поиска по файлу вне зоны видимости
+vim.keymap.set({"x", "o", "n"},"<C-s>", "<cmd>lua require('flash').jump()<CR>", {desc = "Flash"}) -- use xi instead
 return {
     "folke/flash.nvim",
-    event = "VeryLazy",
+    lazy = true,
     vscode = true,
     ---@type Flash.Config
     opts = {
@@ -10,9 +11,6 @@ return {
         enabled = false,
       },
     }
-  },
-  keys = {
-    { "<C-s>", mode = {"x", "o", "n"}, function() require("flash").jump() end}, -- use xi instead
   },
 }
 -- Should you use flash? (YES)
