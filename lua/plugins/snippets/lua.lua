@@ -15,8 +15,8 @@ local sn = ls.snippet_node
 ls.add_snippets("lua", {
   s("key",
     fmt(
-      [[vim.keymap.set("{}", "{}", {})]],
-      { i(1, "mode"), i(2, "keymap"), i(3, "action")}
+      [[vim.keymap.set("{}", "{}", {}, {{desc = "{}"}})]],
+      { i(1, "mode"), i(2, "keymap"), i(3, "action"), i(4, "description")}
     )
   ),
 

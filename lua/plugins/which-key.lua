@@ -1,26 +1,23 @@
 return  {
     'folke/which-key.nvim',
-    event = 'VimEnter',
-    enabled = true,
+    event = "VeryLazy",
     config = function()
-
       require('which-key').setup({
+        notify = false,
         modes = {
         s = false,
+        x = false,
       }
     })
 
       require('which-key').add {
         { "<leader>d", group = "DEBUG" },
-        { "<leader>d_", hidden = true },
-        { "<leader>f", group = "Find" },
-        { "<leader>f_", hidden = true },
-        { "<leader>g", group = "Git" },
-        { "<leader>g_", hidden = true },
-        { "<leader>l", group = "Lsp keymaps" },
-        { "<leader>l_", hidden = true },
-        { "<leader>u", group = "UI / Update" },
-        { "<leader>u_", hidden = true },
+        { "<leader>o", group = "OVERSEER" },
+        { "<leader>a", group = "AI" },
+        { "<leader>f", group = "FIND" },
+        { "<leader>g", group = "GIT" },
+        { "<leader>l", group = "LSP" },
+        { "<leader>u", group = "UI/Update" },
       }
     end,
 }

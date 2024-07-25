@@ -17,7 +17,6 @@ require("basic_autocommands")
 require("lazy").setup({
   spec = {
     {import = "plugins"},
-    {import = "plugins/dap"}
   },
   checker = {
     notify = false,
@@ -25,8 +24,20 @@ require("lazy").setup({
   change_detection = {
     enabled = true,
     notify = false
-  }
+  },
+	performance = {
+		rtp = {
+			disabled_plugins = {
+				"matchit",
+				"matchparen",
+				"netrwPlugin",
+				"gzip",
+				"tarPlugin",
+				"tohtml",
+				"tutor",
+				"zipPlugin",
+			},
+		},
+	},
 }
 )
-
-

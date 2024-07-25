@@ -1,13 +1,14 @@
 return {
   {
     "hrsh7th/nvim-cmp",
+    event = "InsertEnter", -- significantly increase startup time
     dependencies = {
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
-      "hrsh7th/cmp-emoji"
+      "hrsh7th/cmp-emoji",
     },
     config = function()
       local cmp = require("cmp")
@@ -27,10 +28,9 @@ return {
           ["<up>"] = cmp.mapping.select_prev_item(),
           ["<C-u>"] = cmp.mapping.scroll_docs(-4),
           ["<C-d>"] = cmp.mapping.scroll_docs(4),
-          ["<CR>"] = cmp.mapping.confirm({ -- Select (Не париться с C-s или C-i. Это удобнее но есть случаи когда не очень. Тем более <CR> - это дефолт везде (Chrome, pwsh, ...);
-            select = true,
-          }), -- Короче я потестил M-s и если и есть улучшение то оно вообще не заметно. Иногда только неудобнее. В общем не стоить заниматься этой дичью. Лишний оверхед. Тем более <CR> везде по дефолту. Не стоит создавать лишние шорткаты в памяти. Тем более я очень быстро печатаю и использую дополнение редко. Тем более <CR> расположен более чем удобно. По фатку это левосторонний CAPS который я так часто использую)
-          -- Перфекционизм меня до психушки доведет...
+          ["<CR>"] = cmp.mapping.confirm({select = true}),
+          -- https://github.com/hrsh7th/nvim-cmp/issues/1507
+          ["<C-g>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c"}),
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp"},

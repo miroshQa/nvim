@@ -1,18 +1,20 @@
+-- about dependencies and require
+-- we use dependencies only when we have not file for this plugin in plugin folder
+-- because plugins in dependencies downloads and LOads, when require only load plugin
+-- https://lazy.folke.io/developers
+
 return {
   "neovim/nvim-lspconfig",
-  priority = 1001,
-  event = "VimEnter",
+-- https://www.reddit.com/r/neovim/comments/1bk4sru/when_to_use_the_bufreadpost_event/
+  event = "BufReadPost",
   dependencies = {
-    "williamboman/mason.nvim",
-	"nvim-telescope/telescope.nvim",
-    "williamboman/mason-lspconfig.nvim",
     "artemave/workspace-diagnostics.nvim",
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
     { "j-hui/fidget.nvim", opts = {} },
     { "folke/neodev.nvim", opts = {} },
   },
   config = function()
-		local builtin = require("telescope.builtin")
-
     vim.diagnostic.config({
       float = { border = "rounded" },
     signs = {
@@ -26,31 +28,33 @@ return {
     })
 
     vim.keymap.set("n", "<leader>li", "<cmd>LspInfo<CR>", {desc = "Info"})
-    vim.keymap.set("n", "<leader>ll", "<cmd>LspLog<CR>", {desc = "Info"})
     vim.keymap.set("n", "<leader>lR", "<cmd>LspRestart<CR>", {desc = "Restart"})
 
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
       callback = function(event)
 
-        vim.keymap.set("n", "gd", require("telescope.builtin").lsp_definitions, {desc = "Goto Definition"})
+        vim.keymap.set("n", "gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<CR>", {desc = "Goto Definition"})
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {desc = "[G]oto [D]eclaration"})
-        vim.keymap.set("n", "gi", require("telescope.builtin").lsp_implementations, {desc = "Goto Implementation"})
-        vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, {desc = "Goto References"})
+        vim.keymap.set("n", "gi", "<cmd>lua require('telescope.builtin').lsp_implementations()<CR>", {desc = "Goto Implementation"})
+        vim.keymap.set("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<CR>", {desc = "Goto References"})
         vim.keymap.set("n", "gl", "<cmd>ClangdSwitchSourceHeader<Cr>", {desc = "Goto linked file (src / header)"})
         vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, {desc = "Rename symbol"})
         vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
         vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-        vim.keymap.set("n", "H", vim.diagnostic.open_float, {desc = "Open Error / Diagnostic float"}) 
+        vim.keymap.set("n", "H", vim.diagnostic.open_float, {desc = "Open Error / Diagnostic float"})
+        vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", })
 
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", })
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, {desc = "Hover Signature / Documentation"})
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, {desc = "Hover Signature / Documentation"})
+        -- don't add C-s to hover signature in insert mode. This is too much. It is easily to go in normal mode and check using "K" whatever you need
 
-        local ignore_symbols = {"variable", "string", "boolean", "object", "field", "enummember", "property", "array"}
-        vim.keymap.set("n", "<leader>fs", function() builtin.lsp_document_symbols({ignore_symbols = ignore_symbols}) end, { desc = "Find symbols" })
-        vim.keymap.set("n", "<leader>fS", function() builtin.lsp_workspace_symbols({ignore_symbols = ignore_symbols}) end , { desc = "Find symbols in workspace" })
+        vim.keymap.set("n", "<leader>ls", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>", { desc = 'Find symbols'})
+        vim.keymap.set("n", "<leader>lS", "<cmd>lua require('telescope.builtin).lsp_workspace_symbols()<CR>", { desc = "Find symbols in workspace" })
+        vim.keymap.set("n", "<leader>lm", "<cmd>lua require('telescope.builtin').lsp_document_symbols({symbols = {'function', 'class', 'struct', 'method'}})<CR>", { desc = "Find functions / classes / methods" })
+        vim.keymap.set("n", "<leader>lm", "<cmd>lua require('telescope.builtin').lsp_workspace_symbols({symbols = {'function', 'class', 'struct', 'method'}})<CR>", { desc = "Find functions / classes / methods in workspace" })
         vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, {desc = "Lsp actions"})
         vim.keymap.set("n", "<leader>ua", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, {desc = "Toggle inlay_hints (Annotations)"})
+        vim.keymap.set("n", "<leader>um", "<cmd>Mason<CR>", {desc = "Open Mason"})
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         require("workspace-diagnostics").populate_workspace_diagnostics(client, event.buf)
@@ -89,6 +93,9 @@ return {
         }
       },
       clangd = {},
+      csharp_ls = {},
+      yamlls = {},
+      gopls = {},
     }
 
     require("mason").setup()

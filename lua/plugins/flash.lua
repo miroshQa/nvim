@@ -12,7 +12,7 @@ return {
     }
   },
   keys = {
-    { "s", mode = {"x", "o", "n"}, function() require("flash").jump() end}, -- use xi instead
+    { "<C-s>", mode = {"x", "o", "n"}, function() require("flash").jump() end}, -- use xi instead
   },
 }
 -- Should you use flash? (YES)

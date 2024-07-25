@@ -1,7 +1,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.opt.autowriteall = true
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 vim.opt.swapfile = false
 vim.opt.showcmd = false -- symbols in the bottom right corner
@@ -35,17 +34,3 @@ vim.opt_local.formatoptions:remove("cro")
 vim.g.termguicolors = true
 vim.opt.showtabline = 0
 vim.opt.wrap = true
-vim.keymap.set("n", "j", "gj", {silent = true})
-vim.keymap.set("n", "k", "gk", {silent = true})
-
--- Fix kitty Enter key
-vim.api.nvim_set_keymap("n", "<kEnter>", "<Enter>", {})
-vim.api.nvim_set_keymap("i", "<kEnter>", "<Enter>", {})
-vim.api.nvim_set_keymap("c", "<kEnter>", "<Enter>", {})
-
-if vim.g.neovide then
-	local map = vim.keymap
-	map.set({ "n", "v" }, "<C-+>", "<cmd>lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<CR>")
-	map.set({ "n", "v" }, "<C-->", "<cmd>lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<CR>")
-	map.set({ "n", "v" }, "<C-0>", "<cmd>lua vim.g.neovide_scale_factor = 1<CR>")
-end

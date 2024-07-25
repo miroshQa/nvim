@@ -1,7 +1,6 @@
 return {
 	{
 		"luisiacc/gruvbox-baby",
-    enable = false,
 		priority = 1000,
 		config = function()
 			vim.g.gruvbox_baby_use_original_palette = true

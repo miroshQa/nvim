@@ -1,7 +1,7 @@
 return {
   -- amongst your other plugins
   { 'akinsho/toggleterm.nvim', version = "*",
-  event = "VeryLazy",
+    event = "VeryLazy",
     config = function()
 
 
@@ -26,13 +26,17 @@ return {
         open_mapping = "<C-t>",
         autochdir = true,
         terminal_mappings = true,
+        shade_terminals = false,
         direction = "float",
+        float_opts = {
+          title_pos = "center",
+        },
       })
 
       vim.api.nvim_command 'autocmd TermOpen * startinsert' -- starts in insert mode
       vim.api.nvim_command 'autocmd TermOpen * setlocal nonumber' -- no numbers
       vim.api.nvim_command 'autocmd TermEnter * setlocal signcolumn=no' -- no sign column
-      vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+      vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Go to normal mode' })
     end
   },
 }
