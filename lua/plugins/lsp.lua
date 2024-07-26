@@ -1,6 +1,6 @@
 -- about dependencies and require
 -- we use dependencies only when we have not file for this plugin in plugin folder
--- because plugins in dependencies downloads and LOads, when require only load plugin
+-- because plugins in dependencies downloads and LOads (loads when target plugin requires), when require only load plugin
 -- https://lazy.folke.io/developers
 
 return {
@@ -37,7 +37,7 @@ return {
         vim.keymap.set("n", "gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<CR>", {desc = "Goto Definition"})
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {desc = "[G]oto [D]eclaration"})
         vim.keymap.set("n", "gi", "<cmd>lua require('telescope.builtin').lsp_implementations()<CR>", {desc = "Goto Implementation"})
-        vim.keymap.set("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<CR>", {desc = "Goto References"})
+        vim.keymap.set("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references({fname_width = 100})<CR>", {desc = "Goto References"})
         vim.keymap.set("n", "gl", "<cmd>ClangdSwitchSourceHeader<Cr>", {desc = "Goto linked file (src / header)"})
         vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, {desc = "Rename symbol"})
         vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
