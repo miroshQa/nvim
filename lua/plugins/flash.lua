@@ -11,6 +11,9 @@ return {
       char = {
         enabled = false,
       },
+    },
+    label = {
+      uppercase = false,
     }
   },
 }

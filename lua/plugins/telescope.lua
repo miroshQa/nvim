@@ -3,6 +3,7 @@ vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fin
 vim.keymap.set("n", "<leader>fc", "<cmd>Telescope commands<cr>", { desc = "Find commands" })
 vim.keymap.set("n", "<leader>fw", "<cmd>Telescope live_grep<cr>", { desc = "Find Word (Using ripgrep)" })
 vim.keymap.set("n", "<leader>fb", "<cmd>Telescope builtin<cr>", { desc = "Find builtin Telescope" })
+vim.keymap.set("n", "<leader>fn", "<cmd>Telescope notify<cr>", { desc = "Find notification" })
 vim.keymap.set("n", "<leader>fd", "<cmd>Telescope diagnostics<cr>", { desc = "Find Diagnostics" })
 vim.keymap.set("n", "<leader>f.", "<cmd>Telescope oldfiles<cr>", { desc = 'Find Recent Files ("." for repeat)' })
 vim.keymap.set("n", "<leader>fr", "<cmd>Telescope resume<cr>", { desc = 'Find resume' })
