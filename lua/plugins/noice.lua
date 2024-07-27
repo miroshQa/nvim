@@ -1,6 +1,8 @@
 vim.keymap.set('',  '<Esc>', "<ESC>:noh<CR>:lua require('notify').dismiss()<CR>", {silent = true})
 -- The main purpose of this plugin for me is to replace default nvim messages when you have to press <CR> to continue editing
--- And by the way command line completion menu with borders is also very nice
+-- And by the way command line pop up completion menu with borders is also very nice
+-- It also adds search labels for / and ?, *, #, n N, , so I can delete hlslens
+-- That is such a amazing plugin!!! I should't never delete it!
 
 return {
   "folke/noice.nvim",

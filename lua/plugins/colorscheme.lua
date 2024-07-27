@@ -12,8 +12,6 @@ return {
         IncSearch = { bg = "#ff9e64", fg = "White" },
         CurSearch = {link = "IncSearch"},
         FlashLabel = {bg = "#0076CE"},
-        -- for hslens plugin
-        HlSearchLensNear = {bg = "#45923f"}
       }
 			vim.cmd.colorscheme("gruvbox-baby")
 		end,
