@@ -21,7 +21,7 @@ dmap("<leader>df", "<cmd>lua require('dap').focus_frame()<CR>", "Go to paused")
 dmap("<leader>db", "<cmd>lua require('dap').toggle_breakpoint()<CR>", "Toggle breakpont")
 dmap("<leader>dc", "<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", "Set conditional breakpoint")
 dmap("<leader>de", "<cmd>lua require('dap').set_exception_breakpoints()<CR>", "Set exception breakpont")
-dmap("gs", "<cmd>lua require('dap.ui.widgets').centered_float(require('dap.ui.widgets').scopes)<CR>", "Scopes")
+dmap("<leader>ds", "<cmd>lua require('dap.ui.widgets').centered_float(require('dap.ui.widgets').scopes)<CR>", "Scopes")
 dmap("[s", "<cmd>lua require('dap').down()<CR>", "Stack frame down")
 dmap("]s", "<cmd>lua require('dap').up()<CR>", "Stack frame up")
 
