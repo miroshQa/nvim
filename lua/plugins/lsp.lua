@@ -28,7 +28,7 @@ return {
     })
 
     vim.keymap.set("n", "<leader>li", "<cmd>LspInfo<CR>", {desc = "Info"})
-    vim.keymap.set("n", "<leader>lR", "<cmd>LspRestart<CR>", {desc = "Restart"})
+    vim.keymap.set("n", "<leader>lr", "<cmd>LspRestart<CR>", {desc = "Restart"})
 
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
@@ -37,25 +37,26 @@ return {
         vim.keymap.set("n", "gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<CR>", {desc = "Goto Definition"})
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {desc = "[G]oto [D]eclaration"})
         vim.keymap.set("n", "gi", "<cmd>lua require('telescope.builtin').lsp_implementations()<CR>", {desc = "Goto Implementation"})
+        vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, {desc = "Goto Type Definition"})
         vim.keymap.set("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references({fname_width = 100})<CR>", {desc = "Goto References"})
+        vim.keymap.set("n", "cd", vim.lsp.buf.rename, {desc = "Rename symbol (Change definition)"})
         vim.keymap.set("n", "gl", "<cmd>ClangdSwitchSourceHeader<Cr>", {desc = "Goto linked file (src / header)"})
-        vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, {desc = "Rename symbol"})
+
         vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
         vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
         vim.keymap.set("n", "H", vim.diagnostic.open_float, {desc = "Open Error / Diagnostic float"})
-        vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", })
-
         vim.keymap.set("n", "K", vim.lsp.buf.hover, {desc = "Hover Signature / Documentation"})
         -- don't add C-s to hover signature in insert mode. This is too much. It is easily to go in normal mode and check using "K" whatever you need
 
         vim.keymap.set("n", "<leader>ls", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>", { desc = 'Find symbols'})
         vim.keymap.set("n", "<leader>lS", "<cmd>lua require('telescope.builtin).lsp_workspace_symbols()<CR>", { desc = "Find symbols in workspace" })
         vim.keymap.set("n", "<leader>lm", "<cmd>lua require('telescope.builtin').lsp_document_symbols({symbols = {'function', 'class', 'struct', 'method'}})<CR>", { desc = "Find functions / classes / methods" })
-        vim.keymap.set("n", "<leader>lm", "<cmd>lua require('telescope.builtin').lsp_workspace_symbols({symbols = {'function', 'class', 'struct', 'method'}})<CR>", { desc = "Find functions / classes / methods in workspace" })
+        vim.keymap.set("n", "<leader>lM", "<cmd>lua require('telescope.builtin').lsp_workspace_symbols({symbols = {'function', 'class', 'struct', 'method'}})<CR>", { desc = "Find functions / classes / methods in workspace" })
         vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, {desc = "Lsp actions"})
         vim.keymap.set("n", "<leader>ua", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, {desc = "Toggle inlay_hints (Annotations)"})
         vim.keymap.set("n", "<leader>um", "<cmd>Mason<CR>", {desc = "Open Mason"})
 
+        vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", })
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         require("workspace-diagnostics").populate_workspace_diagnostics(client, event.buf)
 

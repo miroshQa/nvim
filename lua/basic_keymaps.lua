@@ -6,6 +6,10 @@ vim.keymap.set('n', '<up>', '<C-w><C-k>', { desc = 'Move focus to the upper wind
 vim.keymap.set("n", "<leader>Q", "<cmd>quitall!<CR>", {desc = "Force quit all (Be careful!)"})
 vim.keymap.set("n", "<leader>q", "<cmd>quit<CR>", {desc = "Close current buffer"})
 
+vim.keymap.set("n", "[q", "<cmd>cprev<CR>", {desc = "Go to prev quickfixlist entry"})
+vim.keymap.set("n", "]q", "<cmd>cnext<CR>", {desc = "Go to next quickfixlist entry"})
+
+
 vim.keymap.set('v', '<', '<gv', { noremap = true })
 vim.keymap.set('v', '>', '>gv', { noremap = true })
 vim.keymap.set("n", "g.", "<cmd>b#<CR>", {desc = "Go to previous buffer (. - most recent)"})
@@ -15,7 +19,7 @@ vim.keymap.set("n", "<leader>ul", "<cmd>Lazy<CR>", {desc = "Open Layz"})
 
 vim.keymap.set("i", "<esc>", "<esc><cmd>write<CR>", {silent = true, noremap = true}) -- Autowrite
 
--- For convinience when use snippets
+-- For snippets
 vim.keymap.del("s", "<")
 vim.keymap.del("s", ">")
 
