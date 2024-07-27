@@ -8,8 +8,8 @@ vim.keymap.set("n", "<leader>fd", "<cmd>Telescope diagnostics<cr>", { desc = "Fi
 vim.keymap.set("n", "<leader>f.", "<cmd>Telescope oldfiles<cr>", { desc = 'Find Recent Files ("." for repeat)' })
 vim.keymap.set("n", "<leader>fr", "<cmd>Telescope resume<cr>", { desc = 'Find resume' })
 vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = 'Find help tags' })
-vim.keymap.set("n", "<leader>gs", "<cmd>lua require('telescope.builtin').git_status({path_display = {'tail'}})<cr>",
-  { desc = 'Git status (using telescope)' })
+vim.keymap.set("n", "<leader>fg", "<cmd>lua require('telescope.builtin').git_status({path_display = {'tail'}})<cr>",
+  { desc = 'Find Git Status Files' })
 vim.keymap.set("n", "<leader><leader>",
   "<cmd>lua require('telescope.builtin').buffers{path_display = {'tail'}, sort_mru = true, ignore_current_buffer = true}<CR>",
   { desc = "Find open buffers" })

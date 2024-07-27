@@ -9,13 +9,16 @@ vim.keymap.set("n", "<leader>q", "<cmd>quit<CR>", {desc = "Close current buffer"
 vim.keymap.set("n", "[q", "<cmd>cprev<CR>", {desc = "Go to prev quickfixlist entry"})
 vim.keymap.set("n", "]q", "<cmd>cnext<CR>", {desc = "Go to next quickfixlist entry"})
 
+vim.keymap.set("n", "[t", "<cmd>tabp<CR>", {desc = "Go to prev tab"})
+vim.keymap.set("n", "]t", "<cmd>tabn<CR>", {desc = "Go to next tab"})
+
 
 vim.keymap.set('v', '<', '<gv', { noremap = true })
 vim.keymap.set('v', '>', '>gv', { noremap = true })
 vim.keymap.set("n", "g.", "<cmd>b#<CR>", {desc = "Go to previous buffer (. - most recent)"})
-vim.keymap.set("n", "<tab>", "gt")
-vim.keymap.set("n", "<S-tab>", "gT")
-vim.keymap.set("n", "<leader>ul", "<cmd>Lazy<CR>", {desc = "Open Layz"})
+vim.keymap.set("n", "<tab>", "<cmd>tabn<CR>")
+vim.keymap.set("n", "<S-tab>", "<cmd>tabp<CR>")
+vim.keymap.set("n", "<leader>ul", "<cmd>Lazy<CR>", {desc = "Open Lazy Ui"})
 
 vim.keymap.set("i", "<esc>", "<esc><cmd>write<CR>", {silent = true, noremap = true}) -- Autowrite
 

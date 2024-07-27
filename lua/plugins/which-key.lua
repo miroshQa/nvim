@@ -9,13 +9,14 @@ return  {
     })
 
       require('which-key').add {
-        { "<leader>d", group = "DEBUG" },
-        { "<leader>o", group = "OVERSEER" },
+        { "<leader>d", group = "Debug" },
+        { "<leader>o", group = "Overseer" },
+        { "<leader>h", group = "Hunks" },
         { "<leader>a", group = "AI" },
-        { "<leader>f", group = "FIND" },
-        { "<leader>g", group = "GIT" },
-        { "<leader>l", group = "LSP" },
-        { "<leader>u", group = "UI/Update" },
+        { "<leader>f", group = "Find" },
+        { "<leader>g", group = "Git" },
+        { "<leader>l", group = "Lsp" },
+        { "<leader>u", group = "Ui/Update" },
       }
     end,
 }

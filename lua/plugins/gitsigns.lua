@@ -2,9 +2,14 @@ return {
 	"lewis6991/gitsigns.nvim",
 	event = "BufReadPost",
 	config = function()
-    vim.keymap.set("n", "<leader>gH", function() require("gitsigns").reset_hunk() end, {desc = "Reset hunk"})
-    vim.keymap.set("n", "<leader>gh", function() require("gitsigns").preview_hunk() end, {desc = "Preview hunk"})
-    vim.keymap.set("n", "<leader>gb", function() require("gitsigns").preview_hunk() end, {desc = "Preview hunk"})
+    vim.keymap.set("n", "<leader>hr", "<cmd>Gitsigns reset_hunk", {desc = "Reset hunk"})
+    vim.keymap.set("n", "<leader>hR", "<cmd>Gitsigns reset_buffer<CR>", {desc = "Reset Buffer"})
+    vim.keymap.set("n", "<leader>hu", "<cmd>Gitsigns undo_stage_hunk<CR>", {desc = "Undo stage hunk"})
+    vim.keymap.set("n", "<leader>hp", "<cmd>Gitsigns preview_hunk<CR>", {desc = "Preview hunk"})
+    vim.keymap.set("n", "<leader>hs", "<cmd>Gitsigns stage_hunk<CR>", {desc = "Stage hunk"})
+    vim.keymap.set("n", "<leader>hS", "<cmd>Gitsigns stage_buffer<CR>", {desc = "Stage Buffer"})
+    vim.keymap.set("n", "<leader>gw", "<cmd>Gitsigns blame_line<CR>", {desc = "Git blame ([W]ho did this??)"})
+
     vim.keymap.set("n", "[h", function() require("gitsigns").prev_hunk() require("gitsigns").preview_hunk() end, {desc = "Prev hunk"})
     vim.keymap.set("n", "]h", function() require("gitsigns").next_hunk() require("gitsigns").preview_hunk() end, {desc = "Next hunk"})
 
