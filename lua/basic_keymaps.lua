@@ -1,31 +1,29 @@
+-- Windows / Tabs Navigation
 vim.keymap.set('n', '<left>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<right>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<down>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<up>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
-
-vim.keymap.set("v", "J", ":m '>+1<CR>gv==kgvo<esc>=kgvo", { desc = "move highlighted text down", silent = true })
-vim.keymap.set("v", "K", ":m '<-2<CR>gv==jgvo<esc>=jgvo", { desc = "move highlighted text up", silent = true })
-
-vim.keymap.set('n', 'H', '^')
-vim.keymap.set('n', 'L', '$', {desc = "a adds after char and A adds in the end of line. l moves right and why L shouldn't go to end of the line than?"})
-
+vim.keymap.set("n", "[t", "<cmd>tabp<CR>", {desc = "Go to prev tab"})
+vim.keymap.set("n", "]t", "<cmd>tabn<CR>", {desc = "Go to next tab"})
+vim.keymap.set("n", "<tab>", "<cmd>tabn<CR>")
+vim.keymap.set("n", "<S-tab>", "<cmd>tabp<CR>")
 vim.keymap.set("n", "<leader>Q", "<cmd>quitall!<CR>", {desc = "Force quit all (Be careful!)"})
 vim.keymap.set("n", "<leader>q", "<cmd>quit<CR>", {desc = "Close current buffer"})
 
+-- Improved motions
+vim.keymap.set("v", "J", ":m '>+1<CR>gv==kgvo<esc>=kgvo", { desc = "move highlighted text down", silent = true })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv==jgvo<esc>=jgvo", { desc = "move highlighted text up", silent = true })
+vim.keymap.set({"n", "x", "o"}, 'H', '^') -- https://www.reddit.com/r/neovim/comments/14v8vlh/what_are_your_absolute_favourite_keymappings/
+vim.keymap.set({"n", "x", "o"}, 'L', '$', {desc = "a adds after char and A adds in the end of line. l moves right and why L shouldn't go to end of the line than?"})
+vim.keymap.set('v', '<', '<gv', { noremap = true })
+vim.keymap.set('v', '>', '>gv', { noremap = true })
+vim.keymap.set("n", "gq", "<cmd>b#<CR>", {desc = "Go to previous buffer (. - most recent)"})
+vim.keymap.set("n", "+", "ggVG=<C-o>", {desc = "Autoindent all text in buffer"})
+
+-- Quickfix list
 vim.keymap.set("n", "[q", "<cmd>cprev<CR>", {desc = "Go to prev quickfixlist entry"})
 vim.keymap.set("n", "]q", "<cmd>cnext<CR>", {desc = "Go to next quickfixlist entry"})
 
-vim.keymap.set("n", "[t", "<cmd>tabp<CR>", {desc = "Go to prev tab"})
-vim.keymap.set("n", "]t", "<cmd>tabn<CR>", {desc = "Go to next tab"})
-
-vim.keymap.set("n", "+", "ggVG=<C-o>", {desc = "Autoindent all text in buffer"})
-
-
-vim.keymap.set('v', '<', '<gv', { noremap = true })
-vim.keymap.set('v', '>', '>gv', { noremap = true })
-vim.keymap.set("n", "g.", "<cmd>b#<CR>", {desc = "Go to previous buffer (. - most recent)"})
-vim.keymap.set("n", "<tab>", "<cmd>tabn<CR>")
-vim.keymap.set("n", "<S-tab>", "<cmd>tabp<CR>")
 vim.keymap.set("n", "<leader>ul", "<cmd>Lazy<CR>", {desc = "Open Lazy Ui"})
 
 vim.keymap.set("i", "<esc>", "<esc><cmd>write<CR>", {silent = true, noremap = true}) -- Autowrite
@@ -37,8 +35,6 @@ vim.keymap.del("s", ">")
 vim.keymap.set("i", "<up>", "")
 vim.keymap.set("i", "<down>", "")
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-vim.keymap.set("n", "j", "gj", {silent = true})
-vim.keymap.set("n", "k", "gk", {silent = true})
 
 -- Fix kitty Enter key
 vim.api.nvim_set_keymap("n", "<kEnter>", "<Enter>", {})
