@@ -44,7 +44,7 @@ return {
 
         vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
         vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-        vim.keymap.set("n", "H", vim.diagnostic.open_float, {desc = "Open Error / Diagnostic float"})
+        vim.keymap.set("n", "M", vim.diagnostic.open_float, {desc = "Open Error / Diagnostic float"})
         vim.keymap.set("n", "K", vim.lsp.buf.hover, {desc = "Hover Signature / Documentation"})
         -- don't add C-s to hover signature in insert mode. This is too much. It is easily to go in normal mode and check using "K" whatever you need
 

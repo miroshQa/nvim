@@ -1,13 +1,15 @@
 -- 19:00. Короче, в итоге я решил что лучше это на отдельный кеймап вообще поместить, а конкретно на s. Потому что тогда вообще получается что ? а также n и N как таковые вообще не нужны. Так что лучше конкретно одну клавишу для flash выделить, а / и ? пуская остаюстя самостоятельными для поиска по файлу вне зоны видимости
 vim.keymap.set({"x", "o", "n"}, "s", "<cmd>lua require('flash').jump()<CR>", {desc = "Flash"})
- -- use xi instead in Normal mode. Use c or S instead s in Visual mode
+vim.keymap.set({"x", "o", "n"}, "<C-s>", "<cmd>lua require('flash').treesitter()<CR>", {desc = "Flash treesitter"})
+vim.keymap.set("o", "r", "<cmd>lua require('flash').remote()<CR>", {desc = "Flash remote yank / delete"})
+-- use xi instead in Normal mode. Use c or S instead s in Visual mode
 return {
-    "folke/flash.nvim",
-    lazy = true,
-    vscode = true,
-    ---@type Flash.Config
-    opts = {
-      modes = {
+  "folke/flash.nvim",
+  lazy = true,
+  vscode = true,
+  ---@type Flash.Config
+  opts = {
+    modes = {
       char = {
         enabled = false,
       },
