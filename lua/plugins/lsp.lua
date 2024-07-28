@@ -40,7 +40,7 @@ return {
         vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, {desc = "Goto Type Definition"})
         vim.keymap.set("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references({fname_width = 100})<CR>", {desc = "Goto References"})
         vim.keymap.set("n", "cd", vim.lsp.buf.rename, {desc = "Rename symbol (Change definition)"})
-        vim.keymap.set("n", "gl", "<cmd>ClangdSwitchSourceHeader<Cr>", {desc = "Goto linked file (src / header)"})
+        -- vim.keymap.set("n", "gl", "<cmd>ClangdSwitchSourceHeader<Cr>", {desc = "Goto linked file (src / header)"})
 
         vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
         vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })

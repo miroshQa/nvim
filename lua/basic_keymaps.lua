@@ -13,8 +13,8 @@ vim.keymap.set("n", "<leader>q", "<cmd>quit<CR>", {desc = "Close current buffer"
 -- Improved motions
 vim.keymap.set("v", "J", ":m '>+1<CR>gv==kgvo<esc>=kgvo", { desc = "move highlighted text down", silent = true })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv==jgvo<esc>=jgvo", { desc = "move highlighted text up", silent = true })
-vim.keymap.set({"n", "x", "o"}, 'H', '^') -- https://www.reddit.com/r/neovim/comments/14v8vlh/what_are_your_absolute_favourite_keymappings/
-vim.keymap.set({"n", "x", "o"}, 'L', '$', {desc = "a adds after char and A adds in the end of line. l moves right and why L shouldn't go to end of the line than?"})
+vim.keymap.set({"n", "x", "o"}, 'gh', '^') -- https://www.reddit.com/r/neovim/comments/14v8vlh/what_are_your_absolute_favourite_keymappings/
+vim.keymap.set({"n", "x", "o"}, 'gl', '$', {desc = "a adds after char and A adds in the end of line. l moves right and why L shouldn't go to end of the line than?"})
 vim.keymap.set('v', '<', '<gv', { noremap = true })
 vim.keymap.set('v', '>', '>gv', { noremap = true })
 vim.keymap.set("n", "gq", "<cmd>b#<CR>", {desc = "Go to previous buffer (. - most recent)"})
