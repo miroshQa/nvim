@@ -95,6 +95,7 @@ local function changeSelected(edit_mode)
   vim.api.nvim_input(input)
 end
 
-vim.keymap.set("v", "<C-r>", function() changeSelected(false) end)
-vim.keymap.set("v", "<C-t>", function() changeSelected(true) end) -- very convinient to combine with Ctrl + f and Ctrl + c to return after
+vim.keymap.set("v", "<C-r>", function() changeSelected(false) end) -- Replace selected
+vim.keymap.set("v", "<C-right>", function() changeSelected(true) end) -- Edit selected (C-right equal to C-e because of my keymaps in the OS)
+-- very convinient to combine with Ctrl + f and Ctrl + c to return after
 
