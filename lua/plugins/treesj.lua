@@ -10,6 +10,7 @@ return {
   config = function()
     require('treesj').setup({
       max_join_length = 250,
+      use_default_keymaps = false,
     })
   end,
 }

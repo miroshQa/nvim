@@ -4,7 +4,6 @@ vim.keymap.set("n", "<leader>fc", "<cmd>Telescope commands<cr>", { desc = "Find 
 vim.keymap.set("n", "<leader>fw", "<cmd>Telescope live_grep<cr>", { desc = "Find Word (Using ripgrep)" })
 vim.keymap.set("n", "<leader>fb", "<cmd>Telescope builtin<cr>", { desc = "Find builtin Telescope" })
 vim.keymap.set("n", "<leader>fn", "<cmd>Telescope notify<cr>", { desc = "Find notification" })
-vim.keymap.set("n", "<leader>fd", "<cmd>Telescope diagnostics<cr>", { desc = "Find Diagnostics" })
 vim.keymap.set("n", "<leader>f.", "<cmd>Telescope oldfiles<cr>", { desc = 'Find Recent Files ("." for repeat)' })
 vim.keymap.set("n", "<leader>fr", "<cmd>Telescope resume<cr>", { desc = 'Find resume' })
 vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = 'Find help tags' })
@@ -38,7 +37,7 @@ return {
             i = {
               ["<esc>"] = require("telescope.actions").close,
               ["<left>"] = require("telescope.actions").select_horizontal, -- ctrl + h
-              ["<right>"] = require("telescope.actions").complete_tag,   -- Ctrl + l
+              ["<right>"] = require("telescope.actions").complete_tag,     -- Ctrl + l
             },
           },
 
