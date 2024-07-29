@@ -34,3 +34,12 @@ vim.opt_local.formatoptions:remove("cro")
 vim.g.termguicolors = true
 vim.opt.showtabline = 0
 vim.opt.wrap = true
+
+
+-- https://www.jackfranklin.co.uk/blog/code-folding-in-vim-neovim/
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldtext = ""
+-- vim.opt.fillchars:append("fold: ")
+-- Open all folds by default, zm is not available
+vim.opt.foldlevelstart = 99
