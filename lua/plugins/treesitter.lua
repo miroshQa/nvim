@@ -1,7 +1,3 @@
-function name(b, a) 
-  local c = a + b
-end
-
 vim.keymap.set("n", "}", "<cmd>TSTextobjectSwapNext @parameter.inner<CR>", {desc = "Swap next text object"})
 vim.keymap.set("n", "{", "<cmd>TSTextobjectSwapPrev @parameter.inner<CR>", {desc = "Swap prev text object"})
 

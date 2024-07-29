@@ -1,6 +1,6 @@
 return {
 	"lewis6991/gitsigns.nvim",
-	event = "BufReadPost",
+	event = {"BufReadPost", "BufNewFile"},
 	config = function()
     vim.keymap.set("n", "<leader>hr", "<cmd>Gitsigns reset_hunk<CR>", {desc = "Reset hunk"})
     vim.keymap.set("n", "<leader>hR", "<cmd>Gitsigns reset_buffer<CR>", {desc = "Reset Buffer"})
