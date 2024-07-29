@@ -19,8 +19,7 @@ return {
   end,
 
   keys = {
-    { "<right>",   function() require("luasnip").jump(1) end,  mode = {"i", "s"}},
-    { "<left>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
-    -- Таб плох тем что в инсерт моде нельзя прыгать вперед после того как отошел от области сниппета
+    { "<right>",   function() require("luasnip").jump(1) end,  mode = {"i", "s"}}, -- Alt + h
+    { "<left>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } }, -- Alt + l (physically on keyboard for me)
   },
 }

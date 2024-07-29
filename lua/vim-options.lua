@@ -5,11 +5,11 @@ vim.opt.autowriteall = true
 vim.opt.swapfile = false
 vim.opt.showcmd = false -- symbols in the bottom right corner
 vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2 -- Установка количества пробельных символов при сдвиге с "<", ">"
+vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.backspace = "indent,eol,start"
-vim.opt.smartindent = true -- Подстравивать новые строки под предыдущий отступ
+vim.opt.smartindent = true
 vim.opt.wrap = false
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -34,7 +34,6 @@ vim.opt_local.formatoptions:remove("cro")
 vim.g.termguicolors = true
 vim.opt.showtabline = 0
 vim.opt.wrap = true
-
 
 -- https://www.jackfranklin.co.uk/blog/code-folding-in-vim-neovim/
 vim.opt.foldmethod = "expr"

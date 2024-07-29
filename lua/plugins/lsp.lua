@@ -85,7 +85,7 @@ return {
       marksman = {},
       lua_ls = {},
       jsonls = {},
-      pyright = {}, -- Нужно сначала запусить neovim (nvim .) и только затем заходить в файл
+      pyright = {},
       tsserver = {},
       rust_analyzer = {
         cargo = {
@@ -105,7 +105,7 @@ return {
       function(server_name)
         local server = servers[server_name] or {}
         server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-        server.capabilities.workspace.didChangeWatchedFiles.dynamicRegirsation = true
+        server.capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
         require("lspconfig")[server_name].setup(server)
       end,
     })
