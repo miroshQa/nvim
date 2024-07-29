@@ -36,8 +36,8 @@ return {
           mode = 0,
           cond = function() return #vim.fn.gettabinfo() > 1 end,
           tabs_color = {
-            active = {bg = "#eebd35", fg = "#FFFFFF"},
-            inactive = {bg = "#8ec07c", fg = "#cad4fc"},
+            active = {bg = "#4081f5", fg = "#FFFFFF"},
+            inactive = {bg = "#f5f5f5", fg = "#4081f5"},
             },
           }
         },
