@@ -17,12 +17,12 @@ vim.keymap.set({"n", "x", "o"}, 'gh', '^') -- https://www.reddit.com/r/neovim/co
 vim.keymap.set({"n", "x", "o"}, 'gl', '$', {desc = "a adds after char and A adds in the end of line. l moves right and why L shouldn't go to end of the line than?"})
 vim.keymap.set('v', '<', '<gv', { noremap = true })
 vim.keymap.set('v', '>', '>gv', { noremap = true })
-vim.keymap.set("n", "gq", "<cmd>b#<CR>", {desc = "Go to previous buffer (. - most recent)"})
+vim.keymap.set("n", "g.", "<cmd>b#<CR>", {desc = "Go to previous buffer (. - most recent)"})
 vim.keymap.set("n", "+", "ggVG=<C-o>", {desc = "Autoindent all text in buffer"})
 
 -- Quickfix list
-vim.keymap.set("n", "[q", "<cmd>cprev<CR>", {desc = "Go to prev quickfixlist entry"})
-vim.keymap.set("n", "]q", "<cmd>cnext<CR>", {desc = "Go to next quickfixlist entry"})
+vim.keymap.set("n", "<C-p>", "<cmd>cprev<CR>", {desc = "Go to prev quickfixlist entry"})
+vim.keymap.set("n", "<C-n>", "<cmd>cnext<CR>", {desc = "Go to next quickfixlist entry"})
 
 vim.keymap.set("n", "<leader>ul", "<cmd>Lazy<CR>", {desc = "Open Lazy Ui"})
 

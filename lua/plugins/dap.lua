@@ -8,8 +8,8 @@ dmap("<M-e>", "<cmd>lua require('dap').step_back()<CR>", "Step back")
 dmap("<M-d>", "<cmd>lua require('dap').step_over()<CR>", "Step over")
 dmap("<M-s>", "<cmd>lua require('dap').step_out()<CR>", "Step out")
 dmap("<M-f>", "<cmd>lua require('dap').step_into()<CR>", "Step into")
-dmap(">", "<cmd>lua require('dap').continue()<CR>" , "Continue")
-dmap("<", "<cmd>lua require('dap').reverse_continue()<CR>", "Reverese continue")
+dmap("<leade>dc", "<cmd>lua require('dap').continue()<CR>" , "Continue")
+dmap("<leader>dC", "<cmd>lua require('dap').reverse_continue()<CR>", "Reverese continue")
 
 
 dmap("<leader>du", "<cmd>lua require('dap') require('dapui').toggle()<CR>", "UI toggle")
