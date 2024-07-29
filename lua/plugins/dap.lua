@@ -3,7 +3,7 @@ local dmap = function(key, func, descritpion)
 end
 
 -- ESDF control like in cs go (instead wasd)
---  syntax '<cmd> lua require(...)...' allow us to lazy load this 
+--  syntax '<cmd> lua require(...)...' allow us to lazy load this  (It is a false actually, We can use just function() ... end)
 dmap("<M-e>", "<cmd>lua require('dap').step_back()<CR>", "Step back")
 dmap("<M-d>", "<cmd>lua require('dap').step_over()<CR>", "Step over")
 dmap("<M-s>", "<cmd>lua require('dap').step_out()<CR>", "Step out")

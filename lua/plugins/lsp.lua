@@ -96,6 +96,7 @@ return {
       csharp_ls = {},
       yamlls = {},
       gopls = {},
+      bashls = {},
     }
 
     require("mason").setup()
