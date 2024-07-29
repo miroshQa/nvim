@@ -11,8 +11,8 @@ return {
     vim.keymap.set("n", "<leader>hS", "<cmd>Gitsigns stage_buffer<CR>", {desc = "Stage Buffer"})
     vim.keymap.set("n", "<leader>gw", "<cmd>Gitsigns blame_line<CR>", {desc = "Git blame ([W]ho did this??)"})
 
-    vim.keymap.set("n", "[h", function() require("gitsigns").prev_hunk() require("gitsigns").preview_hunk() end, {desc = "Prev hunk"})
-    vim.keymap.set("n", "]h", function() require("gitsigns").next_hunk() require("gitsigns").preview_hunk() end, {desc = "Next hunk"})
+    vim.keymap.set("n", "[h", function() require("gitsigns").nav_hunk("prev", {preview = true, navigation_message = false}) end, {desc = "Prev hunk"})
+    vim.keymap.set("n", "]h", function() require("gitsigns").nav_hunk("next", {preview = true, navigation_message = false}) end, {desc = "Next hunk"})
 		require("gitsigns").setup({
 			signs = {
 				add = { text = "+" },

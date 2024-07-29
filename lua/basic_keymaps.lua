@@ -13,12 +13,13 @@ vim.keymap.set("n", "<leader>q", "<cmd>quit<CR>", {desc = "Close current buffer"
 -- Improved motions
 vim.keymap.set("v", "J", ":m '>+1<CR>gv==kgvo<esc>=kgvo", { desc = "move highlighted text down", silent = true })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv==jgvo<esc>=jgvo", { desc = "move highlighted text up", silent = true })
-vim.keymap.set({"n", "x", "o"}, 'gh', '^') -- https://www.reddit.com/r/neovim/comments/14v8vlh/what_are_your_absolute_favourite_keymappings/
-vim.keymap.set({"n", "x", "o"}, 'gl', '$', {desc = "a adds after char and A adds in the end of line. l moves right and why L shouldn't go to end of the line than?"})
+vim.keymap.set({"n", "x", "o"}, 'gh', '^')
+vim.keymap.set({"n", "x", "o"}, 'gl', '$')
 vim.keymap.set('v', '<', '<gv', { noremap = true })
 vim.keymap.set('v', '>', '>gv', { noremap = true })
 vim.keymap.set("n", "g.", "<cmd>b#<CR>", {desc = "Go to previous buffer (. - most recent)"})
 vim.keymap.set("n", "+", "ggVG=<C-o>", {desc = "Autoindent all text in buffer"})
+vim.keymap.set("x", "R", ":s##<left>", {desc = "Start replacement in selected range"})
 
 -- Quickfix list
 vim.keymap.set("n", "<C-p>", "<cmd>cprev<CR>", {desc = "Go to prev quickfixlist entry"})
@@ -27,7 +28,7 @@ vim.keymap.set("n", "<C-n>", "<cmd>cnext<CR>", {desc = "Go to next quickfixlist 
 vim.keymap.set("n", "<leader>ul", "<cmd>Lazy<CR>", {desc = "Open Lazy Ui"})
 vim.keymap.set("n", "<leader>uh", "<cmd>checkhealth<CR>", {desc = "Run editor checkhealth"})
 
-vim.keymap.set("i", "<esc>", "<esc><cmd>write<CR>", {silent = true, noremap = true}) -- Autowrite
+vim.keymap.set("i", "<esc>", "<esc><cmd>write<CR>", {silent = true, noremap = true, desc = "Autowrite"})
 
 -- For snippets
 vim.keymap.del("s", "<")
@@ -43,10 +44,10 @@ vim.api.nvim_set_keymap("i", "<kEnter>", "<Enter>", {})
 vim.api.nvim_set_keymap("c", "<kEnter>", "<Enter>", {})
 
 if vim.g.neovide then
-	local map = vim.keymap
-	map.set({ "n", "v" }, "<C-+>", "<cmd>lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<CR>")
-	map.set({ "n", "v" }, "<C-->", "<cmd>lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<CR>")
-	map.set({ "n", "v" }, "<C-0>", "<cmd>lua vim.g.neovide_scale_factor = 1<CR>")
+  local map = vim.keymap
+  map.set({ "n", "v" }, "<C-+>", "<cmd>lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<CR>")
+  map.set({ "n", "v" }, "<C-->", "<cmd>lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<CR>")
+  map.set({ "n", "v" }, "<C-0>", "<cmd>lua vim.g.neovide_scale_factor = 1<CR>")
 end
 
 local diagnostics_active = true
@@ -93,9 +94,9 @@ local function changeSelected(edit_mode)
   pattern = escapeLt(pattern)
   local input = ""
   if edit_mode then
-     input = '<Esc>:%s#' .. pattern .. "#" .. pattern .. "#g<Left><Left>"
+    input = '<Esc>:%s#' .. pattern .. "#" .. pattern .. "#g<Left><Left>"
   else
-     input = '<Esc>:%s#' .. pattern .. "##g<Left><Left>"
+    input = '<Esc>:%s#' .. pattern .. "##g<Left><Left>"
   end
   vim.api.nvim_input(input)
 end

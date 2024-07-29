@@ -31,7 +31,7 @@ vim.api.nvim_command 'autocmd FileType dap-float nnoremap <buffer><silent> q <cm
 
 return {
   "mfussenegger/nvim-dap",
-  cmd = {"Keymaps above activate this"},
+  lazy = true,
   version = "*",
   dependencies = {
     "williamboman/mason.nvim",
