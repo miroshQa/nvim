@@ -1,4 +1,4 @@
-vim.keymap.set("n", "<leader>or", "<cmd>OverseerRun<CR>", {desc = "Run overseer"})
+-- vim.keymap.set("n", "<leader>c", "<cmd>OverseerRun<CR>", {desc = "Run overseer"})
 
 
 return {
