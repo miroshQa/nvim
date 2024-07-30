@@ -9,6 +9,7 @@ vim.keymap.set("n", "<tab>", "<cmd>tabn<CR>")
 vim.keymap.set("n", "<S-tab>", "<cmd>tabp<CR>")
 vim.keymap.set("n", "<leader>Q", "<cmd>quitall!<CR>", {desc = "Force quit all (Be careful!)"})
 vim.keymap.set("n", "<leader>q", "<cmd>quit<CR>", {desc = "Close current buffer"})
+vim.keymap.set("n", "<leader>r", ":%s##g<left><left>", {desc = "Replace in current buffer"})
 
 -- Improved motions
 vim.keymap.set("v", "J", ":m '>+1<CR>gv==kgvo<esc>=kgvo", { desc = "move highlighted text down", silent = true }) -- Use gs / gS in Normal mode instead (And can even much more!)
@@ -17,7 +18,7 @@ vim.keymap.set({"n", "x", "o"}, 'gh', '^')
 vim.keymap.set({"n", "x", "o"}, 'gl', '$')
 vim.keymap.set('v', '<', '<gv', { noremap = true })
 vim.keymap.set('v', '>', '>gv', { noremap = true })
-vim.keymap.set("n", "g.", "<cmd>b#<CR>", {desc = "Go to previous buffer (. - most recent)"})
+vim.keymap.set("n", "ga", "<cmd>b#<CR>", {desc = "Go to last Accessed file (Ctrl + ^ synonim)"})
 vim.keymap.set("n", "+", "ggVG=<C-o>", {desc = "Autoindent all text in buffer"})
 vim.keymap.set("x", "R", ":s##<left>", {desc = "Start replacement in selected range"})
 

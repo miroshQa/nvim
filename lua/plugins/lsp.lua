@@ -16,11 +16,9 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagn
 vim.keymap.set("n", "M", vim.diagnostic.open_float, {desc = "Misstake hover (Open Error / Diagnostic float)"})
 vim.keymap.set("n", "K", vim.lsp.buf.hover, {desc = "Hover Signature / Documentation"})
 
-vim.keymap.set("n", "<leader>fd", "<cmd>Telescope diagnostics<cr>", { desc = "Find Diagnostics" })
-vim.keymap.set("n", "<leader>ls", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>", { desc = 'Find symbols'})
-vim.keymap.set("n", "<leader>lS", "<cmd>lua require('telescope.builtin).lsp_workspace_symbols()<CR>", { desc = "Find symbols in workspace" })
-vim.keymap.set("n", "<leader>lm", "<cmd>lua require('telescope.builtin').lsp_document_symbols({symbols = {'function', 'class', 'struct', 'method'}})<CR>", { desc = "Find functions / classes / methods" })
-vim.keymap.set("n", "<leader>lM", "<cmd>lua require('telescope.builtin').lsp_workspace_symbols({symbols = {'function', 'class', 'struct', 'method'}})<CR>", { desc = "Find functions / classes / methods in workspace" })
+vim.keymap.set("n", "<leader>w", "<cmd>Telescope diagnostics<cr>", { desc = "Find Workspace Diagnostics" })
+vim.keymap.set("n", "<leader>s", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>", { desc = 'Find symbols'})
+vim.keymap.set("n", "<leader>S", "<cmd>lua require('telescope.builtin').lsp_workspace_symbols()<CR>", { desc = "Find symbols in workspace" })
 vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, {desc = "Lsp actions"})
 vim.keymap.set("n", "<leader>ua", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, {desc = "Toggle inlay_hints (Annotations)"})
 vim.keymap.set("n", "<leader>um", "<cmd>Mason<CR>", {desc = "Open Mason"})
@@ -97,6 +95,8 @@ return {
       yamlls = {},
       gopls = {},
       bashls = {},
+      taplo = {},
+      neocmake = {},
     }
 
     require("mason").setup()

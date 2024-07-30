@@ -1,5 +1,4 @@
-vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<CR>", {desc = "Open Neogit Status"})
-vim.keymap.set("n", "<leader>gc", "<cmd>Neogit commit<CR>", {desc = "Open Commit Menu"})
+vim.keymap.set("n", "<leader>n", "<cmd>Neogit<CR>", {desc = "Open Neogit"})
 
 return {
   "NeogitOrg/neogit",

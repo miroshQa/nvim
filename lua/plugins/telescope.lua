@@ -1,15 +1,14 @@
--- for lazy loading on Telescope cmd
-vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find Files" })
-vim.keymap.set("n", "<leader>fc", "<cmd>Telescope commands<cr>", { desc = "Find commands" })
-vim.keymap.set("n", "<leader>fw", "<cmd>Telescope live_grep<cr>", { desc = "Find Word (Using ripgrep)" })
-vim.keymap.set("n", "<leader>fb", "<cmd>Telescope builtin<cr>", { desc = "Find builtin Telescope" })
-vim.keymap.set("n", "<leader>fn", "<cmd>Telescope notify<cr>", { desc = "Find notification" })
-vim.keymap.set("n", "<leader>f.", "<cmd>Telescope oldfiles<cr>", { desc = 'Find Recent Files ("." for repeat)' })
-vim.keymap.set("n", "<leader>fr", "<cmd>Telescope resume<cr>", { desc = 'Find resume' })
-vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = 'Find help tags' })
-vim.keymap.set("n", "<leader>gs", "<cmd>lua require('telescope.builtin').git_status({path_display = {'tail'}})<cr>",
-  { desc = 'Find Git Status Files' })
-vim.keymap.set("n", "<leader><leader>",
+vim.keymap.set("n", "<leader>f", "<cmd>Telescope find_files<cr>", { desc = "Telescope Find files" })
+vim.keymap.set("n", "<leader>/", "<cmd>Telescope live_grep<cr>", { desc = "Telescope Grep in current working directory" })
+vim.keymap.set("n", "<leader>;", "<cmd>Telescope resume<cr>", { desc = 'Open last picker' })
+-- vim.keymap.set("n", "<leader>fc", "<cmd>Telescope commands<cr>", { desc = "Find commands" })
+-- vim.keymap.set("n", "<leader>fb", "<cmd>Telescope builtin<cr>", { desc = "Find builtin Telescope" })
+vim.keymap.set("n", "<leader>un", "<cmd>Telescope notify<cr>", { desc = "Find notification" })
+vim.keymap.set("n", "<leader>.", "<cmd>Telescope oldfiles<cr>", { desc = 'Find Recent Files ("." for repeat)' })
+-- vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = 'Find help tags' })
+vim.keymap.set("n", "<leader>g", "<cmd>lua require('telescope.builtin').git_status({path_display = {'tail'}})<cr>",
+  { desc = 'Git Status Files Picker (Telescope)' })
+vim.keymap.set("n", "<leader>b",
   "<cmd>lua require('telescope.builtin').buffers{path_display = {'tail'}, sort_mru = true, ignore_current_buffer = true}<CR>",
   { desc = "Find open buffers" })
 
