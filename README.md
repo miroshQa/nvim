@@ -66,19 +66,19 @@
 
 
 ### Colorscheme 😻 
-![Colorscheme](./imgs/colorscheme.png)
+![Colorscheme](./assets/colorscheme.png)
 
 ### File Tree 🌳
-![FileTree](./imgs/file-tree.png) 
+![FileTree](./assets/file-tree.png) 
 
 ### Toggle Term 👽
-![ToggleTerm](./imgs/toggle-term.png) 
+![ToggleTerm](./assets/toggle-term.png) 
 
 ### Telescope 🔭
-![Telescope](./imgs/telescope.png) 
+![Telescope](./assets/telescope.png) 
 
 ### Dashboard 😎
-![Dashboard](./imgs/dashboard.png) 
+![Dashboard](./assets/dashboard.png) 
 
 ### Favourite keymaps ✨
 1. g. (Goto prev buffer)

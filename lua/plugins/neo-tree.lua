@@ -27,6 +27,7 @@ return {
         position = "current",
         mappings = {
           ["/"] = false,
+          ["<space>"] = false,
           ["?"] = false,
           ["f"] = false,
           ["t"] = false,

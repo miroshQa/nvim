@@ -8,7 +8,7 @@ dmap("<M-e>", "<cmd>lua require('dap').step_back()<CR>", "Step back")
 dmap("<M-d>", "<cmd>lua require('dap').step_over()<CR>", "Step over")
 dmap("<M-s>", "<cmd>lua require('dap').step_out()<CR>", "Step out")
 dmap("<M-f>", "<cmd>lua require('dap').step_into()<CR>", "Step into")
-dmap("<leade>dc", "<cmd>lua require('dap').continue()<CR>" , "Continue")
+dmap("<leader>dc", "<cmd>lua require('dap').continue()<CR>" , "Continue")
 dmap("<leader>dC", "<cmd>lua require('dap').reverse_continue()<CR>", "Reverese continue")
 
 
@@ -19,7 +19,7 @@ dmap("<leader>db", "<cmd>lua require('dap').list_breakpoints()<CR>", "Breakpoins
 dmap("<leader>dB", "<cmd>lua require('dap').clear_breakpoints()<CR>", "Clear breakpoints list")
 dmap("<leader>df", "<cmd>lua require('dap').focus_frame()<CR>", "Go to paused")
 dmap("<leader>db", "<cmd>lua require('dap').toggle_breakpoint()<CR>", "Toggle breakpont")
-dmap("<leader>dc", "<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", "Set conditional breakpoint")
+dmap("<leader>di", "<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", "Set conditional breakpoint ([i]f)")
 dmap("<leader>de", "<cmd>lua require('dap').set_exception_breakpoints()<CR>", "Set exception breakpont")
 dmap("<leader>ds", "<cmd>lua require('dap.ui.widgets').centered_float(require('dap.ui.widgets').scopes)<CR>", "Scopes")
 dmap("[s", "<cmd>lua require('dap').down()<CR>", "Stack frame down")
