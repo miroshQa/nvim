@@ -1,3 +1,33 @@
+local kind_icons = {
+  Text = "",
+  Method = "󰆧",
+  Function = "󰊕",
+  Constructor = "",
+  Field = "󰇽",
+  Variable = "󰂡",
+  Class = "󰠱",
+  Interface = "",
+  Module = "",
+  Property = "󰜢",
+  Unit = "",
+  Value = "󰎠",
+  Enum = "",
+  Keyword = "󰌋",
+  Snippet = "",
+  Color = "󰏘",
+  File = "󰈙",
+  Reference = "",
+  Folder = "󰉋",
+  EnumMember = "",
+  Constant = "󰏿",
+  Struct = "",
+  Event = "",
+  Operator = "󰆕",
+  TypeParameter = "󰅲",
+}
+
+
+
 return {
   {
     "hrsh7th/nvim-cmp",
@@ -15,6 +45,21 @@ return {
       local luasnip = require("luasnip")
 
       cmp.setup({
+        formatting = {
+          format = function(entry, vim_item)
+            vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
+            vim_item.menu = ({
+              buffer = "",
+              nvim_lsp = "",
+              luasnip = "",
+              nvim_lua = "",
+              latex_symbolc = ""
+            })[entry.source.name]
+            return vim_item
+          end,
+          expandable_indicator = false,
+          fields = {"abbr", "kind", "menu"},
+        },
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
