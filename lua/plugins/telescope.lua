@@ -35,8 +35,7 @@ return {
           mappings = {
             i = {
               ["<esc>"] = require("telescope.actions").close,
-              ["<left>"] = require("telescope.actions").select_horizontal, -- ctrl + h
-              ["<right>"] = require("telescope.actions").complete_tag,     -- Ctrl + l
+              ["<C-s>"] = require("telescope.actions").select_horizontal,
             },
           },
 
