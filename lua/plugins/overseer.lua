@@ -41,12 +41,5 @@ return {
         hidden = false,
       },
     })
-    -- https://vi.stackexchange.com/questions/17816/solved-ish-neovim-dont-close-terminal-buffer-after-process-exit
-    vim.cmd([[
-        augroup TerminalSettings
-        autocmd!
-        autocmd TermClose * setlocal | lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, false, true), "n", true)
-        augroup END
-        ]])
   end,
 }
