@@ -79,3 +79,8 @@
 
 ### Dashboard 😎
 ![Dashboard](./assets/dashboard.png) 
+
+### Favourite keymaps ✨
+1. ga (Goto prev buffer)
+2. g; (Goto last change in buffer)
+

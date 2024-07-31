@@ -1,4 +1,3 @@
---
 -- if we extract require from function it will break lazyloading (require('telescope.builtin').lsp_definitions - WRONG!)
 vim.keymap.set("n", "gd", function() require('telescope.builtin').lsp_definitions() end, {desc = "Goto Definition"})
 vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {desc = "[G]oto [D]eclaration"})
@@ -28,12 +27,12 @@ return {
   "neovim/nvim-lspconfig",
   -- https://www.reddit.com/r/neovim/comments/1bk4sru/when_to_use_the_bufreadpost_event/
   event = {"BufReadPost", "BufNewFile"},
+  -- We should use dependencies only when we haven't separate file for this plugin. So I delete "mason.nvim" for this reason
+  -- UPDATE: I think I was wrong XD. We should specify dependencies anyway. Because if we delete plugins/mason.lua for some reason It will break this file
   dependencies = {
-    -- "artemave/workspace-diagnostics.nvim",
+    "artemave/workspace-diagnostics.nvim",
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
-    { "j-hui/fidget.nvim", opts = {} },
-    { "folke/neodev.nvim", opts = {} },
   },
   config = function()
     vim.diagnostic.config({
@@ -53,7 +52,7 @@ return {
       callback = function(event)
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
-        -- require("workspace-diagnostics").populate_workspace_diagnostics(client, event.buf)
+        require("workspace-diagnostics").populate_workspace_diagnostics(client, event.buf)
 
         if client and client.server_capabilities.documentHighlightProvider then
           vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
@@ -97,14 +96,14 @@ return {
       neocmake = {},
     }
 
-    require("mason").setup()
+    -- I think I can delete this line below but I am not sure ... https://www.reddit.com/r/neovim/comments/15i2no9/with_lazynvim_when_you_load_a_dependency_do_you/
+    require("mason")
     require("mason-lspconfig").setup({ ensure_installed = vim.tbl_keys(servers or {}) })
 
     require("mason-lspconfig").setup_handlers({
       function(server_name)
         local server = servers[server_name] or {}
         server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-        server.capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
         require("lspconfig")[server_name].setup(server)
       end,
     })
