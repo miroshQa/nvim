@@ -13,9 +13,9 @@ vim.keymap.set("n", "M", vim.diagnostic.open_float, {desc = "Misstake hover (Ope
 vim.keymap.set("n", "K", vim.lsp.buf.hover, {desc = "Hover Signature / Documentation"})
 
 local adequate_symbols = {"function", "class", "struct", "method", "enum", "interface", "type"}
-vim.keymap.set("n", "<leader>w", "<cmd>Telescope diagnostics<cr>", { desc = "Find Workspace Diagnostics" })
-vim.keymap.set("n", "<leader>ss", function() require('telescope.builtin').lsp_document_symbols({symbols = adequate_symbols}) end, { desc = 'Find symbols'})
-vim.keymap.set("n", "<leader>S", function() require('telescope.builtin').lsp_workspace_symbols({symbols = adequate_symbols}) end, { desc = "Find symbols in workspace" })
+vim.keymap.set("n", "<leader>w", "<cmd>Telescope diagnostics<cr>", { desc = "Search Workspace Diagnostics" })
+vim.keymap.set("n", "<leader>sl", function() require('telescope.builtin').lsp_document_symbols({symbols = adequate_symbols}) end, { desc = 'Search lsp symbols'})
+vim.keymap.set("n", "<leader>S", function() require('telescope.builtin').lsp_workspace_symbols({symbols = adequate_symbols}) end, { desc = "Search symbols in workspace" })
 vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, {desc = "Lsp actions"})
 vim.keymap.set("n", "<leader>ua", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, {desc = "Toggle inlay_hints (Annotations)"})
 vim.keymap.set("n", "<leader>um", "<cmd>Mason<CR>", {desc = "Open Mason"})

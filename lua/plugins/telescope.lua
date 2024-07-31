@@ -1,17 +1,17 @@
 vim.keymap.set("n", "<leader>f", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
-vim.keymap.set("n", "<leader>/", "<cmd>Telescope live_grep<cr>", { desc = "Find grep in current working directory" })
-vim.keymap.set("n", "<leader>;", "<cmd>Telescope resume<cr>", { desc = 'Find open last picker' })
+vim.keymap.set("n", "<leader>/", "<cmd>Telescope live_grep<cr>", { desc = "Grep in current working directory" })
+vim.keymap.set("n", "<leader>;", "<cmd>Telescope resume<cr>", { desc = 'Open last telescope picker' })
 vim.keymap.set("n", "<leader>sb", "<cmd>Telescope builtin<cr>", { desc = "Find builtin Telescope" })
-vim.keymap.set("n", "<leader>se", "<cmd>Telescope emoji<cr>", { desc = "Find emoji" })
-vim.keymap.set("n", "<leader>sn", "<cmd>Telescope notify<cr>", { desc = "Find notification" })
-vim.keymap.set("n", "<leader>so", "<cmd>Telescope oldfiles<cr>", { desc = 'Find old files' })
-vim.keymap.set("n", "<leader>sh", "<cmd>Telescope help_tags<cr>", { desc = 'Find help tags' })
-vim.keymap.set("n", "<leader>c", "<cmd>Telescope git_bcommits<cr>", { desc = 'Find commits for current buffer' })
+vim.keymap.set("n", "<leader>se", "<cmd>Telescope emoji<cr>", { desc = "Search emoji" })
+vim.keymap.set("n", "<leader>sn", "<cmd>Telescope notify<cr>", { desc = "Search notification" })
+vim.keymap.set("n", "<leader>so", "<cmd>Telescope oldfiles<cr>", { desc = 'Search old files' })
+vim.keymap.set("n", "<leader>sh", "<cmd>Telescope help_tags<cr>", { desc = 'Search help tags' })
+vim.keymap.set("n", "<leader>c", "<cmd>Telescope git_bcommits<cr>", { desc = 'Commits for current buffer' })
 vim.keymap.set("n", "<leader>g", function() require('telescope.builtin').git_status({path_display = {'tail'}}) end,
-  { desc = 'Find edited / added files' })
+  { desc = 'Search edited / added files' })
 vim.keymap.set("n", "<leader>b",
   function() require('telescope.builtin').buffers{path_display = {'tail'}, sort_mru = true, ignore_current_buffer = true} end,
-  { desc = "Find open buffers" })
+  { desc = "Search open buffers" })
 
 return {
   "nvim-telescope/telescope.nvim",
