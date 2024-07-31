@@ -2,7 +2,7 @@ vim.keymap.set("n", "<leader>e", function() require('neo-tree') vim.cmd('Neotree
 
 return {
   "nvim-neo-tree/neo-tree.nvim",
-  lazy = true,
+  cmd = {"Neotree"},
   branch = "v3.x",
   dependencies = {
     "nvim-lua/plenary.nvim",
