@@ -1,5 +1,5 @@
-vim.keymap.set("n", "gs", "<cmd>lua require('treesj').toggle()<CR>", {desc = "Toggle split / join"})
-vim.keymap.set("n", "gS", "<cmd>lua require('treesj').toggle({split = {recursive = true}})<CR>", {desc = "Toggle split / join recursively"})
+vim.keymap.set("n", "gs", function() require('treesj').toggle() end, {desc = "Toggle split / join"})
+vim.keymap.set("n", "gS", function() require('treesj').toggle({split = {recursive = true}}) end, {desc = "Toggle split / join recursively"})
 
 return {
   'Wansmer/treesj',

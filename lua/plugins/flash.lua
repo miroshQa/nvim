@@ -1,6 +1,6 @@
 vim.keymap.set({"x", "o", "n"}, "s", function() require('flash').jump() end, {desc = "Flash"})
-vim.keymap.set({"x", "o", "n"}, "<C-s>", "<cmd>lua require('flash').treesitter()<CR>", {desc = "Flash treesitter"})
-vim.keymap.set("o", "r", "<cmd>lua require('flash').remote()<CR>", {desc = "Flash remote yank / delete"})
+vim.keymap.set({"x", "o", "n"}, "<C-s>", function() require('flash').treesitter() end, {desc = "Flash treesitter"})
+vim.keymap.set("o", "r", function() require('flash').remote() end, {desc = "Flash remote yank / delete"})
 -- use xi / cl instead in Normal mode. Use c or S instead s in Visual mode
 
 return {

@@ -1,4 +1,4 @@
-vim.keymap.set("n", "<leader>e", "<cmd>lua require('neo-tree') vim.cmd('Neotree toggle reveal')<CR>", { desc = "Toggle file explorer" })
+vim.keymap.set("n", "<leader>e", function() require('neo-tree') vim.cmd('Neotree toggle reveal') end, { desc = "Toggle file explorer" })
 
 return {
   "nvim-neo-tree/neo-tree.nvim",

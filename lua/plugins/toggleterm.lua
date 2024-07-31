@@ -1,4 +1,4 @@
-vim.keymap.set("n", "<C-t>", "<cmd>lua require('toggleterm') vim.cmd('ToggleTerm')<CR>", {desc = "description"})
+vim.keymap.set("n", "<C-t>", function() require('toggleterm') vim.cmd('ToggleTerm') end, {desc = "description"})
 
 return {
   -- amongst your other plugins

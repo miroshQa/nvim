@@ -5,10 +5,10 @@ vim.keymap.set("n", "<leader>ab", "<cmd>Telescope builtin<cr>", { desc = "Find b
 vim.keymap.set("n", "<leader>an", "<cmd>Telescope notify<cr>", { desc = "Find notification" })
 vim.keymap.set("n", "<leader>o", "<cmd>Telescope oldfiles<cr>", { desc = 'Find old files' })
 vim.keymap.set("n", "<leader>ah", "<cmd>Telescope help_tags<cr>", { desc = 'Find help tags' })
-vim.keymap.set("n", "<leader>g", "<cmd>lua require('telescope.builtin').git_status({path_display = {'tail'}})<cr>",
+vim.keymap.set("n", "<leader>g", function() require('telescope.builtin').git_status({path_display = {'tail'}}) end,
   { desc = 'Find edited / added files' })
 vim.keymap.set("n", "<leader>b",
-  "<cmd>lua require('telescope.builtin').buffers{path_display = {'tail'}, sort_mru = true, ignore_current_buffer = true}<CR>",
+  function() require('telescope.builtin').buffers{path_display = {'tail'}, sort_mru = true, ignore_current_buffer = true} end,
   { desc = "Find open buffers" })
 
 return {

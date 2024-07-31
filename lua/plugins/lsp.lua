@@ -1,15 +1,12 @@
--- about dependencies and require
--- we use dependencies only when we have not file for this plugin in plugin folder
--- because plugins in dependencies downloads and LOads (loads when target plugin requires), when require only load plugin
--- https://lazy.folke.io/developers
-
-vim.keymap.set("n", "gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<CR>", {desc = "Goto Definition"})
+--
+-- if we extract require from function it will break lazyloading (require('telescope.builtin').lsp_definitions - WRONG!)
+vim.keymap.set("n", "gd", function() require('telescope.builtin').lsp_definitions() end, {desc = "Goto Definition"})
 vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {desc = "[G]oto [D]eclaration"})
-vim.keymap.set("n", "gi", "<cmd>lua require('telescope.builtin').lsp_implementations()<CR>", {desc = "Goto Implementation"})
+vim.keymap.set("n", "gi", function() require('telescope.builtin').lsp_implementations() end, {desc = "Goto Implementation"})
 vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, {desc = "Goto Type Definition"})
-vim.keymap.set("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references({fname_width = 100})<CR>", {desc = "Goto References"})
+vim.keymap.set("n", "gr", function() require('telescope.builtin').lsp_references({fname_width = 100}) end, {desc = "Goto References"})
 vim.keymap.set("n", "cd", vim.lsp.buf.rename, {desc = "Rename symbol (Change definition)"})
--- vim.keymap.set("n", "gl", "<cmd>ClangdSwitchSourceHeader<Cr>", {desc = "Goto linked file (src / header)"})
+vim.keymap.set("n", "go", "<cmd>ClangdSwitchSourceHeader<Cr>", {desc = "Goto linked file (src / header)"})
 
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
