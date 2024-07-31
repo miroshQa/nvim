@@ -26,14 +26,19 @@ vim.keymap.set("x", "R", ":s##<left>", {desc = "Start replacement in selected ra
 vim.keymap.set("n", "<C-p>", "<cmd>cprev<CR>", {desc = "Go to prev quickfixlist entry"})
 vim.keymap.set("n", "<C-n>", "<cmd>cnext<CR>", {desc = "Go to next quickfixlist entry"})
 
-vim.keymap.set("n", "<leader>ul", "<cmd>Lazy<CR>", {desc = "Open Lazy Ui"})
 vim.keymap.set("n", "<leader>uh", "<cmd>checkhealth<CR>", {desc = "Run editor checkhealth"})
 
 vim.keymap.set("i", "<esc>", "<esc><cmd>write<CR>", {silent = true, noremap = true, desc = "Autowrite"})
+-- Smart delete lines; don't clutter clipboard with whitespace lines
+vim.keymap.set("n", "dd", function()
+    local line = vim.api.nvim_get_current_line()
+    if line:match("^%s*$") then
+        return '"_dd'
+    end
+    return "dd"
+end, { expr = true, silent = true })
 
 -- For snippets
-vim.keymap.del("s", "<")
-vim.keymap.del("s", ">")
 
 vim.keymap.set("i", "<up>", "")
 vim.keymap.set("i", "<down>", "")
@@ -63,7 +68,7 @@ Toggle_diagnostics = function()
   end
 end
 
-vim.api.nvim_set_keymap( 'n', '<Leader>ud', '<Cmd>lua Toggle_diagnostics()<CR>', {silent=true, noremap=true})
+vim.api.nvim_set_keymap( 'n', '<Leader>ud', '<Cmd>lua Toggle_diagnostics()<CR>', {silent=true, noremap=true, desc = "Toggle diagnostic"})
 
 
 

@@ -1,10 +1,10 @@
 vim.keymap.set("n", "<leader>f", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
 vim.keymap.set("n", "<leader>/", "<cmd>Telescope live_grep<cr>", { desc = "Find grep in current working directory" })
 vim.keymap.set("n", "<leader>;", "<cmd>Telescope resume<cr>", { desc = 'Find open last picker' })
--- vim.keymap.set("n", "<leader>fb", "<cmd>Telescope builtin<cr>", { desc = "Find builtin Telescope" })
-vim.keymap.set("n", "<leader>un", "<cmd>Telescope notify<cr>", { desc = "Find notification" })
+vim.keymap.set("n", "<leader>ab", "<cmd>Telescope builtin<cr>", { desc = "Find builtin Telescope" })
+vim.keymap.set("n", "<leader>an", "<cmd>Telescope notify<cr>", { desc = "Find notification" })
 vim.keymap.set("n", "<leader>o", "<cmd>Telescope oldfiles<cr>", { desc = 'Find old files' })
-vim.keymap.set("n", "<leader>t", "<cmd>Telescope help_tags<cr>", { desc = 'Find help tags' })
+vim.keymap.set("n", "<leader>ah", "<cmd>Telescope help_tags<cr>", { desc = 'Find help tags' })
 vim.keymap.set("n", "<leader>g", "<cmd>lua require('telescope.builtin').git_status({path_display = {'tail'}})<cr>",
   { desc = 'Find edited / added files' })
 vim.keymap.set("n", "<leader>b",

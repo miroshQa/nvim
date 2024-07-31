@@ -1,11 +1,11 @@
-vim.keymap.set("n", "<leader>n", "<cmd>Neogit<CR>", {desc = "Open git (Neogit)"})
+vim.keymap.set("n", "<leader>v", "<cmd>Neogit<CR>", {desc = "Open vsc (git)"})
 
 return {
   "NeogitOrg/neogit",
   cmd = "Neogit",
   dependencies = {
-    "nvim-lua/plenary.nvim",         -- required
-    "sindrets/diffview.nvim",        -- optional - Diff integration
+    "nvim-lua/plenary.nvim",
+    "sindrets/diffview.nvim",
     "nvim-telescope/telescope.nvim",
   },
   config = true
