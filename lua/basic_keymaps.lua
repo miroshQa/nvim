@@ -9,7 +9,7 @@ vim.keymap.set("n", "]t", "<cmd>tabn<CR>", {desc = "Go to next tab"})
 -- vim.keymap.set("n", "<S-tab>", "<cmd>tabp<CR>")
 vim.keymap.set("n", "<leader>Q", "<cmd>quitall!<CR>", {desc = "Force quit all (Be careful!)"})
 vim.keymap.set("n", "<leader>q", "<cmd>quit<CR>", {desc = "Close current buffer"})
-vim.keymap.set("n", "<leader>r", ":%s##g<left><left>", {desc = "Replace in current buffer"})
+-- vim.keymap.set("n", "<leader>r", ":%s##g<left><left>", {desc = "Replace in current buffer"})
 
 -- Improved motions
 vim.keymap.set("v", "J", ":m '>+1<CR>gv==kgvo<esc>=kgvo", { desc = "move highlighted text down", silent = true }) -- Use gs / gS in Normal mode instead (And can even much more!)

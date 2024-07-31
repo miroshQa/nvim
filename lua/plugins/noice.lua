@@ -57,6 +57,14 @@ return {
           },
           opts = { skip = true },
         },
+        {
+          filter = {
+            event = "msg_show",
+            kind = "",
+            find = "Local option values",
+          },
+          opts = { skip = true },
+        },
       },
     })
   end,

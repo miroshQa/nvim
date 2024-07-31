@@ -1,10 +1,11 @@
 vim.keymap.set("n", "<leader>f", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
 vim.keymap.set("n", "<leader>/", "<cmd>Telescope live_grep<cr>", { desc = "Find grep in current working directory" })
 vim.keymap.set("n", "<leader>;", "<cmd>Telescope resume<cr>", { desc = 'Find open last picker' })
-vim.keymap.set("n", "<leader>ab", "<cmd>Telescope builtin<cr>", { desc = "Find builtin Telescope" })
-vim.keymap.set("n", "<leader>an", "<cmd>Telescope notify<cr>", { desc = "Find notification" })
+vim.keymap.set("n", "<leader>sb", "<cmd>Telescope builtin<cr>", { desc = "Find builtin Telescope" })
+vim.keymap.set("n", "<leader>sn", "<cmd>Telescope notify<cr>", { desc = "Find notification" })
 vim.keymap.set("n", "<leader>o", "<cmd>Telescope oldfiles<cr>", { desc = 'Find old files' })
-vim.keymap.set("n", "<leader>ah", "<cmd>Telescope help_tags<cr>", { desc = 'Find help tags' })
+vim.keymap.set("n", "<leader>sh", "<cmd>Telescope help_tags<cr>", { desc = 'Find help tags' })
+vim.keymap.set("n", "<leader>c", "<cmd>Telescope git_bcommits<cr>", { desc = 'Find commits for current buffer' })
 vim.keymap.set("n", "<leader>g", function() require('telescope.builtin').git_status({path_display = {'tail'}}) end,
   { desc = 'Find edited / added files' })
 vim.keymap.set("n", "<leader>b",
@@ -35,6 +36,9 @@ return {
             i = {
               ["<esc>"] = require("telescope.actions").close,
               ["<C-s>"] = require("telescope.actions").select_horizontal,
+              -- Works really great when you want find and replace in project
+              -- https://www.reddit.com/r/neovim/comments/121otka/a_nice_telescope_surprise/
+              ["<C-r>"] = require("telescope.actions").to_fuzzy_refine,
             },
           },
 

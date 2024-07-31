@@ -5,6 +5,8 @@ return {
   config = function()
     require("nvim-surround").setup({
       keymaps = {
+        insert = "<NOP>",
+        insert_line = "<NOP>",
         normal = "yz",
         normal_cur = "yzz",
         normal_line = "yZ",

@@ -1,12 +1,25 @@
--- vim.keymap.set("n", "<leader>c", "<cmd>OverseerRun<CR>", {desc = "Run overseer"})
+local restart_last = function()
+  local overseer = require("overseer")
+  local tasks = overseer.list_tasks({ recent_first = true })
+  if vim.tbl_isempty(tasks) then
+    vim.cmd("OverseerRun")
+  else
+    overseer.run_action(tasks[1], "restart")
+  end
+end
+
+
+vim.keymap.set("n", "<leader>r", restart_last, { desc = "Run last task" })
+vim.keymap.set("n", "<leader>R", "<cmd>OverseerRun<CR>", { desc = "Pick and run task" })
 
 
 return {
   'stevearc/overseer.nvim',
-  cmd = "OverseerRun",
+  cmd = { "OverseerRun", "OverseerRestartLast" },
   config = function()
     require("overseer").setup({
       templates = { "builtin", "user.cpp_build" },
+      ---@diagnostic disable-next-line: assign-type-mismatch
       strategy = {
         "toggleterm",
         -- load your default shell before starting the task
@@ -31,10 +44,9 @@ return {
     -- https://vi.stackexchange.com/questions/17816/solved-ish-neovim-dont-close-terminal-buffer-after-process-exit
     vim.cmd([[
         augroup TerminalSettings
-            autocmd!
-            autocmd TermClose * setlocal | lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, false, true), "n", true)
+        autocmd!
+        autocmd TermClose * setlocal | lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, false, true), "n", true)
         augroup END
-    ]])
-
+        ]])
   end,
 }

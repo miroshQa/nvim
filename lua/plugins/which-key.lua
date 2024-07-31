@@ -13,7 +13,7 @@ return  {
       { "<leader>d", group = "Debug" },
       { "<leader>Q", hidden = true },
       { "<leader>q", hidden = true },
-      { "<leader>a", group = "Telescope (Another pickers)"},
+      { "<leader>s", group = "Search"},
       -- { "<leader>o", group = "Overseer", icon = {icon = "", color = "orange"} },
       { "<leader>h", group = "Hunks", icon = {icon = "", color = "red"} }, -- NvimWebDeviconsHiTest
       { "<leader>l", group = "Lsp", icon = {icon = "", color = "blue"} },
