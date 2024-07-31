@@ -50,9 +50,7 @@ return {
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
       callback = function(event)
-
         local client = vim.lsp.get_client_by_id(event.data.client_id)
-        require("workspace-diagnostics").populate_workspace_diagnostics(client, event.buf)
 
         if client and client.server_capabilities.documentHighlightProvider then
           vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
@@ -104,6 +102,11 @@ return {
       function(server_name)
         local server = servers[server_name] or {}
         server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+
+        server.on_attach = function(client, bufnr)
+          require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
+        end
+
         require("lspconfig")[server_name].setup(server)
       end,
     })
