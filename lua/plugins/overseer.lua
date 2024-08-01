@@ -25,7 +25,7 @@ return {
         -- load your default shell before starting the task
         use_shell = true,
         -- overwrite the default toggleterm "direction" parameter
-        direction = "tab",
+        direction = "float",
         -- have the toggleterm window close and delete the terminal buffer
         -- automatically after the task exits
         close_on_exit = false,

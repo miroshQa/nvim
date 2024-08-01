@@ -6,7 +6,7 @@ return  {
     require('which-key').setup({
       preset = "helix",
       notify = false,
-      triggers = { "<auto>", mode = "niotc" },
+      triggers = { "<auto>", mode = "nioc" },
       sort = {"desc"},
     })
 
