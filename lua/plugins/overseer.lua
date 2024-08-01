@@ -18,7 +18,7 @@ return {
   cmd = { "OverseerRun", "OverseerRestartLast" },
   config = function()
     require("overseer").setup({
-      templates = { "builtin", "user.cpp_build" },
+      templates = { "builtin"},
       ---@diagnostic disable-next-line: assign-type-mismatch
       strategy = {
         "toggleterm",
