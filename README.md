@@ -74,6 +74,20 @@
 ### Keymaps 🚀
 ![Colorscheme](./assets/keymaps.png)
 
+### Do you want to check it out?) ⭐
+#### Linux
+1. Clone repo
+```shell
+git clone https://github.com/miron2363/nvim.git ~/.config/nvim-m
+```
+2. Add in you bashrc line below [(wtf?)](https://michaeluloth.com/neovim-switch-configs/)
+```shell
+alias vm='NVIM_APPNAME=nvim-m nvim'
+```
+3. Launch using "vm"
+```shell
+vm
+```
 
 ### Favourite keymaps ✨
 1. ga (Goto prev buffer)
