@@ -65,20 +65,15 @@
 </table>
 
 
-### Colorscheme 😻 
-![Colorscheme](./assets/colorscheme.png)
-
-### File Tree 🌳
-![FileTree](./assets/file-tree.png) 
-
-### Toggle Term 👽
-![ToggleTerm](./assets/toggle-term.png) 
-
-### Telescope 🔭
-![Telescope](./assets/telescope.png) 
-
 ### Dashboard 😎
 ![Dashboard](./assets/dashboard.png) 
+
+### Editor 😻 
+![Colorscheme](./assets/editor.png)
+
+### Keymaps 🚀
+![Colorscheme](./assets/keymaps.png)
+
 
 ### Favourite keymaps ✨
 1. ga (Goto prev buffer)
