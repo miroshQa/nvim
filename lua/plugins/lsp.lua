@@ -72,26 +72,26 @@ return {
 
     -- 1. help lsp-config 2. /config<CR> (To watch info about server configuration)
     local servers = {
-      emmet_language_server = { },
-      cssls = {},
-      lemminx = {},
-      marksman = {},
+      -- emmet_language_server = { },
+      -- cssls = {},
+      -- lemminx = {},
+      -- marksman = {},
       lua_ls = {},
-      jsonls = {},
-      pyright = {},
-      tsserver = {},
-      rust_analyzer = {
-        cargo = {
-          allFeatures = true,
-        }
-      },
-      clangd = {},
-      csharp_ls = {},
-      yamlls = {},
-      gopls = {},
-      bashls = {},
-      taplo = {},
-      neocmake = {},
+      -- jsonls = {},
+      -- pyright = {},
+      -- tsserver = {},
+      -- rust_analyzer = {
+      --   cargo = {
+      --     allFeatures = true,
+      --   }
+      -- },
+      -- clangd = {},
+      -- csharp_ls = {},
+      -- yamlls = {},
+      -- gopls = {},
+      -- bashls = {},
+      -- taplo = {},
+      -- neocmake = {},
     }
 
     -- I think I can delete this line below but I am not sure ... https://www.reddit.com/r/neovim/comments/15i2no9/with_lazynvim_when_you_load_a_dependency_do_you/
@@ -112,3 +112,4 @@ return {
     })
   end,
 }
+

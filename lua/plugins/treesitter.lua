@@ -13,21 +13,9 @@ return {
     require("nvim-treesitter.configs").setup({
       auto_install = true,
       ensure_installed = {
-        "cpp",
-        "python",
-        "json",
-        "bash",
-        "c",
-        "html",
         "lua",
-        "markdown",
         "vim",
         "vimdoc",
-        "go",
-        "c_sharp",
-        "javascript",
-        "typescript",
-        "yaml",
       },
       highlight = {
         enable = true,
