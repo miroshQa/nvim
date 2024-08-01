@@ -58,12 +58,6 @@ return {
           ["ui-select"] = {
             require("telescope.themes").get_dropdown(),
           },
-          emoji = {
-            action = function(emoji)
-              -- insert emoji when picked
-              vim.api.nvim_put({ emoji.value }, 'c', false, true)
-            end,
-          }
         },
       })
 
