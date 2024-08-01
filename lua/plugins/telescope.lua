@@ -42,6 +42,10 @@ return {
               ["<C-s>"] = require("telescope.actions").select_horizontal,
               -- Works really great when you want find and replace in project
               -- https://www.reddit.com/r/neovim/comments/121otka/a_nice_telescope_surprise/
+              -- https://github.com/nvim-telescope/telescope-fzf-native.nvim
+              -- Use telescope-fzf native syntax 
+              -- You don't even need spectre or other replace tools! 
+              -- 1. Find interesting word. 2. Filter files through fuzy refine. 3. Send to quicklist. 4. cdo, or manually
               ["<C-r>"] = require("telescope.actions").to_fuzzy_refine,
             },
           },
