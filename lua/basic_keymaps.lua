@@ -43,6 +43,9 @@ end, { expr = true, silent = true })
 vim.keymap.set("i", "<up>", "")
 vim.keymap.set("i", "<down>", "")
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.del("s", "<")
+vim.keymap.del("s", ">")
+
 
 -- Fix kitty Enter key
 vim.api.nvim_set_keymap("n", "<kEnter>", "<Enter>", {})

@@ -3,7 +3,7 @@ vim.keymap.set("n", "<leader>/", "<cmd>Telescope live_grep<cr>", { desc = "Searc
 vim.keymap.set("n", "<leader>;", "<cmd>Telescope resume<cr>", { desc = 'Search resume' })
 vim.keymap.set("n", "<leader>sp", "<cmd>Telescope builtin<cr>", { desc = "Search telescope picker" })
 vim.keymap.set("n", "<leader>sb", "<cmd>Telescope git_branches<cr>", { desc = "Search branches" })
-vim.keymap.set("n", "<leader>se", "<cmd>Telescope emoji<cr>", { desc = "Search emoji" })
+vim.keymap.set("n", "<leader>se", function () require("telescope.builtin").symbols({sources = {"emoji", "gitmoji"}}) end, { desc = "Search emoji" })
 vim.keymap.set("n", "<leader>sn", "<cmd>Telescope notify<cr>", { desc = "Search notification" })
 vim.keymap.set("n", "<leader>so", "<cmd>Telescope oldfiles<cr>", { desc = 'Search old files' })
 vim.keymap.set("n", "<leader>sh", "<cmd>Telescope help_tags<cr>", { desc = 'Search help tags' })
@@ -21,7 +21,7 @@ return {
   branch = "0.1.x",
   dependencies = {
     "nvim-lua/plenary.nvim",
-    "xiyaowong/telescope-emoji.nvim",
+    "nvim-telescope/telescope-symbols.nvim",
     { "nvim-telescope/telescope-ui-select.nvim" },
     { "nvim-tree/nvim-web-devicons" },
     {
@@ -66,7 +66,7 @@ return {
           }
         },
       })
-    require("telescope").load_extension("emoji")
+
     local is_success, _ = pcall(require('telescope').load_extension, 'fzf')
     if not is_success then
       print("Telescope native is not installed")

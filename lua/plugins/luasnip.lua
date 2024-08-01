@@ -1,6 +1,3 @@
-vim.keymap.del("s", "<")
-vim.keymap.del("s", ">")
-
 return {
 	"L3MON4D3/LuaSnip",
 	config = function()
