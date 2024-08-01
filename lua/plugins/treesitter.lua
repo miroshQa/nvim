@@ -16,6 +16,8 @@ return {
         "lua",
         "vim",
         "vimdoc",
+        "markdown",
+        "html",
       },
       highlight = {
         enable = true,

@@ -88,6 +88,7 @@ alias vm='NVIM_APPNAME=nvim-m nvim'
 ```shell
 vm
 ```
+4. Open Mason and install the LSP servers you need. Do :checkhealth if something goes wrong
 
 ### Favourite keymaps ✨
 1. ga (Goto prev buffer)
