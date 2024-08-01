@@ -74,8 +74,7 @@ return {
           ["<C-u>"] = cmp.mapping.scroll_docs(-4),
           ["<C-d>"] = cmp.mapping.scroll_docs(4),
           ["<CR>"] = cmp.mapping.confirm({select = true}),
-          -- https://github.com/hrsh7th/nvim-cmp/issues/1507
-          ["<C-g>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c"}),
+          ["<C-g>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c"}), -- Open completion. C-f will lead to default keymaps conflict
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp"},

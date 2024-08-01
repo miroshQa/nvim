@@ -4,6 +4,7 @@ return  {
   version = "3.x.x",
   config = function()
     require('which-key').setup({
+      preset = "helix",
       notify = false,
       triggers = { "<auto>", mode = "niotc" },
       sort = {"desc"},
