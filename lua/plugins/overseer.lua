@@ -9,8 +9,8 @@ local restart_last = function()
 end
 
 
-vim.keymap.set("n", "<leader>r", restart_last, { desc = "Run last task" })
-vim.keymap.set("n", "<leader>R", "<cmd>OverseerRun<CR>", { desc = "Pick and run task" })
+vim.keymap.set("n", "<leader>r", restart_last, { desc = "Run last task in terminal" })
+vim.keymap.set("n", "<leader>R", "<cmd>OverseerRun<CR>", { desc = "Pick and run task in terminal" })
 
 
 return {
