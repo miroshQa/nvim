@@ -76,6 +76,7 @@
 
 ### Do you want to check it out?) ⭐
 #### Linux
+0. First of all you need to make sure that you have all external [dependencies](https://github.com/nvim-lua/kickstart.nvim) listed here
 1. Clone repo
 ```shell
 git clone https://github.com/miron2363/nvim.git ~/.config/nvim-m
@@ -89,7 +90,6 @@ alias vm='NVIM_APPNAME=nvim-m nvim'
 vm
 ```
 4. Open Mason and install the LSP servers you need. Do :checkhealth if something goes wrong
-
 ### Favourite keymaps ✨
 1. ga (Goto prev buffer)
 2. g; (Goto last change in buffer)
