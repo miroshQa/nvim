@@ -37,7 +37,6 @@ vim.opt.updatetime = 250
 -- Search
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.inccommand = "split"
 vim.opt.hlsearch = true
 
 -- Folds
