@@ -1,5 +1,6 @@
 local M = {}
 
+--- Smart delete lines; don't clutter clipboard with whitespace lines
 function M.smart_line_delete()
     local line = vim.api.nvim_get_current_line()
     if line:match("^%s*$") then
