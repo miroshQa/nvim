@@ -1,6 +1,3 @@
-vim.keymap.set("n", "}", "<cmd>TSTextobjectSwapNext @parameter.inner<CR>", {desc = "Swap next text object"})
-vim.keymap.set("n", "{", "<cmd>TSTextobjectSwapPrev @parameter.inner<CR>", {desc = "Swap prev text object"})
-
 return {
   "nvim-treesitter/nvim-treesitter",
   event = {"BufReadPost", "BufNewFile"},
@@ -43,21 +40,12 @@ return {
             ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
             ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
           },
-          selection_modes = {
-            ['@parameter.outer'] = 'v', -- charwise
-            ['@function.outer'] = 'V', -- linewise
-            ['@class.outer'] = '<c-v>', -- blockwise
-          },
           include_surrounding_whitespace = false,
         },
-      },
-      swap = {
-        enable = true,
-        swap_next = {
-          ["L"] = "@parameter.inner",
-        },
-        swap_previous = {
-          ["H"] = "@parameter.inner",
+        swap = {
+          enable = true,
+          swap_next = { ["}"] = "@parameter.inner", },
+          swap_previous = { ["{"] = "@parameter.inner", },
         },
       },
     }

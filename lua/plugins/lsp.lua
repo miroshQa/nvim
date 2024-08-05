@@ -14,7 +14,7 @@ vim.keymap.set("n", "K", vim.lsp.buf.hover, {desc = "Hover Signature / Documenta
 
 local adequate_symbols = {"function", "class", "struct", "method", "enum", "interface", "type"}
 vim.keymap.set("n", "<leader>w", "<cmd>Telescope diagnostics<cr>", { desc = "Search Workspace Diagnostics" })
-vim.keymap.set("n", "<leader>sl", function() require('telescope.builtin').lsp_document_symbols({symbols = adequate_symbols}) end, { desc = 'Search lsp symbols'})
+vim.keymap.set("n", "<leader>ss", function() require('telescope.builtin').lsp_document_symbols({symbols = adequate_symbols}) end, { desc = 'Search symbols'})
 vim.keymap.set("n", "<leader>S", function() require('telescope.builtin').lsp_workspace_symbols({symbols = adequate_symbols}) end, { desc = "Search symbols in workspace" })
 vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, {desc = "Lsp actions"})
 vim.keymap.set("n", "<leader>ua", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, {desc = "Toggle inlay_hints (Annotations)"})
@@ -22,10 +22,9 @@ vim.keymap.set("n", "<leader>um", "<cmd>Mason<CR>", {desc = "Open Mason"})
 vim.keymap.set("n", "<leader>li", "<cmd>LspInfo<CR>", {desc = "Info"})
 vim.keymap.set("n", "<leader>lr", "<cmd>LspRestart<CR>", {desc = "Restart"})
 
-
 return {
   "neovim/nvim-lspconfig",
-  -- https://www.reddit.com/r/neovim/comments/1bk4sru/when_to_use_the_bufreadpost_event/
+-- https://www.reddit.com/r/neovim/comments/1bk4sru/when_to_use_the_bufreadpost_event/
   event = {"BufReadPost", "BufNewFile"},
   -- We should use dependencies only when we haven't separate file for this plugin. So I delete "mason.nvim" for this reason
   -- UPDATE: I think I was wrong XD. We should specify dependencies anyway. Because if we delete plugins/mason.lua for some reason It will break this file
