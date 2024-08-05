@@ -15,7 +15,7 @@ return {
       },
     },
     label = {
-      uppercase = false,
+      uppercase = true,
     },
     jump = {
       inclusive = false,

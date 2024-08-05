@@ -8,15 +8,22 @@ local restart_last = function()
   end
 end
 
-
+vim.keymap.set("n", "<leader>tl", "<cmd>OverseerLoadBundle<CR>", {desc = "Load task what were saved to disk"})
+vim.keymap.set("n", "<leader>tp", "<cmd>OverseerRun<CR>", {desc = "Pick and run task"})
+vim.keymap.set("n", "<leader>ts", "<cmd>OverseerSaveBundle<CR>", {desc = "Serialize and save the current task to disk"})
+vim.keymap.set("n", "<leader>ta", "<cmd>OverseerTaskAction<CR>", {desc = "Task action"})
 vim.keymap.set("n", "<leader>r", restart_last, { desc = "Run last task in terminal" })
-vim.keymap.set("n", "<leader>R", "<cmd>OverseerRun<CR>", { desc = "Pick and run task in terminal" })
 
 
 return {
   'stevearc/overseer.nvim',
-  cmd = { "OverseerRun", "OverseerRestartLast" },
+  cmd = { "OverseerRun", "OverseerRestartLast", "OverseerLoadBundle" },
   config = function()
+
+    require("cmp").setup.filetype("OverseerForm", {
+      enabled = false,
+    })
+
     require("overseer").setup({
       templates = { "builtin"},
       ---@diagnostic disable-next-line: assign-type-mismatch

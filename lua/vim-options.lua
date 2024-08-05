@@ -23,7 +23,7 @@ vim.opt.smartindent = true
 
 -- UI
 vim.opt.showcmd = false
-vim.opt.wrap = false
+vim.opt.wrap = true
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.showtabline = 0
@@ -43,5 +43,6 @@ vim.opt.hlsearch = true
 -- https://www.jackfranklin.co.uk/blog/code-folding-in-vim-neovim/
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldnestmax = 3
 vim.opt.foldtext = ""
 vim.opt.foldlevelstart = 99

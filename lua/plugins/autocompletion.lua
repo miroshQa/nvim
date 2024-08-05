@@ -74,8 +74,15 @@ return {
           ["<C-u>"] = cmp.mapping.scroll_docs(-4),
           ["<C-d>"] = cmp.mapping.scroll_docs(4),
           ["<CR>"] = cmp.mapping.confirm({select = true}),
-          ["<C-g>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c"}), -- Open completion. C-f will lead to default keymaps conflict
+          ["<C-g>"] = function()
+            if cmp.visible() then
+              cmp.abort()
+            else
+              cmp.complete()
+            end
+          end,
         }),
+
         sources = cmp.config.sources({
           { name = "nvim_lsp"},
           { name = 'luasnip' },
