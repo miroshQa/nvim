@@ -29,6 +29,8 @@ return {
           ["/"] = false,
           ["<space>"] = false,
           ["?"] = false,
+          ["w"] = false,
+          ["e"] = false,
           ["f"] = false,
           ["t"] = false,
           ["D"] = false,
