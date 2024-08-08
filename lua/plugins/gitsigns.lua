@@ -7,7 +7,7 @@ return {
     vim.keymap.set("n", "<leader>hu", "<cmd>Gitsigns undo_stage_hunk<CR>", {desc = "Undo stage hunk"})
     vim.keymap.set("n", "<leader>hU", "<cmd>Gitsigns reset_buffer_index<CR>", {desc = "Undo buffer staging"})
     vim.keymap.set("n", "H", "<cmd>Gitsigns preview_hunk<CR>", {desc = "Preview hunk"})
-    vim.keymap.set("n", "L", "<cmd>Gitsigns blame_line<CR>", {desc = "Line blame"})
+    vim.keymap.set("n", "L", function () require("gitsigns").blame_line({full = true}) end , {desc = "Line blame"})
     vim.keymap.set("n", "<leader>hs", "<cmd>Gitsigns stage_hunk<CR>", {desc = "Stage hunk"})
     vim.keymap.set("n", "<leader>hS", "<cmd>Gitsigns stage_buffer<CR>", {desc = "Stage Buffer"})
 
