@@ -20,17 +20,13 @@ return {
   cmd = { "OverseerRun", "OverseerRestartLast", "OverseerLoadBundle" },
   config = function()
 
-    require("cmp").setup.filetype("OverseerForm", {
-      enabled = false,
-    })
-
     require("overseer").setup({
       templates = { "builtin"},
       ---@diagnostic disable-next-line: assign-type-mismatch
       strategy = {
         "toggleterm",
         -- load your default shell before starting the task
-        use_shell = true,
+        use_shell = false,
         -- overwrite the default toggleterm "direction" parameter
         direction = "float",
         -- have the toggleterm window close and delete the terminal buffer
