@@ -62,6 +62,11 @@
         <td>CTRL + →</td>
         <td></td>
     </tr>
+    <tr>
+        <td>CTRL + ;</td>
+        <td>Enter</td>
+        <td>More convinient autocompletion</td>
+    </tr>
 </table>
 
 
@@ -93,4 +98,3 @@ vm
 ### Favourite keymaps ✨
 1. ga (Goto prev buffer)
 2. g; (Goto last change in buffer)
-

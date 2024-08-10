@@ -9,6 +9,12 @@ vim.keymap.set("n", "[t", "<cmd>tabp<CR>", {desc = "Go to prev tab"})
 vim.keymap.set("n", "]t", "<cmd>tabn<CR>", {desc = "Go to next tab"})
 vim.keymap.set("n", "<leader>Q", "<cmd>quitall!<CR>", {desc = "Force quit all (Be careful!)"})
 
+vim.keymap.set("i", "<up>", "")
+vim.keymap.set("i", "<down>", "")
+vim.keymap.set("i", "<left>", "")
+vim.keymap.set("i", "<right>", "")
+
+
 -- Improved motions (Normal mode)
 vim.keymap.set({"n", "x", "o"}, 'gh', '^')
 vim.keymap.set({"n", "x", "o"}, 'gl', '$')
