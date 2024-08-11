@@ -6,7 +6,7 @@ vim.keymap.set("n", "<leader>sb", "<cmd>Telescope git_branches<cr>", { desc = "S
 vim.keymap.set("n", "<leader>se", function () require("telescope.builtin").symbols({sources = {"emoji", "gitmoji"}}) end, { desc = "Search emoji" })
 vim.keymap.set("n", "<leader>sn", "<cmd>Telescope notify<cr>", { desc = "Search notification" })
 vim.keymap.set("n", "<leader>.", "<cmd>Telescope oldfiles<cr>", { desc = 'Search old files ("." for repeat)' })
-vim.keymap.set("n", "<leader>sh", "<cmd>Telescope help_tags<cr>", { desc = 'Search help tags' })
+vim.keymap.set("n", "<leader>k", "<cmd>Telescope help_tags<cr>", { desc = 'Search help tags' })
 vim.keymap.set("n", "<leader>c", "<cmd>Telescope git_bcommits<cr>", { desc = 'Search commits for current buffer' })
 vim.keymap.set("n", "<leader>C", "<cmd>Telescope git_commits<cr>", { desc = 'Search commits' })
 vim.keymap.set("n", "<leader>g", function() require('telescope.builtin').git_status({path_display = {'tail'}}) end,

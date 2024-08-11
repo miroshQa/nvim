@@ -1,4 +1,5 @@
-local user_functions = require("user_functions")
+local better_search_and_replace = require("user-functions.search_and_replace")
+local terminal_utils = require("user-functions.terminal")
 
 -- Windows / Tabs Navigation
 vim.keymap.set('n', '<left>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
@@ -8,6 +9,7 @@ vim.keymap.set('n', '<up>', '<C-w><C-k>', { desc = 'Move focus to the upper wind
 vim.keymap.set("n", "[t", "<cmd>tabp<CR>", {desc = "Go to prev tab"})
 vim.keymap.set("n", "]t", "<cmd>tabn<CR>", {desc = "Go to next tab"})
 vim.keymap.set("n", "<leader>Q", "<cmd>quitall!<CR>", {desc = "Force quit all (Be careful!)"})
+vim.keymap.set("n", "<leader>q", "<cmd>quit<CR>", {desc = "Close current buffer"})
 
 vim.keymap.set("i", "<up>", "")
 vim.keymap.set("i", "<down>", "")
@@ -23,7 +25,7 @@ vim.keymap.set("n", "+", "ggVG=<C-o>", {desc = "Autoindent all text in buffer"})
 vim.keymap.set("x", "R", ":s##<left>", {desc = "Start replacement in selected range"})
 vim.keymap.set("c", "<down>", "<C-n>")
 vim.keymap.set("c", "<up>", "<C-p>")
-vim.keymap.set("n", "dd", user_functions.smart_line_delete, { expr = true, silent = true })
+vim.keymap.set("n", "dd", better_search_and_replace.smart_line_delete, { expr = true, silent = true })
 vim.keymap.set("n", "<C-p>", "<cmd>cprev<CR>", {desc = "Go to prev quickfixlist entry"})
 vim.keymap.set("n", "<C-n>", "<cmd>cnext<CR>", {desc = "Go to next quickfixlist entry"})
 vim.keymap.set("n", "zo", "za", {desc = "Toggle fold"})
@@ -34,8 +36,8 @@ vim.keymap.set("n", "zr", "zR", {desc = "Open all folds"})
 -- Improved motions (Visual mode)
 vim.keymap.set("v", "J", ":m '>+1<CR>gv==kgvo<esc>=kgvo", { desc = "Move highlighted text down", silent = true })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv==jgvo<esc>=jgvo", { desc = "Move highlighted text up", silent = true })
-vim.keymap.set("v", "<C-r>", function() user_functions.changeSelected(false) end, {desc = "Replace selected in whole buffer"})
-vim.keymap.set("v", "<C-right>", function() user_functions.changeSelected(true) end, {desc = "Edit selected in whole buffer (Use Ctrl + f to edit prompt and Ctrl + c to return)"})
+vim.keymap.set("v", "<C-r>", function() better_search_and_replace.changeSelected(false) end, {desc = "Replace selected in whole buffer"})
+vim.keymap.set("v", "<C-right>", function() better_search_and_replace.changeSelected(true) end, {desc = "Edit selected in whole buffer (Use Ctrl + f to edit prompt and Ctrl + c to return)"})
 vim.keymap.set('v', '<', '<gv', { noremap = true })
 vim.keymap.set('v', '>', '>gv', { noremap = true })
 
@@ -44,4 +46,8 @@ vim.keymap.del("s", "<", {desc = "Without this you can't use '<' char in Select 
 vim.keymap.del("s", ">")
 vim.keymap.set({"n", "i", "c"}, "<kEnter>", "<Enter>", {desc = "Fix for Kitty Enter key"})
 -- UI
-vim.keymap.set( 'n', '<Leader>ud', user_functions.toggle_diagnostic, {silent=true, noremap=true, desc = "Toggle LSP diagnostic"})
+vim.keymap.set( 'n', '<Leader>ud', better_search_and_replace.toggle_diagnostic, {silent=true, noremap=true, desc = "Toggle LSP diagnostic"})
+
+-- Builtin Terminal Mappings
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Go to normal mode' })
+vim.keymap.set({"n", "t"}, "<C-t>", terminal_utils.ToggleTerminal, {desc = "Toggle terminal"})
