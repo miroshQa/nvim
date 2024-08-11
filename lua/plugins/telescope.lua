@@ -1,6 +1,7 @@
 vim.keymap.set("n", "<leader>f", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
 vim.keymap.set("n", "<leader>/", "<cmd>Telescope live_grep<cr>", { desc = "Search in current working directory" })
 vim.keymap.set("n", "<leader>;", "<cmd>Telescope resume<cr>", { desc = 'Search resume' })
+vim.keymap.set("n", "<leader>:", "<cmd>Telescope command_history<cr>", { desc = 'Search command history' })
 vim.keymap.set("n", "<leader>sp", "<cmd>Telescope builtin<cr>", { desc = "Search telescope picker" })
 vim.keymap.set("n", "<leader>sb", "<cmd>Telescope git_branches<cr>", { desc = "Search branches" })
 vim.keymap.set("n", "<leader>se", function () require("telescope.builtin").symbols({sources = {"emoji", "gitmoji"}}) end, { desc = "Search emoji" })

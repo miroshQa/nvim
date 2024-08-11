@@ -50,4 +50,4 @@ vim.keymap.set( 'n', '<Leader>ud', better_search_and_replace.toggle_diagnostic, 
 
 -- Builtin Terminal Mappings
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Go to normal mode' })
-vim.keymap.set({"n", "t"}, "<C-t>", terminal_utils.ToggleTerminal, {desc = "Toggle terminal"})
+vim.keymap.set({"n", "t"}, "<C-t>", terminal_utils.toggle_last_openned_terminal, {desc = "Toggle terminal"})
