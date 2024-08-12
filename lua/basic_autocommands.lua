@@ -10,6 +10,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+vim.cmd([[autocmd FileType * set formatoptions-=ro]]) -- disable new line autocomment
 
 
 vim.api.nvim_create_autocmd({"InsertLeave", "TextChanged" }, {
