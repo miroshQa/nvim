@@ -1,7 +1,9 @@
 local all_tasks = {
+  -- THIS TABLE CONTAINS TASK CONTAINERS AS BELOW. THIS ALSO ENTRY FOR TELESCOPE
   -- {
-  --   task_source_path = "",
-  --   task = {}
+  --   path = "",
+  --   task = {},
+  --   lnum = 0,
   -- },
 }
 
@@ -14,14 +16,15 @@ end
 local function load_tasks_from_file(file_path)
   local is_success, module_with_tasks = pcall(dofile, file_path)
   if not is_success then
-    print("Can't load file from " .. file_path)
+    vim.notify("Can't load file from " .. file_path, vim.log.levels.ERROR)
     return
   end
 
   for _, task in ipairs(module_with_tasks.tasks) do
     local task_container = {
-      task_source_path = file_path,
+      path = file_path,
       task = task,
+      -- lnum = 2,
     }
     table.insert(all_tasks, task_container)
   end
@@ -64,12 +67,16 @@ local tasks_picker = function(opts)
         vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, lines)
       end
     },
+    -- previewer = conf.file_previewer({}),
     sorter = conf.generic_sorter(opts),
     attach_mappings = function(prompt_bufnr, map)
+      -- MAPPINGS TO ADD
+      -- 1. Ctrl + r (Reuse task as template - creates task duplicate in local tasks directory (cwd/.tasks)
+      -- 2. Ctrl + e (Edit task. Open  file for selected task and allows to edit. Reload this file on buffer leaving and sent notification "Reloaded") 
       actions.select_default:replace(function()
         actions.close(prompt_bufnr)
         local selection = action_state.get_selected_entry()
-        run_task(selection.value)
+        run_task(selection.value.task)
       end)
       return true
     end,
