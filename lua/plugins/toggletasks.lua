@@ -1,11 +1,12 @@
-vim.keymap.set("n", "<leader>r", "<cmd>Telescope toggletasks spawn<CR>", {desc = "Run task in terminal"})
+vim.keymap.set("n", "<leader>tr", "<cmd>Telescope toggletasks spawn<CR>", {desc = "Run task in terminal"})
 vim.keymap.set("n", "<leader>ts", "<cmd>Telescope toggletasks select<CR>", {desc = "Select running task"})
 vim.keymap.set("n", "<leader>te", "<cmd>Telescope toggletasks edit<CR>", {desc = "Edit tasks"})
 
 
 return {
   'jedrzejboczar/toggletasks.nvim',
-  dependencies = {
+  cmd = "Telescope toggletasks",
+dependencies = {
     'nvim-lua/plenary.nvim',
     'akinsho/toggleterm.nvim',
     'nvim-telescope/telescope.nvim',

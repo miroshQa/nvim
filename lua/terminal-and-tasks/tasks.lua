@@ -1,3 +1,8 @@
+require("terminal-and-tasks.terminal")
+
+local M = {}
+
+
 local all_tasks = {
   -- THIS TABLE CONTAINS TASK CONTAINERS AS BELOW.
   -- {
@@ -12,7 +17,7 @@ local last_runned_task = nil
 local function run_task(task)
   last_runned_task = task
   vim.cmd("tabnew")
-  local job_id = vim.fn.termopen(vim.o.shell)
+  local job_id = vim.fn.termopen(vim.o.shell, {detach = true})
   vim.fn.feedkeys("i", "n")
   vim.fn.chansend(job_id, {task.cmd, ""})
 end
@@ -62,7 +67,7 @@ local conf = require("telescope.config").values
 local previewers = require "telescope.previewers"
 local actions = require "telescope.actions"
 local action_state = require "telescope.actions.state"
-local tasks_picker = function(opts)
+M.tasks_picker = function(opts)
   opts = opts or {}
   pickers.new(opts, {
     prompt_title = "SelectTaskToLaunch",
@@ -91,4 +96,4 @@ local tasks_picker = function(opts)
   }):find()
 end
 
-vim.keymap.set("n", "<leader>r", tasks_picker, {desc = "Test telescope extesion"})
+return M
