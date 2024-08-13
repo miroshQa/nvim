@@ -51,6 +51,7 @@ vim.api.nvim_create_autocmd("TabClosed", {
 vim.api.nvim_create_autocmd("TermOpen", {
   callback = function()
     vim.api.nvim_command("set ft=terminal | startinsert")
+    vim.api.nvim_command("setlocal nonumber norelativenumber signcolumn=no")
     openned_terminal_buffer_number = vim.fn.bufnr('%')
     openned_terminal_window_id = vim.fn.win_getid()
   end,

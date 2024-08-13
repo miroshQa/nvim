@@ -7,10 +7,14 @@ local all_tasks = {
   -- },
 }
 
+local last_runned_task = nil
+
 local function run_task(task)
+  last_runned_task = task
   vim.cmd("tabnew")
-  local job_id = vim.fn.termopen("bash")
-  vim.fn.chansend(job_id, task.cmd)
+  local job_id = vim.fn.termopen(vim.o.shell)
+  vim.fn.feedkeys("i", "n")
+  vim.fn.chansend(job_id, {task.cmd, ""})
 end
 
 local function get_task_begin_line_number_by_name(file_with_tasks, name)
