@@ -20,12 +20,16 @@ local function run_task(task)
   vim.fn.chansend(job_id, task.cmd)
 end
 
+local function draw_task(task)
+
+end
 
 vim.keymap.set("n", "<leader>m", function() run_task(tasks[1]) end, {desc = "Tasks test"})
 
 local pickers = require "telescope.pickers"
 local finders = require "telescope.finders"
 local conf = require("telescope.config").values
+local previewers = require "telescope.previewers"
 local actions = require "telescope.actions"
 local action_state = require "telescope.actions.state"
 
@@ -43,6 +47,13 @@ local example = function(opts)
         }
       end
     }),
+    previewer = previewers.new_buffer_previewer {
+      title = "TaskPreview",
+      define_preview = function (self, entry, status)
+        require('telescope.previewers.utils').highlighter(self.state.bufnr, "lua")
+        vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, {entry.value.name , "local value =  2"})
+      end
+    },
     sorter = conf.generic_sorter(opts),
     attach_mappings = function(prompt_bufnr, map)
       actions.select_default:replace(function()
