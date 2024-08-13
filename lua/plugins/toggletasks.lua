@@ -5,7 +5,6 @@ vim.keymap.set("n", "<leader>te", "<cmd>Telescope toggletasks edit<CR>", {desc =
 
 return {
   'jedrzejboczar/toggletasks.nvim',
-  cmd = "Telescope toggletasks",
   dependencies = {
     'nvim-lua/plenary.nvim',
     'akinsho/toggleterm.nvim',
@@ -20,8 +19,14 @@ return {
           cmd = "ls",
         },
         {
-          name = "CPP: Build and run mWeather",
-          cmd = "cd build ; cmake .. ; make ; cd ../bin ; ./mWeather"
+          name = "CPP: Build mWeather",
+          cmd = "cd build ; cmake .. ; make",
+          tags = {"mWeather"}
+        },
+        {
+          name = "Run mWeather",
+          cmd = "cd bin ; ./mWeather",
+          tags = {"mWeather"}
         }
       },
       telescope = {
