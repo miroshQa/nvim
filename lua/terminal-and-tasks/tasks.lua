@@ -4,13 +4,26 @@ local M = {}
 
 
 local all_tasks = {
-  -- THIS TABLE CONTAINS TASK CONTAINERS AS BELOW.
-  -- {
+  -- THIS TABLE CONTAINS TASK CONTAINERS AS BELOW. (WAS CHANGED !!! Now it is not array! Needs to update!)
+  -- [name] = { -- this 'name' key duplucate task name
   --   task_source_file_path = "",
   --   task_begin_line_number = 0,
-  --   task = {},
+  --   task = {
+  --        name = "",
+  --        env = "",
+  --        cmd = "",
+  --        cwd = "",
+  --      },
   -- },
 }
+
+local function collect_tasks()
+  local tasks = {}
+  for _, value in pairs(all_tasks) do
+    table.insert(tasks, value)
+  end
+  return tasks
+end
 
 local last_runned_task = nil
 
@@ -49,7 +62,7 @@ local function load_tasks_from_file(file_path)
       task = task,
       task_begin_line_number = get_task_begin_line_number_by_name(file_with_tasks, task.name)
     }
-    table.insert(all_tasks, task_container)
+    all_tasks[task.name] = task_container
   end
 end
 
@@ -72,7 +85,7 @@ M.tasks_picker = function(opts)
   pickers.new(opts, {
     prompt_title = "SelectTaskToLaunch",
     finder = finders.new_table({
-      results = all_tasks,
+      results = collect_tasks(),
       entry_maker = function(entry)
         return {
           value = entry,
@@ -95,5 +108,6 @@ M.tasks_picker = function(opts)
     end,
   }):find()
 end
+
 
 return M
