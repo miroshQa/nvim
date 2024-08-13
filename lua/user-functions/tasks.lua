@@ -1,5 +1,5 @@
 local all_tasks = {
-  -- THIS TABLE CONTAINS TASK CONTAINERS AS BELOW. THIS ALSO ENTRY FOR TELESCOPE
+  -- THIS TABLE CONTAINS TASK CONTAINERS AS BELOW.
   -- {
   --   task_source_file_path = "",
   --   task_begin_line_number = 0,
@@ -13,8 +13,16 @@ local function run_task(task)
   vim.fn.chansend(job_id, task.cmd)
 end
 
-local function get_task_begin_line_number_by_name(file_path, name)
-  return 5
+local function get_task_begin_line_number_by_name(file_with_tasks, name)
+  file_with_tasks:seek("set", 0)
+  local lines = file_with_tasks:lines()
+  local line_number = 1
+  for line in lines do
+    if string.find(line, name) then
+      return line_number
+    end
+    line_number = line_number + 1
+  end
 end
 
 local function load_tasks_from_file(file_path)
@@ -24,11 +32,13 @@ local function load_tasks_from_file(file_path)
     return
   end
 
+  local file_with_tasks = io.open(file_path, "r")
+
   for _, task in ipairs(module_with_tasks.tasks) do
     local task_container = {
       task_source_file_path = file_path,
       task = task,
-      task_begin_line_number = get_task_begin_line_number_by_name(file_path, task.name)
+      task_begin_line_number = get_task_begin_line_number_by_name(file_with_tasks, task.name)
     }
     table.insert(all_tasks, task_container)
   end
