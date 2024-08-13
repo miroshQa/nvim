@@ -3,7 +3,7 @@ require("terminal-and-tasks.terminal")
 local M = {}
 
 
-local all_tasks = {
+all_tasks = {
   -- THIS TABLE CONTAINS TASK CONTAINERS AS BELOW. (WAS CHANGED !!! Now it is not array! Needs to update!)
   -- [name] = { -- this 'name' key duplucate task name
   --   task_source_file_path = "",
@@ -16,6 +16,15 @@ local all_tasks = {
   --      },
   -- },
 }
+
+-- We have to launch this function before load tasks frome file again (before resoruce)
+local function clear_tasks_loaded_from_file(file_path)
+  for key, value in pairs(all_tasks) do
+    if value.task_source_file_path == file_path then
+      all_tasks[key] = nil
+    end
+  end
+end
 
 local function collect_tasks()
   local tasks = {}
