@@ -1,9 +1,9 @@
 local all_tasks = {
   -- THIS TABLE CONTAINS TASK CONTAINERS AS BELOW. THIS ALSO ENTRY FOR TELESCOPE
   -- {
-  --   path = "",
+  --   task_source_file_path = "",
+  --   task_begin_line_number = 0,
   --   task = {},
-  --   lnum = 0,
   -- },
 }
 
@@ -11,6 +11,10 @@ local function run_task(task)
   vim.cmd("tabnew")
   local job_id = vim.fn.termopen("bash")
   vim.fn.chansend(job_id, task.cmd)
+end
+
+local function get_task_begin_line_number_by_name(file_path, name)
+  return 5
 end
 
 local function load_tasks_from_file(file_path)
@@ -22,9 +26,9 @@ local function load_tasks_from_file(file_path)
 
   for _, task in ipairs(module_with_tasks.tasks) do
     local task_container = {
-      path = file_path,
+      task_source_file_path = file_path,
       task = task,
-      -- lnum = 2,
+      task_begin_line_number = get_task_begin_line_number_by_name(file_path, task.name)
     }
     table.insert(all_tasks, task_container)
   end
@@ -55,24 +59,14 @@ local tasks_picker = function(opts)
           value = entry,
           display = entry.task.name,
           ordinal = entry.task.name,
+          filename = entry.task_source_file_path,
+          lnum = entry.task_begin_line_number,
         }
       end
     }),
-    previewer = previewers.new_buffer_previewer {
-      title = "TaskPreview",
-      define_preview = function (self, entry, status)
-        require('telescope.previewers.utils').highlighter(self.state.bufnr, "lua")
-        local task_container = entry.value
-        local lines = vim.split(vim.inspect(task_container.task), "\n")
-        vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, lines)
-      end
-    },
-    -- previewer = conf.file_previewer({}),
+    previewer = conf.grep_previewer({}),
     sorter = conf.generic_sorter(opts),
     attach_mappings = function(prompt_bufnr, map)
-      -- MAPPINGS TO ADD
-      -- 1. Ctrl + r (Reuse task as template - creates task duplicate in local tasks directory (cwd/.tasks)
-      -- 2. Ctrl + e (Edit task. Open  file for selected task and allows to edit. Reload this file on buffer leaving and sent notification "Reloaded") 
       actions.select_default:replace(function()
         actions.close(prompt_bufnr)
         local selection = action_state.get_selected_entry()
@@ -83,4 +77,4 @@ local tasks_picker = function(opts)
   }):find()
 end
 
-vim.keymap.set("n", "<leader>st", tasks_picker, {desc = "Test telescope extesion"})
+vim.keymap.set("n", "<leader>r", tasks_picker, {desc = "Test telescope extesion"})
