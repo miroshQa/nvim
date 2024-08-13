@@ -41,6 +41,7 @@ return {
             i = {
               ["<esc>"] = require("telescope.actions").close,
               ["<C-s>"] = require("telescope.actions").select_horizontal,
+              ['<c-x>'] = require('telescope.actions').delete_buffer,
               -- Works really great when you want find and replace in project
               -- https://www.reddit.com/r/neovim/comments/121otka/a_nice_telescope_surprise/
               -- https://github.com/nvim-telescope/telescope-fzf-native.nvim
