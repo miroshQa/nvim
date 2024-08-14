@@ -3,7 +3,7 @@ vim.keymap.set("n", "<leader>/", "<cmd>Telescope live_grep<cr>", { desc = "Searc
 vim.keymap.set("n", "<leader>;", "<cmd>Telescope resume<cr>", { desc = 'Search resume' })
 vim.keymap.set("n", "<leader>:", "<cmd>Telescope command_history<cr>", { desc = 'Search command history' })
 vim.keymap.set("n", "<leader>sp", "<cmd>Telescope builtin<cr>", { desc = "Search telescope picker" })
-vim.keymap.set("n", "<leader>sb", "<cmd>Telescope git_branches<cr>", { desc = "Search branches" })
+vim.keymap.set("n", "<leader>b", "<cmd>Telescope git_branches<cr>", { desc = "Search branches" })
 vim.keymap.set("n", "<leader>se", function () require("telescope.builtin").symbols({sources = {"emoji", "gitmoji"}}) end, { desc = "Search emoji" })
 vim.keymap.set("n", "<leader>sn", "<cmd>Telescope notify<cr>", { desc = "Search notification" })
 vim.keymap.set("n", "<leader>.", "<cmd>Telescope oldfiles<cr>", { desc = 'Search old files ("." for repeat)' })
@@ -48,7 +48,6 @@ return {
               -- Use telescope-fzf native syntax 
               -- You don't even need spectre or other replace tools! 
               -- 1. Find interesting word. 2. Filter files through fuzy refine. 3. Send to quicklist. 4. cdo, or manually
-              ["<C-r>"] = require("telescope.actions").to_fuzzy_refine,
             },
           },
 
