@@ -15,6 +15,10 @@ M.tasks = {
     some_func = function()
       print("Hello world")
     end
+  },
+  {
+    name = "Cargo run",
+    cmd = "cargo run",
   }
 }
 

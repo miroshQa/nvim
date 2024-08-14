@@ -38,7 +38,6 @@ local function run_task(task)
   last_runned_task = task
   vim.cmd("tabnew")
   local job_id = vim.fn.termopen(vim.o.shell, {detach = true})
-  vim.fn.feedkeys("i", "n")
   vim.fn.chansend(job_id, {task.cmd, ""})
 end
 
@@ -84,6 +83,7 @@ end
 
 init_tasks()
 
+
 vim.api.nvim_create_autocmd("BufLeave", {
   pattern = {vim.fn.stdpath("config") .. "/lua/tasks/*.lua"},
   group = vim.api.nvim_create_augroup("TasksReloader", {clear = true}),
@@ -127,10 +127,19 @@ M.tasks_picker = function(opts)
         actions.close(prompt_bufnr)
         local selection = action_state.get_selected_entry()
         run_task(selection.value.task)
+        vim.fn.feedkeys("i", "n")
       end)
       return true
     end,
   }):find()
+end
+
+M.run_last_runned_task = function(opts)
+  if last_runned_task then
+    run_task(last_runned_task)
+  else
+    M.tasks_picker(opts)
+  end
 end
 
 
