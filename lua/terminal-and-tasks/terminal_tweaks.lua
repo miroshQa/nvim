@@ -3,6 +3,7 @@ require("terminal-and-tasks.tabs_tweaks")
 
 local M = {}
 
+local terminals_enters_stack = {}
 -- It stores the followings items
 -- local terminals_enters_stack = {
 --   {
@@ -11,7 +12,6 @@ local M = {}
 --   }
 -- }
 
-local terminals_enters_stack = {}
 
 local function keep_pop_until_find_existing_terminal()
   while #terminals_enters_stack ~= 0 do

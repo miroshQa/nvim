@@ -1,4 +1,4 @@
-require("terminal-and-tasks.terminal")
+require("terminal-and-tasks.terminal_tweaks")
 
 local M = {}
 local all_tasks = {
@@ -76,7 +76,7 @@ local function init_tasks()
   for _, file_path in ipairs(vim.api.nvim_get_runtime_file("lua/tasks/*.lua", true)) do
     local is_success = load_tasks_from_file(file_path)
     if not is_success then
-      vim.notify("Can't load file from " .. file_path, vim.log.levels.ERROR)
+      vim.print("Can't load file from " .. file_path, vim.log.levels.ERROR)
     end
   end
 end
@@ -91,9 +91,9 @@ vim.api.nvim_create_autocmd("BufLeave", {
     clear_tasks_loaded_from_file(data.match)
     local is_success = load_tasks_from_file(data.match)
     if not is_success then
-      vim.notify(string.format("Unable to reload tasks for the file.\n%s", data.match), vim.log.levels.ERROR, {title = "TaskReloader"})
+      vim.print(string.format("Unable to reload tasks. FILE: %s", data.match))
     else
-      vim.notify(string.format("File was successfully reloaded.\n%s", data.match), vim.log.levels.INFO, {title = "TasksReloader"})
+      vim.print(string.format("Reload success. FILE: %s", data.match))
     end
   end
 })

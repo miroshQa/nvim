@@ -49,7 +49,7 @@ vim.keymap.set( 'n', '<Leader>ud', better_search_and_replace.toggle_diagnostic, 
 
 -- Builtin Terminal Mappings
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Go to normal mode' })
-vim.keymap.set({"n", "t"}, "<C-t>", function() require("terminal-and-tasks.terminal").toggle_last_openned_terminal() end, {desc = "Toggle terminal"})
+vim.keymap.set({"n", "t"}, "<C-t>", function() require("terminal-and-tasks.terminal_tweaks").toggle_last_openned_terminal() end, {desc = "Toggle terminal"})
 vim.keymap.set("n", "<leader>r", function() require("terminal-and-tasks.tasks").tasks_picker() end, {desc = "Test telescope extesion"})
 vim.keymap.set("n", "<leader>R", function() require("terminal-and-tasks.tasks").run_last_runned_task() end, {desc = "Test telescope extesion"})
 
