@@ -1,11 +1,9 @@
 require("terminal-and-tasks.terminal")
 
 local M = {}
-
-
-all_tasks = {
-  -- THIS TABLE CONTAINS TASK CONTAINERS AS BELOW. (WAS CHANGED !!! Now it is not array! Needs to update!)
-  -- [name] = { -- this 'name' key duplucate task name
+local all_tasks = {
+  -- THIS TABLE CONTAINS TASK CONTAINERS AS BELOW
+  -- [name] = { -- this 'name' key duplucate the task name
   --   task_source_file_path = "",
   --   task_begin_line_number = 0,
   --   task = {
@@ -16,6 +14,7 @@ all_tasks = {
   --      },
   -- },
 }
+local last_runned_task = nil
 
 -- We have to launch this function before load tasks frome file again (before resoruce)
 local function clear_tasks_loaded_from_file(file_path)
@@ -34,7 +33,6 @@ local function collect_tasks()
   return tasks
 end
 
-local last_runned_task = nil
 
 local function run_task(task)
   last_runned_task = task
@@ -44,7 +42,7 @@ local function run_task(task)
   vim.fn.chansend(job_id, {task.cmd, ""})
 end
 
-local function get_task_begin_line_number_by_name(file_with_tasks, name)
+local function find_task_begin_line_number_by_name(file_with_tasks, name)
   file_with_tasks:seek("set", 0)
   local lines = file_with_tasks:lines()
   local line_number = 1
@@ -59,8 +57,7 @@ end
 local function load_tasks_from_file(file_path)
   local is_success, module_with_tasks = pcall(dofile, file_path)
   if not is_success then
-    vim.notify("Can't load file from " .. file_path, vim.log.levels.ERROR)
-    return
+    return false
   end
 
   local file_with_tasks = io.open(file_path, "r")
@@ -69,19 +66,37 @@ local function load_tasks_from_file(file_path)
     local task_container = {
       task_source_file_path = file_path,
       task = task,
-      task_begin_line_number = get_task_begin_line_number_by_name(file_with_tasks, task.name)
+      task_begin_line_number = find_task_begin_line_number_by_name(file_with_tasks, task.name)
     }
     all_tasks[task.name] = task_container
   end
+  return true
 end
 
 local function init_tasks()
   for _, file_path in ipairs(vim.api.nvim_get_runtime_file("lua/tasks/*.lua", true)) do
-    load_tasks_from_file(file_path)
+    local is_success = load_tasks_from_file(file_path)
+    if not is_success then
+      vim.notify("Can't load file from " .. file_path, vim.log.levels.ERROR)
+    end
   end
 end
 
 init_tasks()
+
+vim.api.nvim_create_autocmd("BufLeave", {
+  pattern = {vim.fn.stdpath("config") .. "/lua/tasks/*.lua"},
+  group = vim.api.nvim_create_augroup("TasksReloader", {clear = true}),
+  callback = function(data)
+    clear_tasks_loaded_from_file(data.match)
+    local is_success = load_tasks_from_file(data.match)
+    if not is_success then
+      vim.notify(string.format("Unable to reload tasks for the file.\n%s", data.match), vim.log.levels.ERROR, {title = "TaskReloader"})
+    else
+      vim.notify(string.format("File was successfully reloaded.\n%s", data.match), vim.log.levels.INFO, {title = "TasksReloader"})
+    end
+  end
+})
 
 local pickers = require "telescope.pickers"
 local finders = require "telescope.finders"
