@@ -1,58 +1,60 @@
+require("terminal-and-tasks.tabs_tweaks")
+
+
 local M = {}
 
-local openned_terminal_buffer_number = nil
-local openned_terminal_window_id = nil
-local last_entered_tab = nil
-local tabs_list_before_close = {}
+-- It stores the followings items
+-- local terminals_enters_stack = {
+--   {
+--     openned_terminal_buffer_number = nil,
+--     openned_terminal_window_id = nil,
+--   }
+-- }
 
+local terminals_enters_stack = {}
 
-function M.toggle_last_openned_terminal()
-  if openned_terminal_window_id == vim.fn.win_getid() then
-    vim.api.nvim_command("hide")
-    return
-  end
-
-  if vim.fn.win_gotoid(openned_terminal_window_id) == 1  then
-    return
-  end
-
-  if vim.fn.bufexists(openned_terminal_buffer_number) == 0 then
-    vim.api.nvim_command("tabnew | terminal")
-    openned_terminal_window_id = vim.fn.win_getid()
-    openned_terminal_buffer_number = vim.fn.bufnr('%')
-    -- vim.api.nvim_buf_set_name(0, "MainTerminalBuffer")
-  else
-    vim.api.nvim_command("tab sb " .. openned_terminal_buffer_number)
-    openned_terminal_window_id = vim.fn.win_getid()
+local function keep_pop_until_find_existing_terminal()
+  while #terminals_enters_stack ~= 0 do
+    local enter_info = terminals_enters_stack[#terminals_enters_stack]
+    if vim.fn.bufexists(enter_info.openned_terminal_buffer_number) == 1 then
+      return
+    end
+    table.remove(terminals_enters_stack)
   end
 end
 
--- Default behaviour when close tab:
--- If tab is on the last position then go to the previous tab.
--- If tab is not on the last position the go to the next tab
--- Desired behaviour: Go always to the previous tab
-vim.api.nvim_create_autocmd("TabEnter", {
-  callback = function()
-    last_entered_tab = vim.api.nvim_win_get_tabpage(0)
-    tabs_list_before_close = vim.api.nvim_list_tabpages()
-  end
-})
+local function register_terminal_enter()
+  local openned_terminal_info = {
+    openned_terminal_window_id = vim.fn.win_getid(),
+    openned_terminal_buffer_number = vim.fn.bufnr('%')
+  }
+  table.insert(terminals_enters_stack, openned_terminal_info)
+end
 
-vim.api.nvim_create_autocmd("TabClosed", {
-  callback = function()
-    if tabs_list_before_close[#tabs_list_before_close] ~= last_entered_tab then
-      vim.cmd("tabp")
-    end
-  end
-})
 
+function M.toggle_last_openned_terminal()
+  keep_pop_until_find_existing_terminal()
+  if #terminals_enters_stack == 0 then
+    vim.api.nvim_command("tabnew | terminal")
+    return
+  end
+
+  local last_enter_info = terminals_enters_stack[#terminals_enters_stack]
+  if last_enter_info.openned_terminal_window_id == vim.fn.win_getid() then
+    vim.api.nvim_command("hide")
+  elseif vim.api.nvim_win_is_valid(last_enter_info.openned_terminal_window_id)  then
+    vim.fn.win_gotoid(last_enter_info.openned_terminal_window_id)
+  else
+    vim.api.nvim_command("tab sb " .. last_enter_info.openned_terminal_buffer_number)
+    last_enter_info.openned_terminal_window_id = vim.fn.win_getid()
+  end
+end
 
 vim.api.nvim_create_autocmd("TermOpen", {
   callback = function()
     vim.api.nvim_command("set ft=terminal | startinsert")
     vim.api.nvim_command("setlocal nonumber norelativenumber signcolumn=no")
-    openned_terminal_buffer_number = vim.fn.bufnr('%')
-    openned_terminal_window_id = vim.fn.win_getid()
+    register_terminal_enter()
   end,
 })
 
@@ -60,10 +62,12 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
   callback = function()
     if vim.bo.filetype == "terminal" then
       vim.api.nvim_command("startinsert")
-      openned_terminal_buffer_number = vim.fn.bufnr('%')
-      openned_terminal_window_id = vim.fn.win_getid()
+      register_terminal_enter()
     end
   end,
 })
+
+
+
 
 return M
