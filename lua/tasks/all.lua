@@ -13,8 +13,12 @@ M.tasks = {
     env = "",
     cwd = "",
     some_func = function()
-      print("Hello world")
+      print("You can even add you own functions because tasks configures in lua!")
     end
+  },
+  {
+    name = "Run main.cpp",
+    cmd = "g++ main.cpp -o main ; ./main"
   },
   {
     name = "Cargo run",
