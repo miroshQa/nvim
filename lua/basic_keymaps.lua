@@ -49,6 +49,3 @@ vim.keymap.set( 'n', '<Leader>ud', better_search_and_replace.toggle_diagnostic, 
 
 -- Builtin Terminal Mappings
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Go to normal mode' })
-
--- for developing
-vim.keymap.set("n", "<leader>a", "<cmd>source %<CR>", {desc = "resource"})
