@@ -12,7 +12,7 @@ M.tasks = {
   },
   {
     name = "Run main.cpp",
-    cmd = "g++ main.cpp -o main ; ./main"
+    cmd = {"g++ main.cpp -o main ; ./main"}
   },
 }
 

@@ -13,13 +13,13 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 vim.cmd([[autocmd FileType * set formatoptions-=ro]]) -- disable new line autocomment
 
 
-vim.api.nvim_create_autocmd({"InsertLeave", "TextChanged" }, {
-  callback = function()
-    if #vim.api.nvim_buf_get_name(0) ~= 0 and vim.bo.buflisted then
-      vim.cmd "silent update"
-    end
-  end,
-})
+-- vim.api.nvim_create_autocmd({"InsertLeave", "TextChanged" }, {
+--   callback = function()
+--     if #vim.api.nvim_buf_get_name(0) ~= 0 and vim.bo.buflisted then
+--       vim.cmd "silent update"
+--     end
+--   end,
+-- })
 
 -- https://github.com/Alexis12119/nvim-config/blob/main/lua/core/autocommands.lua
 local autocmd = vim.api.nvim_create_autocmd

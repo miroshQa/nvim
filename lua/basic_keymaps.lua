@@ -33,8 +33,6 @@ vim.keymap.set("n", "zm", "zM", {desc = "Close all folds"})
 vim.keymap.set("n", "zr", "zR", {desc = "Open all folds"})
 
 -- Improved motions (Visual mode)
-vim.keymap.set("v", "J", ":m '>+1<CR>gv==kgvo<esc>=kgvo", { desc = "Move highlighted text down", silent = true })
-vim.keymap.set("v", "K", ":m '<-2<CR>gv==jgvo<esc>=jgvo", { desc = "Move highlighted text up", silent = true })
 vim.keymap.set("v", "<C-r>", function() better_search_and_replace.changeSelected(false) end, {desc = "Replace selected in whole buffer"})
 vim.keymap.set("v", "<C-right>", function() better_search_and_replace.changeSelected(true) end, {desc = "Edit selected in whole buffer (Use Ctrl + f to edit prompt and Ctrl + c to return)"})
 vim.keymap.set('v', '<', '<gv', { noremap = true })
@@ -46,6 +44,3 @@ vim.keymap.del("s", ">")
 vim.keymap.set({"n", "i", "c"}, "<kEnter>", "<Enter>", {desc = "Fix for Kitty Enter key"})
 -- UI
 vim.keymap.set( 'n', '<Leader>ud', better_search_and_replace.toggle_diagnostic, {silent=true, noremap=true, desc = "Toggle LSP diagnostic"})
-
--- Builtin Terminal Mappings
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Go to normal mode' })
