@@ -3,7 +3,7 @@ local M = {}
 M.tasks = {
   {
     name = "Cargo run",
-    cmd = "cargo run",
+    cmd = {"cargo run"},
   }
 }
 

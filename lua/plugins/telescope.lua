@@ -1,6 +1,6 @@
 vim.keymap.set("n", "<leader>f", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
 vim.keymap.set("n", "<leader>/", "<cmd>Telescope live_grep<cr>", { desc = "Search in current working directory" })
-vim.keymap.set("n", "<leader>;", "<cmd>Telescope resume<cr>", { desc = 'Search resume' })
+vim.keymap.set("n", "<leader>'", "<cmd>Telescope resume<cr>", { desc = 'Search resume' })
 vim.keymap.set("n", "<leader>:", "<cmd>Telescope command_history<cr>", { desc = 'Search command history' })
 vim.keymap.set("n", "<leader>sp", "<cmd>Telescope builtin<cr>", { desc = "Search telescope picker" })
 vim.keymap.set("n", "<leader>b", "<cmd>Telescope git_branches<cr>", { desc = "Search branches" })
@@ -40,12 +40,7 @@ return {
               ["<esc>"] = require("telescope.actions").close,
               ["<C-s>"] = require("telescope.actions").select_horizontal,
               ['<c-x>'] = require('telescope.actions').delete_buffer,
-              -- Works really great when you want find and replace in project
-              -- https://www.reddit.com/r/neovim/comments/121otka/a_nice_telescope_surprise/
-              -- https://github.com/nvim-telescope/telescope-fzf-native.nvim
-              -- Use telescope-fzf native syntax 
-              -- You don't even need spectre or other replace tools! 
-              -- 1. Find interesting word. 2. Filter files through fuzy refine. 3. Send to quicklist. 4. cdo, or manually
+              ["<c-f>"] = require("telescope.actions").complete_tag,
             },
           },
 

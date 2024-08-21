@@ -15,7 +15,7 @@ vim.keymap.set("n", "K", vim.lsp.buf.hover, {desc = "Hover Signature / Documenta
 local adequate_symbols = {"function", "class", "struct", "method", "enum", "interface", "type"}
 vim.keymap.set("n", "<leader>w", "<cmd>Telescope diagnostics<cr>", { desc = "Search Workspace Diagnostics" })
 vim.keymap.set("n", "<leader>j", function() require('telescope.builtin').lsp_document_symbols({symbols = adequate_symbols, symbol_width = 50}) end, { desc = 'Jump to symbol (search)'})
-vim.keymap.set("n", "<leader>J", function() require('telescope.builtin').lsp_workspace_symbols({symbols = adequate_symbols, symbol_width = 40, fname_width = 15}) end, { desc = "Jump to symbol in workspace (search)" })
+vim.keymap.set("n", "<leader>J", function() require('telescope.builtin').lsp_dynamic_workspace_symbols({symbols = adequate_symbols, symbol_width = 40, fname_width = 15}) end, { desc = "Jump to symbol in workspace (search)" })
 vim.keymap.set("n", "<leader>ua", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, {desc = "Toggle inlay_hints (Annotations)"})
 vim.keymap.set("n", "<leader>um", "<cmd>Mason<CR>", {desc = "Open Mason"})
 vim.keymap.set("n", "<leader>li", "<cmd>LspInfo<CR>", {desc = "Info"})
