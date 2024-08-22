@@ -43,7 +43,7 @@ return {
     config = function()
       local cmp = require("cmp")
       local luasnip = require("luasnip")
-
+      local compare = require('cmp.config.compare')
       cmp.setup({
         formatting = {
           format = function(entry, vim_item)
@@ -80,6 +80,19 @@ return {
             end
           end,
         }),
+        sorting = {
+          priority_weight = 2,
+          comparators = {
+            compare.offset,
+            compare.exact,
+            compare.score,
+            compare.kind,
+            compare.recently_used,
+            compare.locality,
+            compare.length,
+            compare.order,
+          },
+        },
 
         sources = cmp.config.sources({
           { name = "nvim_lsp"},
@@ -97,5 +110,3 @@ return {
     end,
   },
 }
-
-
