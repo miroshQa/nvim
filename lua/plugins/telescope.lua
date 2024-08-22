@@ -12,8 +12,6 @@ vim.keymap.set("n", "<leader>c", "<cmd>Telescope git_bcommits<cr>", { desc = 'Se
 vim.keymap.set("n", "<leader>C", "<cmd>Telescope git_commits<cr>", { desc = 'Search commits' })
 vim.keymap.set("n", "<leader>g", function() require('telescope.builtin').git_status({path_display = {'tail'}}) end,
   { desc = 'Search edited / added files' })
-vim.keymap.set("n", "<leader><leader>", function() require('telescope.builtin').buffers{path_display = {'tail'}, sort_mru = true, ignore_current_buffer = true} end, { desc = "Search open buffers" })
-
 return {
   "nvim-telescope/telescope.nvim",
   cmd = "Telescope",
