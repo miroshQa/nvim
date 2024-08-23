@@ -20,6 +20,7 @@ M.tasks = {
   {
     name = "Build and run current cpp / c file",
     builder = function()
+      vim.cmd("wa")
       local cur_file = vim.fn.expand("%")
       -- See :help fnamemodify, :help filename-modifiers
       local bin_name = vim.fn.fnamemodify(cur_file, ":t:r")
