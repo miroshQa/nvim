@@ -41,6 +41,6 @@ vim.keymap.set('v', '>', '>gv', { noremap = true })
 -- Some fixes
 vim.keymap.del("s", "<", {desc = "Without this you can't use '<' char in Select mode when use snippets"})
 vim.keymap.del("s", ">")
-vim.keymap.set({"n", "i", "c"}, "<kEnter>", "<Enter>", {desc = "Fix for Kitty Enter key"})
+-- vim.keymap.set({"n", "i", "c"}, "<kEnter>", "<Enter>", {desc = "Fix for Kitty Enter key"})
 -- UI
 vim.keymap.set( 'n', '<Leader>ud', better_search_and_replace.toggle_diagnostic, {silent=true, noremap=true, desc = "Toggle LSP diagnostic"})

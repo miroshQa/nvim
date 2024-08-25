@@ -44,7 +44,7 @@ return {
     config = function()
       local cmp = require("cmp")
       local luasnip = require("luasnip")
-      cmp.setup({
+      local opts = {
         formatting = {
           format = function(entry, vim_item)
             vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
@@ -92,7 +92,10 @@ return {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
         },
-      })
+      }
+
+      opts.window.completion.scrolloff = 5
+      cmp.setup(opts)
     end,
   },
 }
