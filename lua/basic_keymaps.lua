@@ -10,12 +10,6 @@ vim.keymap.set("n", "]t", "<cmd>tabn<CR>", {desc = "Go to next tab"})
 vim.keymap.set("n", "<leader>Q", "<cmd>quitall!<CR>", {desc = "Force quit all (Be careful!)"})
 vim.keymap.set("n", "<leader>q", "<cmd>quit<CR>", {desc = "Close current buffer"})
 
-vim.keymap.set("i", "<up>", "")
-vim.keymap.set("i", "<down>", "")
-vim.keymap.set("i", "<left>", "")
-vim.keymap.set("i", "<right>", "")
-
-
 -- Improved motions (Normal mode)
 vim.keymap.set({"n", "x", "o"}, 'gh', '^')
 vim.keymap.set({"n", "x", "o"}, 'gl', '$')
@@ -31,6 +25,7 @@ vim.keymap.set("n", "zo", "za", {desc = "Toggle fold"})
 vim.keymap.set("n", "zO", "zA", {desc = "Toggle all folds under cursor"})
 vim.keymap.set("n", "zm", "zM", {desc = "Close all folds"})
 vim.keymap.set("n", "zr", "zR", {desc = "Open all folds"})
+vim.keymap.set("n", "p", "p=`]") -- https://vim.fandom.com/wiki/Format_pasted_text_automatically
 
 -- Improved motions (Visual mode)
 vim.keymap.set("v", "<C-r>", function() better_search_and_replace.changeSelected(false) end, {desc = "Replace selected in whole buffer"})

@@ -1,7 +1,7 @@
 vim.keymap.set({"x", "o", "n"}, "s", function() require('flash').jump() end, {desc = "Flash"})
 vim.keymap.set({"x", "o", "n"}, "<C-s>", function() require('flash').treesitter() end, {desc = "Flash treesitter"})
 vim.keymap.set("o", "r", function() require('flash').remote() end, {desc = "Flash remote yank / delete"})
--- use xi / cl instead in Normal mode. Use c or S instead s in Visual mode
+-- use cl instead in Normal mode. Use c instead s in Visual mode
 
 return {
   "folke/flash.nvim",
