@@ -1,3 +1,5 @@
+
+
 vim.keymap.set("n", "<leader>f", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
 -- Tutorial is here: https://github.com/nvim-telescope/telescope-live-grep-args.nvim
 vim.keymap.set("n", "<leader>/", function() require('telescope').extensions.live_grep_args.live_grep_args() end)
@@ -33,11 +35,19 @@ return {
     require("telescope").setup(
       {
         defaults = {
+          -- https://www.reddit.com/r/neovim/comments/r22xrq/in_nvimtelescope_how_can_i_make_the_display_a/
+          -- Uncomment if you want vertical layout (It is probably more convenient on small screens)
+          -- layout_strategy = "vertical",
+          -- layout_config = {
+          --   height = 0.95,
+          --   -- mirror = true,
+          --   preview_cutoff = 0,
+          --   prompt_position = "bottom",
+          -- },
           file_ignore_patterns = { "%.png", "%.pdf", },
-
           mappings = {
             i = {
-              ["<esc>"] = require("telescope.actions").close,
+              -- ["<esc>"] = require("telescope.actions").close,
               ["<C-s>"] = require("telescope.actions").select_horizontal,
               ['<c-x>'] = require('telescope.actions').delete_buffer,
               ["<c-f>"] = require("telescope.actions").complete_tag,
