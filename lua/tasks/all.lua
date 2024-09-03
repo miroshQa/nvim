@@ -3,19 +3,16 @@ local M = {}
 
 M.tasks = {
   {
-    name = "dotnet run",
-    is_available = function() return vim.bo.filetype == "cs" end,
+    name = "run application",
     builder = function()
-      vim.cmd("wa")
-      return {cmd = {"dotnet run"}}
-    end
+      return {cmd = {"node backend/app.js"}}
+    end,
   },
   {
-    name = "run node",
-    builder = function() 
-      vim.cmd("wa")
-      local file = vim.fn.fnamemodify(vim.fn.expand("%"), ":t")
-      return {cmd = {string.format("node %s", file)}}
+    name = "Dotnet run",
+    builder = function()
+      vim.cmd("wall");
+      return {cmd = {"dotnet run"}}
     end,
   }
 }

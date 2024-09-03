@@ -92,6 +92,9 @@ return {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
         },
+        matching = {
+          disallow_partial_fuzzy_matching = false,
+        },
       }
 
       opts.window.completion.scrolloff = 5
