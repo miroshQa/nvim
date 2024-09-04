@@ -51,6 +51,7 @@ return {
               ["<C-s>"] = require("telescope.actions").select_horizontal,
               ['<c-x>'] = require('telescope.actions').delete_buffer,
               ["<c-f>"] = require("telescope.actions").complete_tag,
+              ["<kEnter>"] = require("telescope.actions").select_default,
             },
           },
 
