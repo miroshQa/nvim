@@ -77,7 +77,7 @@ return {
       lua_ls = {},
       -- jsonls = {},
       -- pyright = {},
-      -- tsserver = {},
+      -- ts_ls = {},
       -- rust_analyzer = {
       --   cargo = {
       --     allFeatures = true,

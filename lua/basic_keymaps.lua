@@ -11,8 +11,11 @@ vim.keymap.set("n", "<leader>Q", "<cmd>quitall!<CR>", {desc = "Force quit all (B
 vim.keymap.set("n", "<leader>q", "<cmd>quit<CR>", {desc = "Close current buffer"})
 
 -- Improved motions (Normal mode)
-vim.keymap.set({"n", "x", "o"}, 'gh', '^')
-vim.keymap.set({"n", "x", "o"}, 'gl', '$')
+-- vim.keymap.set({"n", "x", "o"}, 'gh', '^') I don't use those keymaps anymore because I want to use only classic vim keybindings 
+--                                            Because they are available almost everywhere (typst.app for example, vscode, on the remote server)
+-- vim.keymap.set({"n", "x", "o"}, 'gl', '$') I probably are going to delete flash.nvim for this reason as well
+
+
 vim.keymap.set("n", "ga", "<cmd>b#<CR>", {desc = "Go to last Accessed file (Ctrl + ^ synonim)"})
 vim.keymap.set("n", "+", "ggVG=<C-o>", {desc = "Autoindent all text in buffer"})
 vim.keymap.set("x", "R", ":s##<left>", {desc = "Start replacement in selected range"})
