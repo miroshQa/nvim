@@ -39,7 +39,6 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
-      "hrsh7th/cmp-emoji",
     },
     config = function()
       local cmp = require("cmp")
@@ -86,7 +85,6 @@ return {
           { name = 'luasnip' },
           { name = "buffer" },
           { name = "path" }, -- type ./ to activate
-          {name = "emoji"}, -- type : to activate
         }),
 
         window = {
