@@ -39,10 +39,12 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
+      { "kndndrj/nvim-dbee", ft = "sql", opts = {} },
     },
     config = function()
       local cmp = require("cmp")
       local luasnip = require("luasnip")
+      local compare = cmp.config.compare
       local opts = {
         formatting = {
           format = function(entry, vim_item)
@@ -57,7 +59,7 @@ return {
             return vim_item
           end,
           expandable_indicator = false,
-          fields = {"abbr", "kind", "menu"},
+          fields = { "abbr", "kind", "menu" },
         },
         snippet = {
           expand = function(args)
@@ -70,8 +72,8 @@ return {
         mapping = cmp.mapping.preset.insert({
           ["<C-u>"] = cmp.mapping.scroll_docs(-4),
           ["<C-d>"] = cmp.mapping.scroll_docs(4),
-          ["<CR>"] = cmp.mapping.confirm({select = true}),
-          ["<kEnter>"] = cmp.mapping.confirm({select = true}),
+          ["<CR>"] = cmp.mapping.confirm({ select = true }),
+          ["<kEnter>"] = cmp.mapping.confirm({ select = true }),
           ["<C-g>"] = function()
             if cmp.visible() then
               cmp.abort()
@@ -81,10 +83,11 @@ return {
           end,
         }),
         sources = cmp.config.sources({
-          { name = "nvim_lsp"},
+          { name = "nvim_lsp" },
           { name = 'luasnip' },
           { name = "buffer" },
           { name = "path" }, -- type ./ to activate
+          { "cmp-dbee" },
         }),
 
         window = {
@@ -94,6 +97,19 @@ return {
         matching = {
           disallow_partial_fuzzy_matching = false,
         },
+        sorting = {
+          comparators = {
+            compare.offset,
+            compare.exact,
+            compare.kind,
+            compare.score,
+            compare.recently_used,
+            compare.locality,
+            compare.sort_text,
+            compare.length,
+            compare.order,
+          },
+        },
       }
 
       opts.window.completion.scrolloff = 5
@@ -101,5 +117,3 @@ return {
     end,
   },
 }
-
-
