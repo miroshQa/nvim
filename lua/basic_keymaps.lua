@@ -15,7 +15,7 @@ vim.keymap.set("n", "<leader>q", "<cmd>quit<CR>", {desc = "Close current buffer"
 --                                            Because they are available almost everywhere (typst.app for example, vscode, on the remote server)
 -- vim.keymap.set({"n", "x", "o"}, 'gl', '$') I probably are going to delete flash.nvim for this reason as well
 
-
+vim.keymap.set("n", "<leader>w", function() vim.cmd("w") end)
 vim.keymap.set("n", "ga", "<cmd>b#<CR>", {desc = "Go to last Accessed file (Ctrl + ^ synonim)"})
 vim.keymap.set("n", "+", "ggVG=<C-o>", {desc = "Autoindent all text in buffer"})
 vim.keymap.set("x", "R", ":s##<left>", {desc = "Start replacement in selected range"})
@@ -39,6 +39,7 @@ vim.keymap.set('v', '>', '>gv', { noremap = true })
 -- Some fixes
 vim.keymap.del("s", "<", {desc = "Without this you can't use '<' char in Select mode when use snippets"})
 vim.keymap.del("s", ">")
--- vim.keymap.set({"n", "i", "c"}, "<kEnter>", "<Enter>", {desc = "Fix for Kitty Enter key"})
 -- UI
 vim.keymap.set( 'n', '<Leader>ud', better_search_and_replace.toggle_diagnostic, {silent=true, noremap=true, desc = "Toggle LSP diagnostic"})
+
+vim.keymap.set("n", "<leader>a", "<cmd>source %<CR>")

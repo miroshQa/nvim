@@ -2,7 +2,7 @@ vim.keymap.set("n", "<leader>n", "<cmd>TodoTelescope<CR>", {desc = "Find code No
 
 return {
   "folke/todo-comments.nvim",
-  cmd = "TodoTelescope",
+  event = {"BufReadPost", "BufNewFile"},
   dependencies = { "nvim-lua/plenary.nvim" },
   opts = {
   }

@@ -10,10 +10,8 @@ vim.keymap.set("n", "g'", "<cmd>ClangdSwitchSourceHeader<Cr>", {desc = "Goto lin
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set("n", "M", vim.diagnostic.open_float, {desc = "Misstake hover (Open Error / Diagnostic float)"})
-vim.keymap.set("n", "K", vim.lsp.buf.hover, {desc = "Hover Signature / Documentation"})
 
 local adequate_symbols = {"function", "class", "struct", "method", "enum", "interface", "type"}
-vim.keymap.set("n", "<leader>w", "<cmd>Telescope diagnostics<cr>", { desc = "Search Workspace Diagnostics" })
 vim.keymap.set("n", "<leader>j", function() require('telescope.builtin').lsp_document_symbols({symbols = adequate_symbols, symbol_width = 50}) end, { desc = 'Jump to symbol (search)'})
 vim.keymap.set("n", "<leader>J", function() require('telescope.builtin').lsp_dynamic_workspace_symbols({symbols = adequate_symbols, symbol_width = 40, fname_width = 15}) end, { desc = "Jump to symbol in workspace (search)" })
 vim.keymap.set("n", "<leader>ua", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, {desc = "Toggle inlay_hints (Annotations)"})

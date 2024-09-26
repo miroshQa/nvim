@@ -5,13 +5,16 @@ end
 
 return {
   dir = "~/projects/rittli.nvim",
-  lazy = true,
+  -- "miroshQa/rittli.nvim",
+  -- lazy = true,
   keys = {
-    { "<C-t>",     function() require("rittli.terminal_tweaks").toggle_last_openned_terminal() end, mode = { "n", "t" }},
+    { "<C-t>",     function() require("rittli.conveniences.terminal_tweaks").toggle_last_openned_terminal() end, mode = { "n", "t" }},
     {"<Esc><Esc>", "<C-\\><C-n>", mode = "t"},
-    { "<leader>r", function() require("rittli.tasks.telescope").run_last_runned_task() end, desc = "Rerun the last task or pick the new" },
-    { "<leader>R", function() require("rittli.tasks.telescope").tasks_picker() end, desc = "Pick the task" },
+    { "<leader>r", function() require("rittli.core.telescope").tasks_picker() end, desc = "Pick the task" },
     { "<leader><leader>", function() require('telescope.builtin').buffers({path_display = {'tail'}, sort_mru = true, ignore_current_buffer = true}) end}
   },
-  opts = { }
+  config = function()
+    require("rittli").setup({})
+  end
+
 }
