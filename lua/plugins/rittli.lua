@@ -14,7 +14,9 @@ return {
     { "<leader><leader>", function() require('telescope.builtin').buffers({path_display = {'tail'}, sort_mru = true, ignore_current_buffer = true}) end}
   },
   config = function()
-    require("rittli").setup({})
+    require("rittli").setup({
+      global_tasks_dir_path_tail = vim.fn.stdpath("config") .. "/lua/personal"
+    })
   end
 
 }

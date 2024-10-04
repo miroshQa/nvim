@@ -1,4 +1,4 @@
-local better_search_and_replace = require("user-functions.search_and_replace")
+local better_search_and_replace = require("personal.search_and_replace")
 
 -- Windows / Tabs Navigation
 vim.keymap.set('n', '<left>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
