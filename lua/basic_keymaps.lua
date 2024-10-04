@@ -36,10 +36,9 @@ vim.keymap.set("v", "<C-right>", function() better_search_and_replace.changeSele
 vim.keymap.set('v', '<', '<gv', { noremap = true })
 vim.keymap.set('v', '>', '>gv', { noremap = true })
 
--- Some fixes
-vim.keymap.del("s", "<", {desc = "Without this you can't use '<' char in Select mode when use snippets"})
-vim.keymap.del("s", ">")
 -- UI
 vim.keymap.set( 'n', '<Leader>ud', better_search_and_replace.toggle_diagnostic, {silent=true, noremap=true, desc = "Toggle LSP diagnostic"})
-
 vim.keymap.set("n", "<leader>a", "<cmd>source %<CR>")
+
+vim.keymap.set("n", "K", "")
+vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end)

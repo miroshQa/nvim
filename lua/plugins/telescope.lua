@@ -11,8 +11,14 @@ vim.keymap.set("n", "<leader>.", "<cmd>Telescope oldfiles<cr>", { desc = 'Search
 vim.keymap.set("n", "<leader>k", "<cmd>Telescope help_tags<cr>", { desc = 'Search help tags' })
 vim.keymap.set("n", "<leader>c", "<cmd>Telescope git_bcommits<cr>", { desc = 'Search commits for current buffer' })
 vim.keymap.set("n", "<leader>C", "<cmd>Telescope git_commits<cr>", { desc = 'Search commits' })
-vim.keymap.set("n", "<leader>g", function() require('telescope.builtin').git_status({path_display = {'tail'}}) end,
-  { desc = 'Search edited / added files' })
+vim.keymap.set("n", "<leader>g", function() require('telescope.builtin').git_status({path_display = {'tail'}}) end, { desc = 'Search edited / added files' })
+
+
+vim.keymap.set("n", "<leader>sc", function () require("telescope.builtin").find_files({cwd = vim.fn.stdpath('config')}) end, { desc = "Search neovim cache" })
+vim.keymap.set("n", "<leader>sl", function () require("telescope.builtin").find_files({cwd = vim.fn.stdpath('log')}) end, { desc = "Search neovim log" })
+vim.keymap.set("n", "<leader>sd", function () require("telescope.builtin").find_files({cwd = vim.fn.stdpath('data')}) end, { desc = "Search neovim data " })
+vim.keymap.set("n", "<leader>sm", function () require("telescope.builtin").find_files({cwd = vim.fn.stdpath('cache')}) end, { desc = "Search neovim cache " })
+
 return {
   "nvim-telescope/telescope.nvim",
   cmd = "Telescope",
