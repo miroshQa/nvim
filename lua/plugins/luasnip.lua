@@ -8,7 +8,7 @@ return {
   end,
 
   keys = {
-    { "<right>",   function() require("luasnip").jump(1) end,  mode = {"i", "s"}}, -- Alt + h
-    { "<left>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } }, -- Alt + l (physically on keyboard for me)
+    -- { "<right>",   function() require("luasnip").jump(1) end,  mode = {"i", "s"}}, -- Alt + h
+    -- { "<left>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } }, -- Alt + l (physically on keyboard for me)
   },
 }

@@ -1,6 +1,6 @@
 
 vim.keymap.set("n", "<leader>f", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
-vim.keymap.set("n", "<leader>/", "<cmd>Telescope live_grep<CR>", {desc = "Search for cwd"})
+vim.keymap.set("n", "<leader>/", "<CMD>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", {desc = "Search for cwd"})
 vim.keymap.set("n", "<leader>'", "<cmd>Telescope resume<cr>", { desc = 'Search resume' })
 vim.keymap.set("n", "<leader>:", "<cmd>Telescope command_history<cr>", { desc = 'Search command history' })
 vim.keymap.set("n", "<leader>sp", "<cmd>Telescope builtin<cr>", { desc = "Search telescope picker" })
