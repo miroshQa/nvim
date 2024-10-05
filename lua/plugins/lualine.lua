@@ -18,6 +18,11 @@ local lsp_server_component = {
   icon = ' LSP:',
 }
 
+local macro = function()
+  local reg = vim.fn.reg_recording()
+  if reg == "" then return "" end -- not recording
+  return "recording macro to " .. reg
+end
 
 
 return {
@@ -49,7 +54,8 @@ return {
           {"filename", path = 1},
           {"branch"},
           {"diff"},
-          {"diagnostics"}
+          {"diagnostics"},
+          macro,
         },
         lualine_x = {
           lsp_server_component,
