@@ -16,28 +16,30 @@ return {
     {"<leader>c", "<cmd>Telescope git_bcommits<cr>", mode = "n",  desc = 'Search commits for current buffer' },
     {"<leader>C", "<cmd>Telescope git_commits<cr>", mode = "n",  desc = 'Search commits' },
     {"<leader>g", function() require('telescope.builtin').git_status({path_display = {'tail'}}) end, mode = "n",  desc = 'Search edited / added files' },
-
+    {"<leader>n", "<cmd>TodoTelescope<CR>", mode = "n", desc = "Find code Notes (todo comments)"},
+    {"<leader>m", "<cmd>Telescope diagnostics<CR>", mode = "n", desc = "Search misstakes (code diagnostics)"},
   },
   dependencies = {
+    "folke/todo-comments.nvim",
     "nvim-lua/plenary.nvim",
     "nvim-telescope/telescope-symbols.nvim",
     "nvim-telescope/telescope-live-grep-args.nvim" ,
-     "nvim-tree/nvim-web-devicons",
+    "nvim-tree/nvim-web-devicons",
   },
   config = function()
     require("telescope").setup( {
-        defaults = {
-          file_ignore_patterns = { "%.png", "%.pdf", },
-          mappings = {
-            i = {
-              ["<esc>"] = require("telescope.actions").close,
-              ["<C-s>"] = require("telescope.actions").select_horizontal,
-              ['<c-x>'] = require('telescope.actions').delete_buffer,
-              ["<c-f>"] = require("telescope.actions").complete_tag,
-            },
+      defaults = {
+        file_ignore_patterns = { "%.png", "%.pdf", },
+        mappings = {
+          i = {
+            ["<esc>"] = require("telescope.actions").close,
+            ["<C-s>"] = require("telescope.actions").select_horizontal,
+            ['<c-x>'] = require('telescope.actions').delete_buffer,
+            ["<c-f>"] = require("telescope.actions").complete_tag,
           },
-
         },
-      })
+
+      },
+    })
   end,
 }

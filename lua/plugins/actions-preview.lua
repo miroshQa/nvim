@@ -1,8 +1,8 @@
-vim.keymap.set({ "v", "n" }, "go", function() require("actions-preview").code_actions() end, {desc = "Open actions-preview"})
-
 return {
   "aznhe21/actions-preview.nvim",
-  lazy = true,
+  keys = {
+    {"go", function() require("actions-preview").code_actions() end, mode = { "v", "n" }, desc = "Open actions-preview"}
+  },
   opts = {
   },
 }

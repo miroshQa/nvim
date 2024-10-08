@@ -1,9 +1,9 @@
-vim.keymap.set("n", "gs", function() require('treesj').toggle() end, {desc = "Toggle split / join"})
-vim.keymap.set("n", "gS", function() require('treesj').toggle({split = {recursive = true}}) end, {desc = "Toggle split / join recursively"})
-
 return {
   'Wansmer/treesj',
-  lazy = true,
+  keys = {
+    {"gs", function() require('treesj').toggle() end, mode = "n", {desc = "Toggle split / join"}},
+    {"gS", function() require('treesj').toggle({split = {recursive = true}}) end, mode = "n", desc = "Toggle split / join recursively"}
+  },
   dependencies = {
     'nvim-treesitter/nvim-treesitter',
   },

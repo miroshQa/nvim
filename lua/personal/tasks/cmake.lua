@@ -1,5 +1,9 @@
 local M = {}
 
+M.is_available = function()
+  return vim.fn.filereadable("CMakeLists.txt") == 1
+end
+
 M.tasks = {
   {
     name = "CMAKE: Build C++ project (DEBUG)",
@@ -16,3 +20,4 @@ M.tasks = {
 }
 
 return M
+

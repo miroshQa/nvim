@@ -39,6 +39,3 @@ vim.keymap.set('v', '>', '>gv', { noremap = true })
 -- UI
 vim.keymap.set( 'n', '<Leader>ud', better_search_and_replace.toggle_diagnostic, {silent=true, noremap=true, desc = "Toggle LSP diagnostic"})
 vim.keymap.set("n", "<leader>a", "<cmd>source %<CR>")
-
-vim.keymap.set("n", "K", "")
-vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end)

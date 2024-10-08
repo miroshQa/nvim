@@ -27,8 +27,6 @@ local kind_icons = {
   TypeParameter = "󰅲",
 }
 
-
-
 return {
   {
     "hrsh7th/nvim-cmp",
@@ -39,22 +37,25 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
-      { "kndndrj/nvim-dbee", ft = "sql", opts = {} },
     },
     config = function()
       local cmp = require("cmp")
       local luasnip = require("luasnip")
       local compare = cmp.config.compare
       local opts = {
+        performance = {
+          debounce = 0,
+          throttle = 0,
+        },
         formatting = {
           format = function(entry, vim_item)
-            vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
+            vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
             vim_item.menu = ({
               buffer = "",
               nvim_lsp = "",
               luasnip = "",
               nvim_lua = "",
-              latex_symbolc = ""
+              latex_symbolc = "",
             })[entry.source.name]
             return vim_item
           end,
@@ -84,10 +85,9 @@ return {
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
-          { name = 'luasnip' },
+          { name = "luasnip" },
           { name = "buffer" },
           { name = "path" }, -- type ./ to activate
-          { "cmp-dbee" },
         }),
 
         window = {
@@ -117,3 +117,4 @@ return {
     end,
   },
 }
+
