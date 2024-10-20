@@ -1,6 +1,6 @@
 return {
   {
-  
+
   "nvim-treesitter/nvim-treesitter",
   event = {"BufReadPost", "BufNewFile"},
   build = ":TSUpdate",
@@ -11,6 +11,9 @@ return {
     ---@diagnostic disable-next-line: missing-fields
     require("nvim-treesitter.configs").setup({
       auto_install = true,
+      disable = function(lang, bufnr)
+        return vim.api.nvim_buf_line_count(bufnr) > 50000
+        end,
       ensure_installed = {
         "bash",
         "c",
@@ -41,14 +44,6 @@ return {
         enable = true,
       },
       indent = { enable = true},
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<Enter>",
-          node_incremental = "<Enter>",
-          node_decremental = "<BS>",
-        },
-      },
       textobjects = {
         select = {
           enable = true,
