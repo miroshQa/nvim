@@ -18,28 +18,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
--- if we extract require from function it will break lazyloading (require('telescope.builtin').lsp_definitions - WRONG!)
-vim.keymap.set("n", "gd", function() require('telescope.builtin').lsp_definitions() end, {desc = "Goto Definition"})
-vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {desc = "[G]oto [D]eclaration"})
-vim.keymap.set("n", "gi", function() require('telescope.builtin').lsp_implementations() end, {desc = "Goto Implementation"})
-vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, {desc = "Goto tYpe Definition"})
-vim.keymap.set("n", "gr", function() require('telescope.builtin').lsp_references({fname_width = 100}) end, {desc = "Goto References"})
-vim.keymap.set("n", "cd", vim.lsp.buf.rename, {desc = "Rename symbol (Change definition)"})
-vim.keymap.set("n", "g'", "<cmd>ClangdSwitchSourceHeader<Cr>", {desc = "Goto linked file (src / header)"})
-vim.keymap.set("n", "<leader>i", "<cmd>Telescope diagnostics<CR>", {desc = "Workspace [I]nfo (diagnostic)"})
-vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help, {desc = "Signature help"})
-
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-vim.keymap.set("n", "M", vim.diagnostic.open_float, {desc = "Misstake hover (Open Error / Diagnostic float)"})
-
-local adequate_symbols = {"function", "class", "struct", "method", "enum", "interface", "type"}
-vim.keymap.set("n", "<leader>j", function() require('telescope.builtin').lsp_document_symbols({symbols = adequate_symbols, symbol_width = 50}) end, { desc = 'Jump to symbol (search)'})
-vim.keymap.set("n", "<leader>J", function() require('telescope.builtin').lsp_dynamic_workspace_symbols({symbols = adequate_symbols, symbol_width = 40, fname_width = 15}) end, { desc = "Jump to symbol in workspace (search)" })
-vim.keymap.set("n", "<leader>ua", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, {desc = "Toggle inlay_hints (Annotations)"})
-vim.keymap.set("n", "<leader>um", "<cmd>Mason<CR>", {desc = "Open Mason"})
-vim.keymap.set("n", "<leader>li", "<cmd>LspInfo<CR>", {desc = "Info"})
-vim.keymap.set("n", "<leader>lr", "<cmd>LspRestart<CR>", {desc = "Restart"})
 
 return {
   "neovim/nvim-lspconfig",
@@ -48,6 +26,27 @@ return {
     "artemave/workspace-diagnostics.nvim",
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
+  },
+  keys = {
+    {"gd", "<cmd>Telescope lsp_definitions<CR>", mode = "n", desc = "Goto Definition"},
+    {"gD", vim.lsp.buf.declaration, mode = "n", desc = "[G]oto [D]eclaration"},
+    {"gi", "<cmd>Telescope lsp_implementations<CR>", desc = "Goto Implementation", mode = "n"},
+    {"gy", vim.lsp.buf.type_definition, mode = "n", desc = "Goto tYpe Definition"},
+    {"gr", "<cmd> Telescope lsp_references ", mode = "n", desc = "Goto References"},
+    {"cd", vim.lsp.buf.rename, mode = "n", desc = "Rename symbol (Change definition)"},
+    {"g'", "<cmd>ClangdSwitchSourceHeader<Cr>", mode = "n", desc = "Goto linked file (src / header)"},
+    {"<leader>i", "<cmd>Telescope diagnostics<CR>", mode = "n", desc = "Workspace [I]nfo (diagnostic)"},
+    {"<C-s>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature help"},
+    {'[d', vim.diagnostic.goto_prev, mode = 'n', desc = 'Go to previous [D]iagnostic message'},
+    {']d', vim.diagnostic.goto_next, mode = 'n', desc = 'Go to next [D]iagnostic message'},
+    {"M", vim.diagnostic.open_float, mode = "n", desc = "Misstake hover (Open Error / Diagnostic float)"},
+    {"<leader>j", "<cmd>Telescope lsp_document_symbols<CR>", mode = "n", desc = 'Jump to symbol (search)'},
+    {"<leader>J", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", mode = "n", desc = "Jump to symbol in workspace (search)"} ,
+    {"<leader>ua", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, mode = "n", desc = "Toggle inlay_hints (Annotations"},
+    {"<leader>um", "<cmd>Mason<CR>", mode = "n", desc = "Open Mason"},
+    {"<leader>li", "<cmd>LspInfo<CR>", mode = "n", desc = "Info"},
+    {"<leader>lr", "<cmd>LspRestart<CR>", mode = "n", desc = "Restart"},
+    {"<leader>lf", vim.lsp.buf.format, mode = "n", desc = "LSP! Format my code!"},
   },
   config = function()
     vim.diagnostic.config({

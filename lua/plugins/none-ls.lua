@@ -9,7 +9,6 @@ return {
       },
     })
 
-    vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, {desc = "LSP! Format my code!"})
   end,
 }
 

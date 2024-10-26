@@ -1,5 +1,3 @@
-vim.keymap.set("n", "<leader>e", function() require('neo-tree') vim.cmd('Neotree toggle reveal') end, { desc = "Toggle file tree" })
-
 return {
   "nvim-neo-tree/neo-tree.nvim",
   cmd = {"Neotree"},
@@ -9,8 +7,10 @@ return {
     "nvim-tree/nvim-web-devicons",
     "MunifTanjim/nui.nvim",
   },
+  keys = {
+    {"<leader>e", "<cmd>Neotree toggle reveal<CR>", mode = "n",  desc = "Toggle file tree" }
+  },
   config = function()
-
     require("neo-tree").setup({
       hijack_netrw_behavior = "open_current",
       popup_border_style = "rounded",

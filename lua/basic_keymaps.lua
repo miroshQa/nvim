@@ -10,11 +10,6 @@ vim.keymap.set("n", "]t", "<cmd>tabn<CR>", {desc = "Go to next tab"})
 vim.keymap.set("n", "<leader>Q", "<cmd>quitall!<CR>", {desc = "Force quit all (Be careful!)"})
 vim.keymap.set("n", "<leader>q", "<cmd>quit<CR>", {desc = "Close current buffer"})
 
--- Improved motions (Normal mode)
--- vim.keymap.set({"n", "x", "o"}, 'gh', '^') I don't use those keymaps anymore because I want to use only classic vim keybindings 
---                                            Because they are available almost everywhere (typst.app for example, vscode, on the remote server)
--- vim.keymap.set({"n", "x", "o"}, 'gl', '$') I probably are going to delete flash.nvim for this reason as well
-
 vim.keymap.set("n", "<leader>w", function() vim.cmd("silent! w") end)
 vim.keymap.set("n", "ga", "<cmd>b#<CR>", {desc = "Go to last Accessed file (Ctrl + ^ synonim)"})
 vim.keymap.set("n", "+", "ggVG=<C-o>", {desc = "Autoindent all text in buffer"})
@@ -38,4 +33,3 @@ vim.keymap.set('v', '>', '>gv', { noremap = true })
 
 -- UI
 vim.keymap.set( 'n', '<Leader>ud', better_search_and_replace.toggle_diagnostic, {silent=true, noremap=true, desc = "Toggle LSP diagnostic"})
-vim.keymap.set("n", "<leader>a", "<cmd>source %<CR>")

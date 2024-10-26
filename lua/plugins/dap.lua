@@ -1,31 +1,3 @@
-local dmap = function(key, func, descritpion)
-  vim.keymap.set("n", key, func, {desc = descritpion})
-end
-
--- ESDF control like in cs go (instead wasd)
---  syntax '<cmd> lua require(...)...' allow us to lazy load this  (It is a false actually, We can use just function() ... end)
-dmap("<M-e>", function() require('dap').step_back() end, "Step back")
-dmap("<M-d>", function() require('dap').step_over() end, "Step over")
-dmap("<M-s>", function() require('dap').step_out() end, "Step out")
-dmap("<M-f>", function() require('dap').step_into() end, "Step into")
-dmap("<leader>dc", function() require('dap').continue() end , "Continue")
-dmap("<leader>dC", function() require('dap').reverse_continue() end, "Reverese continue")
-
-
-dmap("<leader>du", function() require('dap') require('dapui').toggle() end, "UI toggle")
-dmap("<leader>dt", function() require('dap').terminate() end, "Termniate")
-dmap("<leader>dh", function() require('dap').run_to_cursor() end, "Debug HERE (Run to cursoer)")
-dmap("<leader>db", function() require('dap').list_breakpoints() end, "Breakpoinst list")
-dmap("<leader>dB", function() require('dap').clear_breakpoints() end, "Clear breakpoints list")
-dmap("<leader>df", function() require('dap').focus_frame() end, "Go to paused")
-dmap("<leader>db", function() require('dap').toggle_breakpoint() end, "Toggle breakpont")
-dmap("<leader>di", function() require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, "Set conditional breakpoint ([i]f)")
-dmap("<leader>de", function() require('dap').set_exception_breakpoints() end, "Set exception breakpont")
-dmap("<leader>ds", function() require('dap.ui.widgets').centered_float(require('dap.ui.widgets').scopes) end, "Scopes")
-dmap("[s", function() require('dap').down() end, "Stack frame down")
-dmap("]s", function() require('dap').up() end, "Stack frame up")
-
-vim.api.nvim_command 'autocmd FileType dap-float nnoremap <buffer><silent> q <cmd>close!<CR>'
 
 
 
@@ -40,6 +12,24 @@ return {
     "jay-babu/mason-nvim-dap.nvim",
     "rcarriga/nvim-dap-ui",
     "nvim-telescope/telescope-dap.nvim",
+  },
+  keys = {
+    {"<M-d>", "<cmd>DapStepOver<CR>", "Step over"},
+    {"<M-s>",  "<cmd>DapStepOut<CR>", "Step out"},
+    {"<M-f>",   "<cmd>DapStepInto<CR>", "Step into"},
+    {"<leader>dc", "<cmd>DapStepContinue<CR>", "Continue"},
+    {"<leader>du", function() require('dap') require('dapui').toggle() end, "UI toggle"},
+    {"<leader>dt", "<cmd>DapTerminate<CR>", "Termniate"},
+    {"<leader>dh", function() require('dap').run_to_cursor() end, "Debug HERE (Run to cursoer)"},
+    {"<leader>db", function() require('dap').list_breakpoints() end, "Breakpoinst list"},
+    {"<leader>dB", function() require('dap').clear_breakpoints() end, "Clear breakpoints list"},
+    {"<leader>df", function() require('dap').focus_frame() end, "Go to paused"},
+    {"<leader>db", function() require('dap').toggle_breakpoint() end, "Toggle breakpont"},
+    {"<leader>di", function() require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, "Set conditional breakpoint ([i]f)"},
+    {"<leader>de", function() require('dap').set_exception_breakpoints() end, "Set exception breakpont"},
+    {"<leader>ds", function() require('dap.ui.widgets').centered_float(require('dap.ui.widgets').scopes) end, "Scopes"},
+    {"[s", function() require('dap').down() end, "Stack frame down"},
+    {"]s", function() require('dap').up() end, "Stack frame up"},
   },
   config = function()
     require("mason").setup() -- Function vim.fn.exepath will not work if we do not setup mason first
@@ -75,5 +65,7 @@ return {
 
     dapui.setup()
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
+
+    vim.api.nvim_command 'autocmd FileType dap-float nnoremap <buffer><silent> q <cmd>close!<CR>'
   end,
 }
