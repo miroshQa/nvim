@@ -1,24 +1,3 @@
-vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
-  callback = function(event)
-    local client = vim.lsp.get_client_by_id(event.data.client_id)
-
-    if client and client.server_capabilities.documentHighlightProvider then
-      vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-        buffer = event.buf,
-        callback = vim.lsp.buf.document_highlight,
-      })
-
-      vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-        buffer = event.buf,
-        callback = vim.lsp.buf.clear_references,
-      })
-
-    end
-  end,
-})
-
-
 return {
   "neovim/nvim-lspconfig",
   event = {"BufReadPost", "BufNewFile"},
@@ -32,9 +11,9 @@ return {
     {"gD", vim.lsp.buf.declaration, mode = "n", desc = "[G]oto [D]eclaration"},
     {"gi", "<cmd>Telescope lsp_implementations<CR>", desc = "Goto Implementation", mode = "n"},
     {"gy", vim.lsp.buf.type_definition, mode = "n", desc = "Goto tYpe Definition"},
-    {"gr", "<cmd> Telescope lsp_references ", mode = "n", desc = "Goto References"},
+    {"gr", "<cmd>Telescope lsp_references<CR>", mode = "n", desc = "Goto References"},
     {"cd", vim.lsp.buf.rename, mode = "n", desc = "Rename symbol (Change definition)"},
-    {"g'", "<cmd>ClangdSwitchSourceHeader<Cr>", mode = "n", desc = "Goto linked file (src / header)"},
+    {"g'", "<cmd>ClangdSwitchSourceHeader<CR>", mode = "n", desc = "Goto linked file (src / header)"},
     {"<leader>i", "<cmd>Telescope diagnostics<CR>", mode = "n", desc = "Workspace [I]nfo (diagnostic)"},
     {"<C-s>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature help"},
     {'[d', vim.diagnostic.goto_prev, mode = 'n', desc = 'Go to previous [D]iagnostic message'},
@@ -75,7 +54,6 @@ return {
       function(server_name)
         local server = servers[server_name] or {}
         server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-
         server.on_attach = function(client, bufnr)
           require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
         end

@@ -74,7 +74,6 @@ return {
           ["<C-u>"] = cmp.mapping.scroll_docs(-4),
           ["<C-d>"] = cmp.mapping.scroll_docs(4),
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
-          ["<kEnter>"] = cmp.mapping.confirm({ select = true }),
           ["<C-space>"] = function()
             if cmp.visible() then
               cmp.abort()

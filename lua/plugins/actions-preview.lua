@@ -3,6 +3,5 @@ return {
   keys = {
     {"go", function() require("actions-preview").code_actions() end, mode = { "v", "n" }, desc = "Open actions-preview"}
   },
-  opts = {
-  },
+  opts = {},
 }
