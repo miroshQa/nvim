@@ -15,12 +15,10 @@ return {
     {"<leader>k", "<cmd>Telescope help_tags<cr>", mode = "n",  desc = 'Search help tags' },
     {"<leader>c", "<cmd>Telescope git_bcommits<cr>", mode = "n",  desc = 'Search commits for current buffer' },
     {"<leader>C", "<cmd>Telescope git_commits<cr>", mode = "n",  desc = 'Search commits' },
-    {"<leader>g", function() require('telescope.builtin').git_status({path_display = {'tail'}}) end, mode = "n",  desc = 'Search edited / added files' },
-    {"<leader>n", "<cmd>TodoTelescope<CR>", mode = "n", desc = "Find code Notes (todo comments)"},
+    {"<leader>g", "<cmd>silent! Telescope git_status<CR>", mode = "n",  desc = 'Search edited / added files' },
     {"<leader>m", "<cmd>Telescope diagnostics<CR>", mode = "n", desc = "Search misstakes (code diagnostics)"},
   },
   dependencies = {
-    "folke/todo-comments.nvim",
     "nvim-lua/plenary.nvim",
     "nvim-telescope/telescope-symbols.nvim",
     "nvim-telescope/telescope-live-grep-args.nvim" ,
