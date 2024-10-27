@@ -12,9 +12,10 @@ return {
   },
   config = function()
     require("neo-tree").setup({
-      hijack_netrw_behavior = "open_current",
       popup_border_style = "rounded",
       filesystem = {
+        hijack_netrw_behavior = "open_current",
+        use_libuv_file_watcher = true,
         filtered_items = {
           visible = false,
           hide_dotfiles = false,
