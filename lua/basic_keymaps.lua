@@ -7,8 +7,6 @@ vim.keymap.set('n', '<down>', '<C-w><C-j>', { desc = 'Move focus to the lower wi
 vim.keymap.set('n', '<up>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 vim.keymap.set("n", "[t", "<cmd>tabp<CR>", {desc = "Go to prev tab"})
 vim.keymap.set("n", "]t", "<cmd>tabn<CR>", {desc = "Go to next tab"})
-vim.keymap.set("n", "<leader>Q", "<cmd>quitall!<CR>", {desc = "Force quit all (Be careful!)"})
-vim.keymap.set("n", "<leader>q", "<cmd>quit<CR>", {desc = "Close current buffer"})
 
 vim.keymap.set("n", "<leader>w", function() vim.cmd("silent! w") end)
 vim.keymap.set("n", "ga", "<cmd>b#<CR>", {desc = "Go to last Accessed file (Ctrl + ^ synonim)"})

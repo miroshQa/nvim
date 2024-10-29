@@ -12,7 +12,6 @@ return  {
 
     require('which-key').add {
       { "<leader>d", group = "Debug" },
-      { "<leader>Q", hidden = true },
       { "<leader>s", group = "Search"},
       { "<leader>h", group = "Hunks", icon = {icon = "", color = "red"} }, -- NvimWebDeviconsHiTest
       { "<leader>l", group = "Lsp", icon = {icon = "", color = "blue"} },
