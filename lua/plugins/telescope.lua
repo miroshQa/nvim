@@ -13,7 +13,8 @@ return {
     {"<leader>c", "<cmd>Telescope git_bcommits<cr>", mode = "n",  desc = 'Search commits for current buffer' },
     {"<leader>C", "<cmd>Telescope git_commits<cr>", mode = "n",  desc = 'Search commits' },
     {"<leader>g", "<cmd>silent! Telescope git_status<CR>", mode = "n",  desc = 'Search edited / added files' },
-    {"<leader>m", "<cmd>Telescope diagnostics<CR>", mode = "n", desc = "Search misstakes (code diagnostics)"},
+    {"<leader>i", "<cmd>Telescope diagnostics<CR>", mode = "n", desc = "Search code [I]nfo (code diagnostics)"},
+    {"<leader>m", "<cmd>Telescope man_pages<CR>", mode = "n", desc = "Search man pages"},
   },
   dependencies = {
     "nvim-lua/plenary.nvim",
@@ -33,7 +34,6 @@ return {
             ["<c-f>"] = require("telescope.actions").complete_tag,
           },
         },
-
       },
     })
   end,
