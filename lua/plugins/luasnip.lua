@@ -3,21 +3,20 @@ return {
   config = function()
     require("luasnip").config.setup({ history = true })
   end,
-
   keys = {
     {
-      "<C-n>",
+      "<c-n>",
       function()
         require("luasnip").jump(1)
       end,
       mode = { "i", "s" },
-    }, -- Alt + h
+    },
     {
-      "<C-p>",
+      "<c-p>",
       function()
         require("luasnip").jump(-1)
       end,
       mode = { "i", "s" },
-    }, -- Alt + l (physically on keyboard for me)
+    },
   },
 }

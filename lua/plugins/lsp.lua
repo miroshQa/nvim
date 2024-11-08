@@ -20,7 +20,7 @@ return {
     {"M", vim.diagnostic.open_float, mode = "n", desc = "Misstake hover (Open Error / Diagnostic float)"},
     {"<leader>j", "<cmd>Telescope lsp_document_symbols<CR>", mode = "n", desc = 'Jump to symbol (search)'},
     {"<leader>J", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", mode = "n", desc = "Jump to symbol in workspace (search)"} ,
-    {"<leader>ua", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, mode = "n", desc = "Toggle inlay_hints (Annotations"},
+    {"<leader>h", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, mode = "n", desc = "Toggle inlay_hints (Annotations"},
     {"<leader>li", "<cmd>LspInfo<CR>", mode = "n", desc = "Info"},
     {"<leader>lr", "<cmd>LspRestart<CR>", mode = "n", desc = "Restart"},
     {"<leader>lf", vim.lsp.buf.format, mode = "n", desc = "LSP! Format my code!"},

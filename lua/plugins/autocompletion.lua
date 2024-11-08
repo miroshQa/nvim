@@ -40,6 +40,7 @@ return {
     },
     config = function()
       local cmp = require("cmp")
+      local types = require('cmp.types')
       local luasnip = require("luasnip")
       local compare = cmp.config.compare
       local opts = {
@@ -70,10 +71,16 @@ return {
         completion = {
           completeopt = "menu,menuone,noinsert",
         },
-        mapping = cmp.mapping.preset.insert({
+        mapping = {
           ["<C-u>"] = cmp.mapping.scroll_docs(-4),
           ["<C-d>"] = cmp.mapping.scroll_docs(4),
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
+          ["<Down>"] = {
+            i = cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Select }),
+          },
+          ["<Up>"] = {
+            i = cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Select }),
+          },
           ["<C-space>"] = function()
             if cmp.visible() then
               cmp.abort()
@@ -81,7 +88,7 @@ return {
               cmp.complete()
             end
           end,
-        }),
+        },
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
           { name = "luasnip" },
