@@ -1,4 +1,5 @@
 local M = {}
+local user = require("rittli.user")
 
 M.tasks = {
   {
@@ -30,7 +31,12 @@ M.tasks = {
       }
       return task
     end
+  },
+  {
+    name = "Run shell script",
+    builder = user.run_cur(""),
   }
+
 }
 
 return M

@@ -1,3 +1,4 @@
+local user = require("rittli.user")
 local M = {}
 
 
@@ -6,17 +7,11 @@ M.is_available = function() return #vim.fn.glob("./*.csproj", false, true) > 0 e
 M.tasks = {
   {
     name = "C#: Dotnet run",
-    builder = function()
-      vim.cmd("wall")
-      return {cmd = {"dotnet run"}}
-    end,
+    builder = user.single("dotnet run"),
   },
   {
     name = "C#: Dotnet build",
-    builder = function()
-      vim.cmd("wall")
-      return {cmd = {"dotnet build"}}
-    end,
+    builder = user.single("dotnet build -c Release /nologo /clp:NoSummary"),
   },
 }
 

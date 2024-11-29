@@ -1,3 +1,4 @@
+local user = require("rittli.user")
 local M = {}
 
 M.is_available = function()
@@ -7,10 +8,7 @@ end
 M.tasks = {
   {
     name = "RUST: Cargo run",
-    builder = function()
-      vim.cmd("wall")
-      return { cmd = { "cargo run" } }
-    end,
+    builder = user.single("cargo run"),
   },
 }
 

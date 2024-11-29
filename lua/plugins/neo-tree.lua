@@ -1,5 +1,6 @@
 return {
-  "nvim-neo-tree/neo-tree.nvim",
+  -- "nvim-neo-tree/neo-tree.nvim",
+  dir = "~/projects/neo-tree.nvim/",
   cmd = {"Neotree"},
   branch = "v3.x",
   dependencies = {
@@ -14,6 +15,7 @@ return {
     require("neo-tree").setup({
       popup_border_style = "rounded",
       filesystem = {
+        shared_clipboard = true,
         hijack_netrw_behavior = "open_current",
         use_libuv_file_watcher = true,
         filtered_items = {
@@ -51,8 +53,6 @@ return {
           end,
         },
       },
-
-    }
-    )
+    })
   end,
 }
