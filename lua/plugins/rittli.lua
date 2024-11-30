@@ -4,8 +4,8 @@ end
 
 
 return {
-  dir = "~/projects/rittli.nvim",
-  -- "miroshQa/rittli.nvim",
+  -- dir = "~/projects/rittli.nvim",
+  "miroshQa/rittli.nvim",
   -- lazy = true,
   keys = {
     { "<C-t>",     function() require("rittli.conveniences.terminal_tweaks").toggle_last_openned_terminal() end, mode = { "n", "t" }},
