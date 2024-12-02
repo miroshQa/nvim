@@ -25,6 +25,10 @@ return {
   config = function()
     require("telescope").setup( {
       defaults = {
+        -- https://github.com/nvim-telescope/telescope.nvim/issues/3032
+        preview = {
+          filesize_limit = 0.5555,
+        },
         file_ignore_patterns = { "%.png", "%.pdf", },
         mappings = {
           i = {
