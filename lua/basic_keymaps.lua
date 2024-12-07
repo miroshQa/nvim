@@ -21,7 +21,6 @@ vim.keymap.set("n", "zo", "za", {desc = "Toggle fold"})
 vim.keymap.set("n", "zO", "zA", {desc = "Toggle all folds under cursor"})
 vim.keymap.set("n", "zm", "zM", {desc = "Close all folds"})
 vim.keymap.set("n", "zr", "zR", {desc = "Open all folds"})
-vim.keymap.set("n", "p", "p=`]") -- https://vim.fandom.com/wiki/Format_pasted_text_automatically
 
 -- Improved motions (Visual mode)
 vim.keymap.set("v", "<C-r>", function() better_search_and_replace.changeSelected(false) end, {desc = "Replace selected in whole buffer"})
