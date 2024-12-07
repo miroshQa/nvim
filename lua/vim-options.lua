@@ -40,8 +40,9 @@ vim.opt.smartcase = true
 vim.opt.hlsearch = true
 
 -- https://www.jackfranklin.co.uk/blog/code-folding-in-vim-neovim/
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.opt.foldnestmax = 2
-vim.opt.foldtext = ""
-vim.opt.foldlevelstart = 99
+-- I couldn't open files greater than 5mb, after I comment this lines below I solve this problem. So, don't use treesitter for folds, it is garbage
+-- vim.opt.foldmethod = "expr"
+-- vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+-- vim.opt.foldnestmax = 2
+-- vim.opt.foldtext = ""
+-- vim.opt.foldlevelstart = 99
