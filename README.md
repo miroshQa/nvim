@@ -30,7 +30,7 @@
 0. First of all you need to make sure that you have all external [dependencies](https://github.com/nvim-lua/kickstart.nvim) listed here
 1. Clone repo
 ```shell
-git clone https://github.com/miron2363/nvim.git ~/.config/nvim-m
+git clone https://github.com/mirosQa/nvim.git ~/.config/nvim-m
 ```
 2. Add in you bashrc line below [(wtf?)](https://michaeluloth.com/neovim-switch-configs/)
 ```shell

@@ -1,5 +1,3 @@
-local better_search_and_replace = require("personal.search_and_replace")
-
 -- Windows / Tabs Navigation
 vim.keymap.set('n', '<left>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<right>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
@@ -14,7 +12,6 @@ vim.keymap.set("n", "+", "ggVG=<C-o>", {desc = "Autoindent all text in buffer"})
 vim.keymap.set("x", "R", ":s##<left>", {desc = "Start replacement in selected range"})
 vim.keymap.set("c", "<down>", "<C-n>")
 vim.keymap.set("c", "<up>", "<C-p>")
-vim.keymap.set("n", "dd", better_search_and_replace.smart_line_delete, { expr = true, silent = true })
 vim.keymap.set("n", "<C-p>", "<cmd>cprev<CR>", {desc = "Go to prev quickfixlist entry"})
 vim.keymap.set("n", "<C-n>", "<cmd>cnext<CR>", {desc = "Go to next quickfixlist entry"})
 vim.keymap.set("n", "zo", "za", {desc = "Toggle fold"})
@@ -23,10 +20,5 @@ vim.keymap.set("n", "zm", "zM", {desc = "Close all folds"})
 vim.keymap.set("n", "zr", "zR", {desc = "Open all folds"})
 
 -- Improved motions (Visual mode)
-vim.keymap.set("v", "<C-r>", function() better_search_and_replace.changeSelected(false) end, {desc = "Replace selected in whole buffer"})
-vim.keymap.set("v", "<C-right>", function() better_search_and_replace.changeSelected(true) end, {desc = "Edit selected in whole buffer (Use Ctrl + f to edit prompt and Ctrl + c to return)"})
 vim.keymap.set('v', '<', '<gv', { noremap = true })
 vim.keymap.set('v', '>', '>gv', { noremap = true })
-
--- UI
-vim.keymap.set( 'n', '<Leader>ud', better_search_and_replace.toggle_diagnostic, {silent=true, noremap=true, desc = "Toggle LSP diagnostic"})
