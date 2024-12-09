@@ -4,7 +4,6 @@ vim.g.maplocalleader = " "
 
 -- Better UX
 vim.opt.autowriteall = true
-vim.opt.autoread = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.swapfile = false

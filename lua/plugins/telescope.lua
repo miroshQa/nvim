@@ -1,9 +1,8 @@
 return {
   "nvim-telescope/telescope.nvim",
-  cmd = "Telescope",
-  branch = "0.1.x",
   keys = {
     {"<leader>f", "<cmd>Telescope find_files<cr>", mode = "n",  desc = "Find files" },
+    {"<leader><leader>", "<cmd>Telescope buffers<cr>", mode = "n",  desc = "Find buffers" },
     {"<leader>/", "<CMD>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", mode = "n", desc = "Search for cwd"},
     {"<leader>'", "<cmd>Telescope resume<cr>", mode = "n",  desc = 'Search resume' },
     {"<leader>b", "<cmd>Telescope git_branches<cr>", mode = "n",  desc = "Search branches" },
