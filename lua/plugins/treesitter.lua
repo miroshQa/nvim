@@ -10,7 +10,7 @@ return {
   config = function()
     ---@diagnostic disable-next-line: missing-fields
     require("nvim-treesitter.configs").setup({
-      auto_install = true,
+    auto_install = true,
     disable = function(lang, buf)
         local max_filesize = 500 * 1024 -- 500 KB
         local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
@@ -18,32 +18,6 @@ return {
             return true
         end
     end,
-      ensure_installed = {
-        "bash",
-        "c",
-        "diff",
-        "html",
-        "javascript",
-        "jsdoc",
-        "json",
-        "jsonc",
-        "lua",
-        "luadoc",
-        "luap",
-        "markdown",
-        "markdown_inline",
-        "printf",
-        "python",
-        "query",
-        "regex",
-        "toml",
-        "tsx",
-        "typescript",
-        "vim",
-        "vimdoc",
-        "xml",
-        "yaml",
-      },
       highlight = {
         enable = true,
       },
