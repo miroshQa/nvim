@@ -20,6 +20,7 @@ return {
     "nvim-telescope/telescope-symbols.nvim",
     "nvim-telescope/telescope-live-grep-args.nvim" ,
     "nvim-tree/nvim-web-devicons",
+    'nvim-telescope/telescope-ui-select.nvim'
   },
   config = function()
     require("telescope").setup( {
@@ -39,5 +40,7 @@ return {
         },
       },
     })
+
+  require("telescope").load_extension("ui-select")
   end,
 }
