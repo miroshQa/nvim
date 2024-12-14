@@ -32,15 +32,8 @@
 ```shell
 git clone https://github.com/mirosQa/nvim.git ~/.config/nvim-m
 ```
-2. Add in you bashrc line below [(wtf?)](https://michaeluloth.com/neovim-switch-configs/)
+2. Launch using command below
 ```shell
-alias vm='NVIM_APPNAME=nvim-m nvim'
+NVIM_APPNAME=nvim-m nvim
 ```
-3. Launch using "vm"
-```shell
-vm
-```
-4. Open Mason and install the LSP servers you need. Do :checkhealth if something goes wrong
-### Favourite keymaps ✨
-1. ga (Goto prev buffer)
-2. g; (Goto last change in buffer)
+3. Open Mason and install the LSP servers you need. Do :checkhealth if something goes wrong
