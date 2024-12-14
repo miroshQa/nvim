@@ -54,7 +54,10 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
     vim.opt_local.foldmethod = 'manual'
     vim.opt_local.spell = false
     vim.schedule(function()
-      vim.bo[ev.buf].syntax = vim.filetype.match({ buf = ev.buf }) or ''
+      local ok, ft = pcall(vim.filetype.match, { buf = ev.buf })
+      if ok then
+        vim.bo[ev.buf].syntax = ft or ''
+      end
     end)
   end,
 })
