@@ -6,6 +6,14 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("quitHelpUsingq", { clear = true}),
+  pattern = {"help"},
+  callback = function()
+    vim.keymap.set("n", "q", "<cmd>q<CR>", { buffer = 0 })
+  end
+})
+
 -- disable new line autocomment
 vim.cmd([[autocmd FileType * set formatoptions-=ro]])
 
