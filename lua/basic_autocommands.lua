@@ -1,7 +1,3 @@
-
--- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.highlight.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
@@ -10,7 +6,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
-vim.cmd([[autocmd FileType * set formatoptions-=ro]]) -- disable new line autocomment
+-- disable new line autocomment
+vim.cmd([[autocmd FileType * set formatoptions-=ro]])
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
