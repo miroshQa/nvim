@@ -66,3 +66,10 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
     end)
   end,
 })
+
+vim.api.nvim_create_autocmd({ 'WinResized' }, {
+  group = vim.api.nvim_create_augroup("OnTerminalResize", { clear = true }),
+  callback = function(ev)
+    vim.cmd("wincmd =")
+  end,
+})
