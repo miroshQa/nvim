@@ -7,6 +7,9 @@ return  {
       preset = "helix",
       notify = false,
       triggers = { "<auto>", mode = "nioc" },
+      filter = function(mapping)
+        return mapping.desc ~= nil
+      end,
       sort = {"desc"},
     })
 
