@@ -7,6 +7,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
   },
   keys = {
+    {"go", vim.lsp.buf.code_action, mode = { "v", "n" }, desc = "Open actions-preview"},
     {"gd", "<cmd>Telescope lsp_definitions<CR>", mode = "n", desc = "Goto Definition"},
     {"gD", vim.lsp.buf.declaration, mode = "n", desc = "[G]oto [D]eclaration"},
     {"gi", "<cmd>Telescope lsp_implementations<CR>", desc = "Goto Implementation", mode = "n"},
