@@ -16,7 +16,7 @@ return {
     "nvim-neotest/nvim-nio",
     "theHamsta/nvim-dap-virtual-text",
     "jay-babu/mason-nvim-dap.nvim",
-    "nvim-telescope/telescope-dap.nvim",
+    { "rcarriga/nvim-dap-ui", opts = {} },
   },
   keys = {
 
@@ -30,11 +30,8 @@ return {
     {"<leader>r", function() require('dap').run_to_cursor() end, "Debug: run to cursor"},
 
     {"<leader>dt", "<cmd>DapTerminate<CR>", "Termniate"},
-
-    {"<leader>df", "<cmd>Telescope dap frames<CR>", "Go to paused"},
-
-    {"<leader>dB", "<cmd>Telescope dap list_breakpoints<CR>", "Telescope breakponts"},
-    {"<leader>ds", function() require('dap.ui.widgets').centered_float(require('dap.ui.widgets').scopes) end, "Scopes"},
+    -- {"<leader>ds", function() require('dap.ui.widgets').centered_float(require('dap.ui.widgets').scopes) end, "Scopes"},
+    {"U", function() require('dap.ui.widgets').hover() end}
   },
   config = function()
     require("mason").setup() -- Function vim.fn.exepath will not work if we do not setup mason first
@@ -48,11 +45,9 @@ return {
         function(config)
           require('mason-nvim-dap').default_setup(config)
         end,
-
       },
     })
 
-    require("telescope").load_extension("dap")
     require("nvim-dap-virtual-text").setup({ virt_text_pos = "eol"})
 
     local wpath = vim.fn.exepath("wezterm")
@@ -60,18 +55,51 @@ return {
       print("Wezterm haven't found. External terminal launch will fail")
     end
 
-    dap.defaults.fallback.external_terminal = {
-      command = wpath,
-      args = {"start", "--always-new-process"}
-    }
+    require("dap").defaults.fallback.auto_continue_if_many_stopped = false
 
-    dap.defaults.fallback.force_external_terminal = true
+    local dap, dapui = require("dap"), require("dapui")
 
-    vim.fn.sign_define('DapBreakpoint',          { text='', texthl='red'})
-    vim.fn.sign_define('DapBreakpointCondition', { text='', texthl='blue'})
-    vim.fn.sign_define('DapBreakpointRejected',  { text='', texthl='orange'})
-    vim.fn.sign_define('DapStopped',             { text='󰁕', texthl='green'})
-    vim.fn.sign_define('DapLogPoint',            { text='.>', texthl='yellow', linehl='DapBreakpoint', numhl='DapBreakpoint' })
+    dap.listeners.before.attach.dapui_config = function()
+      dapui.open()
+    end
+    dap.listeners.before.launch.dapui_config = function()
+      dapui.open()
+    end
+    dap.listeners.before.event_terminated.dapui_config = function()
+      dapui.close()
+    end
+    dap.listeners.before.event_exited.dapui_config = function()
+      dapui.close()
+    end
+
+    -- dap.defaults.fallback.external_terminal = {
+    --   command = wpath,
+    --   args = {"start", "--always-new-process"}
+    -- }
+    --
+    -- dap.defaults.fallback.force_external_terminal = true
+    --
+    -- vim.fn.sign_define('DapBreakpoint',          { text='', texthl='red'})
+    -- vim.fn.sign_define('DapBreakpointCondition', { text='', texthl='blue'})
+    -- vim.fn.sign_define('DapBreakpointRejected',  { text='', texthl='orange'})
+    -- vim.fn.sign_define('DapStopped',             { text='󰁕', texthl='green'})
+    -- vim.fn.sign_define('DapLogPoint',            { text='.>', texthl='yellow', linehl='DapBreakpoint', numhl='DapBreakpoint' })
+    --
+    --
+    -- local widgets = require('dap.ui.widgets')
+    -- local scopes = widgets.sidebar(widgets.scopes, {}, 'vs | wincmd l')
+    -- local repl = require("dap.repl")
+    -- local op = function()
+    --     scopes.toggle()
+    --     repl.toggle({}, 'wincmd l | split')
+    --   end
+    --
+    -- vim.keymap.set( "n", "<leader>du", op)
+    --
+    -- dap.listeners.before.attach.ui = function () op() end
+    -- dap.listeners.before.launch.ui = function() op() end
+    -- dap.listeners.before.event_terminated.dapui_config = function() op() end
+    -- dap.listeners.before.event_exited.dapui_config = function() op() end
 
     vim.api.nvim_command 'autocmd FileType dap-float nnoremap <buffer><silent> q <cmd>close!<CR>'
   end,

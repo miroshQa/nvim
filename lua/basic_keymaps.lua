@@ -7,6 +7,7 @@ vim.keymap.set("n", "[t", "<cmd>tabp<CR>", {desc = "Go to prev tab"})
 vim.keymap.set("n", "]t", "<cmd>tabn<CR>", {desc = "Go to next tab"})
 
 vim.keymap.set("n", "<leader>w", function() vim.cmd("silent! w") end)
+vim.keymap.set("n", "<leader>q", function() vim.cmd("silent! q") end)
 vim.keymap.set("n", "ga", "<cmd>b#<CR>", {desc = "Go to last Accessed file (Ctrl + ^ synonim)"})
 vim.keymap.set("x", "R", ":s##<left>", {desc = "Start replacement in selected range"})
 vim.keymap.set("c", "<down>", "<C-n>")
