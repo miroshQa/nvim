@@ -1,6 +1,9 @@
 return {
   "ibhagwan/fzf-lua",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
+  dependencies = {
+    "nvim-tree/nvim-web-devicons",
+    "nvim-treesitter/nvim-treesitter",
+  },
   keys = {
     -- General
     {"<leader>f", function() require('fzf-lua').files() end},
@@ -22,16 +25,19 @@ return {
     -- calling `setup` is optional for customization
     require("fzf-lua").setup({
       winopts = {
+        width = 0.90,
         preview = {
           delay = 0,
+          horizontal = 'right:50%',
         },
         backdrop = 100,
       },
       keymap = {
-
         builtin = {
           true, -- inherit all other default binds
           ["<Esc>"] = "hide",
+          ["<C-d>"]    = "preview-page-down",
+          ["<C-u>"]      = "preview-page-up",
         }
       }
     })
