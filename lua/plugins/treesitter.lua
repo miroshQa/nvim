@@ -1,9 +1,7 @@
 return {
   {
-
   "nvim-treesitter/nvim-treesitter",
   event = {"BufReadPost", "BufNewFile"},
-  build = ":TSUpdate",
   dependencies = {
     {"nvim-treesitter/nvim-treesitter-textobjects"},
   },
@@ -27,12 +25,10 @@ return {
           enable = true,
           lookahead = true,
           keymaps = {
-            -- You can use the capture groups defined in textobjects.scm
             ["af"] = "@function.outer",
             ["if"] = "@function.inner",
             ["ac"] = "@class.outer",
             ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
-            ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
           },
           include_surrounding_whitespace = false,
         },

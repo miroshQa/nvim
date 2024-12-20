@@ -2,9 +2,8 @@ return {
   "neovim/nvim-lspconfig",
   event = {"BufReadPost", "BufNewFile"},
   dependencies = {
-    "artemave/workspace-diagnostics.nvim",
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
+    {"williamboman/mason.nvim", opts = {}},
+    {"williamboman/mason-lspconfig.nvim", opts = {}},
   },
   keys = {
     {"go", vim.lsp.buf.code_action, mode = "n", desc = "Code Actions"},
@@ -32,22 +31,14 @@ return {
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
-    -- 1. help lsp-config 2. /config<CR> (To watch info about server configuration)
-    local servers = {
-      lua_ls = {},
-    }
-
     require("mason")
-    require("mason-lspconfig").setup({ ensure_installed = vim.tbl_keys(servers or {}) })
+    require("mason-lspconfig").setup({ ensure_installed = {"lua_ls"} })
 
     require("mason-lspconfig").setup_handlers({
       function(server_name)
-        local server = servers[server_name] or {}
-        server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-        server.on_attach = function(client, bufnr)
-          require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
-        end
-        require("lspconfig")[server_name].setup(server)
+        local opts = {}
+        opts.capabilities = capabilities
+        require("lspconfig")[server_name].setup(opts)
       end,
     })
   end,

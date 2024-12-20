@@ -25,8 +25,8 @@ return {
     {"<C-g>", "<cmd>DapStepInto<CR>", "Debug: step into (Go deeper)"},
     {"<C-c>", "<cmd>DapContinue<CR>", "Debug: continue"},
 
-    {"<leader>b", "<cmd>DapToggleBreakpoint<CR>", "Debug: toggle breakpoint"},
-    { '<leader>B', function() require('dap').set_breakpoint(vim.fn.input 'Breakpoint condition: ') end, desc = 'Debug: Set Breakpoint', },
+    {"<leader>db", "<cmd>DapToggleBreakpoint<CR>", "Debug: toggle breakpoint"},
+    { '<leader>dB', function() require('dap').set_breakpoint(vim.fn.input 'Breakpoint condition: ') end, desc = 'Debug: Set Breakpoint', },
     {"<leader>r", function() require('dap').run_to_cursor() end, "Debug: run to cursor"},
 
     {"<leader>dt", "<cmd>DapTerminate<CR>", "Termniate"},

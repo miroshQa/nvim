@@ -26,6 +26,7 @@ vim.opt.signcolumn = "yes"
 vim.opt.breakindent = true
 vim.g.termguicolors = true
 vim.opt.updatetime = 250
+vim.opt.showmode = false
 
 -- Search
 vim.opt.ignorecase = true
