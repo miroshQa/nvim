@@ -1,10 +1,11 @@
 # My neovim configuration 🤗
 
 ## Editor 😻 
-![Colorscheme](./assets/editor.png)
+![Colorscheme](https://github.com/user-attachments/assets/5ad5cad4-acb7-47b6-b65a-62c3bdc1e571)
+
 
 ## Keymaps 🚀
-![Colorscheme](./assets/keymaps.png)
+![keymaps](https://github.com/user-attachments/assets/ce0d0863-b013-47cf-807f-9df927fcc5d7)
 
 ## Do you want to check it out?) ⭐
 ### Linux
