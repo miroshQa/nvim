@@ -27,6 +27,7 @@ vim.opt.breakindent = true
 vim.g.termguicolors = true
 vim.opt.updatetime = 250
 vim.opt.showmode = false
+vim.opt.laststatus = 3
 
 -- Search
 vim.opt.ignorecase = true
