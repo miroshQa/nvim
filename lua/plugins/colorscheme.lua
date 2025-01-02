@@ -13,6 +13,7 @@ return {
       NeoTreeNormalNC = { fg = c.foreground, bg = c.background },
       FloatBorder = { bg = c.background },
       NormalFloat = { fg = c.foreground, bg = c.background },
+      StatusLine = { fg = c.background }
     }
     vim.cmd.colorscheme("gruvbox-baby")
   end,
