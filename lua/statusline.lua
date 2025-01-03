@@ -27,8 +27,8 @@ local function lsp_status()
         local name = client.name:gsub("language.server", "ls")
         return name
       end)
-      :totable()
-  return "LSP: " .. table.concat(names, ", ")
+      :join(", ")
+  return "LSP: " .. names
 end
 
 function _G.statusline()
