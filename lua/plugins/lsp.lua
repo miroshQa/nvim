@@ -26,6 +26,7 @@ return {
     { '[d',         vim.diagnostic.goto_prev,            mode = 'n', desc = 'Go to previous [D]iagnostic message' },
     { ']d',         vim.diagnostic.goto_next,            mode = 'n', desc = 'Go to next [D]iagnostic message' },
     { "M",          vim.diagnostic.open_float,           mode = "n", desc = "Misstake hover (Open Error / Diagnostic float)" },
+    { "K",          function() vim.lsp.buf.hover({border = "rounded"}) end,           mode = "n", desc = "Misstake hover (Open Error / Diagnostic float)" },
     { "<leader>lr", "<cmd>LspRestart<CR>",               mode = "n", desc = "Restart" },
     { "<leader>lf", vim.lsp.buf.format,                  mode = "n", desc = "LSP! Format my code!" },
   },
@@ -61,6 +62,11 @@ return {
     }
     servers.clangd = {}
     servers.rust_analyzer = {}
+    servers.ts_ls = {}
+    servers.bashls = {}
+    servers.jsonls = {}
+    servers.gopls = {}
+    -- type :help lspconfig-all
 
     for name, opts in pairs(servers) do
       local conf = lspconfig[name]
