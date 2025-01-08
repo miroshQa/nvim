@@ -14,6 +14,7 @@ return {
       FloatBorder = { bg = c.background },
       NormalFloat = { fg = c.foreground, bg = c.background },
       StatusLine = { fg = c.background },
+      StatusLineTerm = { fg = c.background },
       ModeMsg = { fg = c.milk }
     }
     vim.cmd.colorscheme("gruvbox-baby")
