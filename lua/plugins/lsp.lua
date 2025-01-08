@@ -19,7 +19,6 @@ return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPost", "BufNewFile" },
   keys = {
-    { "go",         vim.lsp.buf.code_action,             mode = "n", desc = "Code Actions" },
     { "cd",         vim.lsp.buf.rename,                  mode = "n", desc = "Rename symbol (Change definition)" },
     { "gh",         "<cmd>ClangdSwitchSourceHeader<CR>", mode = "n", desc = "Goto linked file (src / header)" },
     { "<C-s>",      vim.lsp.buf.signature_help,          mode = "i", desc = "Signature help" },
