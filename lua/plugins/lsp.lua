@@ -19,15 +19,14 @@ return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPost", "BufNewFile" },
   keys = {
-    { "cd",         vim.lsp.buf.rename,                  mode = "n", desc = "Rename symbol (Change definition)" },
-    { "gh",         "<cmd>ClangdSwitchSourceHeader<CR>", mode = "n", desc = "Goto linked file (src / header)" },
-    { "<C-s>",      vim.lsp.buf.signature_help,          mode = "i", desc = "Signature help" },
-    { '[d',         vim.diagnostic.goto_prev,            mode = 'n', desc = 'Go to previous [D]iagnostic message' },
-    { ']d',         vim.diagnostic.goto_next,            mode = 'n', desc = 'Go to next [D]iagnostic message' },
-    { "M",          vim.diagnostic.open_float,           mode = "n", desc = "Misstake hover (Open Error / Diagnostic float)" },
-    { "K",          function() vim.lsp.buf.hover({border = "rounded"}) end,           mode = "n", desc = "Misstake hover (Open Error / Diagnostic float)" },
-    { "<leader>lr", "<cmd>LspRestart<CR>",               mode = "n", desc = "Restart" },
-    { "<leader>lf", vim.lsp.buf.format,                  mode = "n", desc = "LSP! Format my code!" },
+    { "cd", vim.lsp.buf.rename, mode = "n" },
+    { "<C-s>", vim.lsp.buf.signature_help, mode = "i" },
+    { '[d', vim.diagnostic.goto_prev, mode = 'n' },
+    { ']d', vim.diagnostic.goto_next, mode = 'n' },
+    { "M", vim.diagnostic.open_float, mode = "n" },
+    { "K", function() vim.lsp.buf.hover({ border = "rounded" }) end },
+    { "<leader>lr", "<cmd>LspRestart<CR>", mode = "n" },
+    { "<leader>lf", vim.lsp.buf.format, mode = "n" },
   },
   config = function()
     local lspconfig = require("lspconfig")
@@ -62,10 +61,18 @@ return {
     }
     servers.clangd = {}
     servers.rust_analyzer = {}
+
+    -- npm install -g typescript typescript-language-server
     servers.ts_ls = {}
+
+    -- npm i -g bash-language-server
     servers.bashls = {}
-    servers.jsonls = {}
     servers.gopls = {}
+
+    -- npm i -g vscode-langservers-extracted
+    servers.jsonls = {}
+    servers.cssls = {}
+    servers.html = {}
     -- type :help lspconfig-all
 
     for name, opts in pairs(servers) do
@@ -74,6 +81,5 @@ return {
         conf.setup(opts)
       end
     end
-
   end,
 }
