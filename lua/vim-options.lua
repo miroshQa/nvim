@@ -1,3 +1,5 @@
+vim.cmd("colorscheme gruvboxbaby")
+
 -- Leader 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -28,6 +30,7 @@ vim.g.termguicolors = true
 vim.opt.updatetime = 250
 vim.opt.showmode = false
 vim.opt.laststatus = 3
+vim.opt.fillchars = { eob = " "}
 
 -- Search
 vim.opt.ignorecase = true

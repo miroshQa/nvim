@@ -13,9 +13,9 @@ return {
     -- LSP
     { "<leader>s", function() require("fzf-lua").lsp_document_symbols() end,       mode = "n" },
     { "<leader>S", function() require("fzf-lua").lsp_live_workspace_symbols() end, mode = "n" },
-    { "gd",        function() require("fzf-lua").lsp_definitions() end,            mode = "n",          desc = "Goto Definition" },
-    { "gr",        function() require("fzf-lua").lsp_references() end,             mode = "n",          desc = "Goto References" },
-    { "go",        function() require("fzf-lua").lsp_code_actions() end,           mode = { "v", "n" }, desc = "Open actions-preview" },
+    { "gd",        function() require("fzf-lua").lsp_definitions() end,            mode = "n" },
+    { "gr",        function() require("fzf-lua").lsp_references() end,             mode = "n" },
+    { "go",        function() require("fzf-lua").lsp_code_actions() end,           mode = { "v", "n" } },
 
   },
   config = function()

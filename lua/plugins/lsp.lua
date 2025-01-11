@@ -19,14 +19,14 @@ return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPost", "BufNewFile" },
   keys = {
-    { "cd", vim.lsp.buf.rename, mode = "n" },
-    { "<C-s>", vim.lsp.buf.signature_help, mode = "i" },
-    { '[d', vim.diagnostic.goto_prev, mode = 'n' },
-    { ']d', vim.diagnostic.goto_next, mode = 'n' },
-    { "M", vim.diagnostic.open_float, mode = "n" },
-    { "K", function() vim.lsp.buf.hover({ border = "rounded" }) end },
-    { "<leader>lr", "<cmd>LspRestart<CR>", mode = "n" },
-    { "<leader>lf", vim.lsp.buf.format, mode = "n" },
+    { "cd",         vim.lsp.buf.rename,                  mode = "n"},
+    { "<C-s>",      function() vim.lsp.buf.signature_help({border = "rounded"}) end,      mode = "i"},
+    { '[d',         vim.diagnostic.goto_prev,            mode = 'n'},
+    { ']d',         vim.diagnostic.goto_next,            mode = 'n'},
+    { "M",          vim.diagnostic.open_float,           mode = "n"},
+    { "K",          function() vim.lsp.buf.hover({border = "rounded"}) end},
+    { "<leader>lr", "<cmd>LspRestart<CR>",               mode = "n"},
+    { "<leader>lf", vim.lsp.buf.format,                  mode = "n"},
   },
   config = function()
     local lspconfig = require("lspconfig")
@@ -48,6 +48,9 @@ return {
     servers.lua_ls = {
       settings = {
         Lua = {
+          runtime = {
+            version = 'LuaJIT'
+          },
           workspace = {
             checkThirdParty = false,
             library = {
