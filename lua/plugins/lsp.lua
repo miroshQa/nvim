@@ -53,17 +53,14 @@ return {
           },
           workspace = {
             checkThirdParty = false,
-            library = {
-              vim.env.VIMRUNTIME,
-              "${3rd}/luv/library",
-              vim.fn.stdpath("data") .. "/lazy",
-            }
+          library = vim.api.nvim_get_runtime_file("", true)
           }
         }
       }
     }
     servers.clangd = {}
     servers.rust_analyzer = {}
+    servers.taplo = {}
 
     -- npm install -g typescript typescript-language-server
     servers.ts_ls = {}
@@ -76,6 +73,7 @@ return {
     servers.jsonls = {}
     servers.cssls = {}
     servers.html = {}
+    servers.basedpyright = {}
     -- type :help lspconfig-all
 
     for name, opts in pairs(servers) do

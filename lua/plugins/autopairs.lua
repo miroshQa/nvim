@@ -5,10 +5,7 @@ return  {
     },
     event = 'InsertEnter',
     config = function()
-      require("nvim-autopairs").setup {
-        check_ts = true,
-        enable_check_bracket_line = true,
-      }
+      require("nvim-autopairs").setup({})
 
       local cmp_autopairs = require('nvim-autopairs.completion.cmp')
       local cmp = require('cmp')

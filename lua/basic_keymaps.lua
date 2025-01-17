@@ -14,8 +14,22 @@ vim.keymap.set("c", "<down>", "<C-n>")
 vim.keymap.set("c", "<up>", "<C-p>")
 vim.keymap.set("n", "<C-p>", "<cmd>cprev<CR>", {desc = "Go to prev quickfixlist entry"})
 vim.keymap.set("n", "<C-n>", "<cmd>cnext<CR>", {desc = "Go to next quickfixlist entry"})
-vim.keymap.set('n',  '<Esc>', "<ESC>:noh<CR>", {silent = true})
+vim.keymap.set('n',  '<Esc>', "<ESC><cmd>noh<CR>", {silent = true})
 
 -- Improved motions (Visual mode)
 vim.keymap.set('v', '<', '<gv', { noremap = true })
 vim.keymap.set('v', '>', '>gv', { noremap = true })
+
+local diagnostic_on = true
+function Toggle_diagnostics()
+    if diagnostic_on then
+        diagnostic_on = false
+        vim.diagnostic.enable(false)
+    else
+        diagnostic_on = true
+        vim.diagnostic.enable()
+    end
+end
+
+vim.keymap.set('n', '<leader>ld', Toggle_diagnostics, { noremap = true, silent = true, desc = "Toggle vim diagnostics" })
+vim.keymap.set("n", "<leader>lh", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end)
