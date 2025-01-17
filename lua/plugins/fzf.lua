@@ -1,6 +1,5 @@
 return {
   "ibhagwan/fzf-lua",
-  branch = "hide",
   keys = {
     { "<leader>f", function() require('fzf-lua').files() end },
     { "<leader>'", function() require("fzf-lua").resume() end },
@@ -39,6 +38,7 @@ return {
       keymap = {
         builtin = {
           true,
+          ["<esc>"] = "hide",
           ["<C-d>"] = "preview-page-down",
           ["<C-u>"] = "preview-page-up",
         }

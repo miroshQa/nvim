@@ -64,6 +64,7 @@ return {
     }
     servers.clangd = {}
     servers.rust_analyzer = {}
+    servers.taplo = {}
 
     -- npm install -g typescript typescript-language-server
     servers.ts_ls = {}
@@ -76,6 +77,7 @@ return {
     servers.jsonls = {}
     servers.cssls = {}
     servers.html = {}
+    servers.basedpyright = {}
     -- type :help lspconfig-all
 
     for name, opts in pairs(servers) do
