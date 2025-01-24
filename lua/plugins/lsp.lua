@@ -45,19 +45,7 @@ return {
 
     local servers = {}
 
-    servers.lua_ls = {
-      settings = {
-        Lua = {
-          runtime = {
-            version = 'LuaJIT'
-          },
-          workspace = {
-            checkThirdParty = false,
-          library = vim.api.nvim_get_runtime_file("", true)
-          }
-        }
-      }
-    }
+    servers.lua_ls = {}
     servers.clangd = {}
     servers.rust_analyzer = {}
     servers.taplo = {}
