@@ -7,7 +7,12 @@ return {
     { "<leader>.", function() require("fzf-lua").oldfiles() end },
     { "<leader>/", function() require("fzf-lua").live_grep() end },
     { "<leader>g", function() require("fzf-lua").git_status() end },
-    { "<leader>b", function() require("fzf-lua").buffers() end },
+    -- { "<leader>b", function() require("fzf-lua").buffers() end },
+    { "<leader>m", function() require("fzf-lua").manpages() end },
+    { "<leader>z", function() require("fzf-lua").zoxide() end },
+    { "<leader>c", function() require("fzf-lua").git_bcommits() end },
+    { "<leader>b", function() require("fzf-lua").git_branches() end },
+    { "<leader>C", function() require("fzf-lua").git_commits() end },
 
     -- LSP
     { "<leader>s", function() require("fzf-lua").lsp_document_symbols() end,       mode = "n" },
@@ -22,6 +27,7 @@ return {
   config = function()
     require("fzf-lua").setup({
       "hide",
+      fzf_opts = { ['--cycle'] = true },
       files = {
         git_icons = false,
       },

@@ -21,8 +21,8 @@ return {
   keys = {
     { "cd",         vim.lsp.buf.rename,                  mode = "n"},
     { "<C-s>",      function() vim.lsp.buf.signature_help({border = "rounded"}) end,      mode = "i"},
-    { '[d',         vim.diagnostic.goto_prev,            mode = 'n'},
-    { ']d',         vim.diagnostic.goto_next,            mode = 'n'},
+    { '[d',         function() vim.diagnostic.jump({severity = "ERROR", count = -1, float = true}) end,            mode = 'n'},
+    { ']d',         function() vim.diagnostic.jump({severity = "ERROR", count = 1, float = true}) end,            mode = 'n'},
     { "M",          vim.diagnostic.open_float,           mode = "n"},
     { "K",          function() vim.lsp.buf.hover({border = "rounded"}) end},
     { "<leader>lr", "<cmd>LspRestart<CR>",               mode = "n"},

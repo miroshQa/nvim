@@ -14,7 +14,6 @@ return {
   config = function()
     require("neo-tree").setup({
       popup_border_style = "rounded",
-      enable_git_status = false,
       filesystem = {
         shared_clipboard = true,
         hijack_netrw_behavior = "open_current",
