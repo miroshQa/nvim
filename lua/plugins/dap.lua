@@ -10,12 +10,6 @@ vim.api.nvim_create_autocmd("FileType", {
 return {
   "mfussenegger/nvim-dap",
   lazy = true,
-  version = "*",
-  dependencies = {
-    "nvim-neotest/nvim-nio",
-    "theHamsta/nvim-dap-virtual-text",
-    { "rcarriga/nvim-dap-ui", opts = {} },
-  },
   keys = {
 
     {"<C-n>", "<cmd>DapStepOver<CR>", "Debug: step over (next line)"},
@@ -33,33 +27,16 @@ return {
   },
   config = function()
     local dap = require("dap")
-    dap.set_log_level('TRACE')
-
-    require("nvim-dap-virtual-text").setup({ virt_text_pos = "eol"})
+    -- this line below increase starupt time, so I guess I should disable it
+    -- dap.set_log_level('TRACE')
 
     local wpath = vim.fn.exepath("wezterm")
-
     if not wpath then
       print("Wezterm haven't found. External terminal launch will fail")
     end
-
     require("dap").defaults.fallback.auto_continue_if_many_stopped = false
 
-    local dap, dapui = require("dap"), require("dapui")
-
-    dap.listeners.before.attach.dapui_config = function()
-      dapui.open()
-    end
-    dap.listeners.before.launch.dapui_config = function()
-      dapui.open()
-    end
-    dap.listeners.before.event_terminated.dapui_config = function()
-      dapui.close()
-    end
-    dap.listeners.before.event_exited.dapui_config = function()
-      dapui.close()
-    end
-
+    -- local dap, dapui = require("dap"), require("dapui")
     dap.defaults.fallback.external_terminal = {
       command = wpath,
       args = {"start", "--always-new-process"}

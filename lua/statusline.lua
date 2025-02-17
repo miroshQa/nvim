@@ -34,6 +34,7 @@ end
 function _G.statusline()
   return table.concat({
     "%f",
+    "%y",
     "%h%w%m%r",
     diagnostics(),
     "%=",
