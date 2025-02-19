@@ -104,6 +104,10 @@ local theme = {
   WarningMsg = { fg = c.soft_yellow },
   WildMenu = { fg = c.background, bg = c.blue_gray },
   EndOfBuffer = { fg = c.background },
+  WhichKey = { fg = c.magenta },
+  WhichKeySeperator = { fg = c.soft_yellow },
+  WhichKeyGroup = { fg = c.orange },
+  WhichKeyDesc = { fg = c.forest_green },
 
   -- Tree Sitter
   ["@boolean"] = { fg = c.orange },
