@@ -1,0 +1,14 @@
+{
+  "diagnostics.globals": [
+    "awesome",
+    "client",
+    "root",
+    "screen",
+    "tag",
+    "mouse"
+  ],
+  "workspace.library": [
+    "/usr/share/awesome/lib",
+    "/home/miron/.config/awesome"
+  ]
+}

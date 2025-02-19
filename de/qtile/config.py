@@ -1,16 +1,13 @@
 import os
 from libqtile import hook
-import subprocess
 from libqtile import bar, layout, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
-from libqtile.utils import guess_terminal
-from libqtile import hook
 
 mod = "mod4"
 terminal = "wezterm"
 font_size = 48
-wallpaper = "~/.config/wallpapers/spaceman.jpg"
+wallpaper = "~/.config/wallpapers/ancientcastle.jpg"
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -118,6 +115,7 @@ widget_defaults = dict(
     font="sans",
     fontsize=26,
 )
+
 extension_defaults = widget_defaults.copy()
 
 screens = [
@@ -126,16 +124,13 @@ screens = [
             [
                 # widget.CurrentLayout(),
                 widget.GroupBox(),
-                widget.Prompt(),
-                widget.WindowName(),
+                widget.Spacer(),
                 widget.Chord(
                     chords_colors={
                         "launch": ("#ff0000", "#ffffff"),
                     },
                     name_transform=lambda name: name.upper(),
                 ),
-                # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
-                # widget.StatusNotifier(),
                 widget.Systray(icon_size=font_size),
                 widget.Net(),
                 widget.Volume(),
@@ -151,6 +146,7 @@ screens = [
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
         # By default we handle these events delayed to already improve performance, however your system might still be struggling
         # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
+        background="#000000.3",
         x11_drag_polling_rate = 120,
         wallpaper = wallpaper,
         wallpaper_mode = "fill",
@@ -165,7 +161,7 @@ mouse = [
 ]
 
 dgroups_key_binder = None
-dgroups_app_rules = []  # type: list
+dgroups_app_rules = []
 follow_mouse_focus = True
 bring_front_click = False
 floats_kept_above = True
