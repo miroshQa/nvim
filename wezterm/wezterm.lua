@@ -10,6 +10,7 @@ config.audible_bell = "Disabled"
 config.window_background_opacity = 1
 config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 config.use_fancy_tab_bar = true
+-- config.window_background_opacity = 0.5
 config.max_fps = 240
 config.initial_rows = 36
 config.initial_cols = 140

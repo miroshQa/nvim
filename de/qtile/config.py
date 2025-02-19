@@ -1,56 +1,37 @@
 import os
+import subprocess
 from libqtile import hook
 from libqtile import bar, layout, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
+from qtile_extras.widget.decorations import RectDecoration
+from colors import colors
 
 mod = "mod4"
 terminal = "wezterm"
 font_size = 48
 wallpaper = "~/.config/wallpapers/ancientcastle.jpg"
+widget_radius = 18
 
 keys = [
     # A list of available commands that can be bound to keys can be found
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
-    # Switch between windows
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-    Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
-    # Move windows between left/right columns or move up/down in current stack.
-    # Moving out of range in Columns layout will create new column.
+
     Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
     Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
-    # Grow windows. If current window is on the edge of screen and direction
-    # will be to screen edge - window would shrink.
-    Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
-    Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
-    Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
-    Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
-    Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
-    # Toggle between split and unsplit sides of stack.
-    # Split = all windows displayed
-    # Unsplit = 1 window displayed, like Max layout, but still with
-    # multiple stack panes
-    Key(
-        [mod, "shift"],
-        "Return",
-        lazy.layout.toggle_split(),
-        desc="Toggle between split and unsplit sides of stack",
-    ),
+
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-    # Toggle between different layouts as defined below
+    Key([mod], "s", lazy.spawn("flameshot gui"), desc="Launch terminal"),
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
-    Key(
-        [mod],
-        "f",
-        lazy.window.toggle_fullscreen(),
-        desc="Toggle fullscreen on the focused window",
-    ),
+    Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen on the focused window"),
+
     Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
@@ -59,21 +40,14 @@ keys = [
     Key([mod], "space",  lazy.widget["keyboardlayout"].next_keyboard()),
 ]
 
-# Add key bindings to switch VTs in Wayland.
-# We can't check qtile.core.name in default config as it is loaded before qtile is started
-# We therefore defer the check until the key binding is run by using .when(func=...)
-for vt in range(1, 8):
-    keys.append(
-        Key(
-            ["control", "mod1"],
-            f"f{vt}",
-            lazy.core.change_vt(vt).when(func=lambda: qtile.core.name == "wayland"),
-            desc=f"Switch to VT{vt}",
-        )
+
+groups = [
+    Group(
+        i[0],
+        label=i[1]
     )
-
-
-groups = [Group(i) for i in "123456789"]
+    for i in [("1", "D"), ("2", ""), ("3", "󰈹"), ("4", "A"), ("5", "󰉋")]
+]
 
 for i in groups:
     keys.extend(
@@ -96,8 +70,15 @@ for i in groups:
     )
 
 layouts = [
-    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4, margin = 10),
-    layout.Max(),
+    layout.Columns(
+        border_focus_stack=["#d75f5f", "#8f3d3d"],
+        border_width=4,
+        single_border_width=0,
+        margin=8,
+        border_focus=colors["color7"],
+        border_normal=colors["color8"],
+    ),
+    layout.Max(margin=8),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
@@ -112,31 +93,131 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font="sans",
-    fontsize=26,
+    font="Hack Nerd Font Mono",
+    fontsize=30,
+    padding=20,
 )
 
 extension_defaults = widget_defaults.copy()
+
+sep_config = {
+        "size_percent": 0,
+        "padding": 8,
+}
+
+def get_backlight_device():
+    """
+    Detects and returns the first available backlight device.
+
+    Returns:
+        str: The name of the first available backlight device.
+        None: If no backlight device is found.
+    """
+    backlight_dir = "/sys/class/backlight"
+    if os.path.isdir(backlight_dir):
+        devices = os.listdir(backlight_dir)
+        if len(devices) > 0:
+            return devices[0]
+    return None
+
+def get_wireless_interface():
+    """
+    Dynamically detect the wireless network interface.
+
+    Returns:
+        str: Name of the wireless network interface.
+    """
+    result = subprocess.run(["ip", "link"], capture_output=True, text=True, check=True)
+    for line in result.stdout.split("\n"):
+        if "wlan" in line or "wlp" in line:
+            return line.split(":")[1].strip()
+    return "wlan0"
 
 screens = [
     Screen(
         top=bar.Bar(
             [
-                # widget.CurrentLayout(),
-                widget.GroupBox(),
-                widget.Spacer(),
-                widget.Chord(
-                    chords_colors={
-                        "launch": ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
+                widget.GroupBox(
+                    borderwidth=0,
+                    block_highlight_text_color=colors["color3"],
+                    active=colors["foreground"],
+                    inactive=colors["color8"],
+                    disable_drag=True,
+                    radius=True,
+                    padding_x=0,
+                    margin_x=28,
+                    decorations=[
+                        RectDecoration(
+                            colour=colors["background"],
+                            radius=widget_radius,
+                            filled=True,
+                        )
+                    ],
                 ),
-                widget.Systray(icon_size=font_size),
-                widget.Net(),
-                widget.Volume(),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-                widget.BatteryIcon(),
-                widget.Battery(),
+                widget.Spacer(),
+                widget.Memory(
+                    format="󰍛 {MemUsed:.0f}{mm}",
+                    # decorations=[
+                    #     RectDecoration(
+                    #         colour=colors["background"],
+                    #         radius=widget_radius,
+                    #         filled=True,
+                    #     )
+                    # ],
+                    foreground=colors["color5"],
+                ),
+                widget.Sep(**sep_config),
+                widget.CPU(
+                    format="󰘚 {load_percent}%",
+                    # decorations=[
+                    #     RectDecoration(
+                    #         colour=colors["background"],
+                    #         radius=widget_radius,
+                    #         filled=True,
+                    #     )
+                    # ],
+                    foreground=colors["color6"],
+                ),
+                widget.Battery(
+                    format="{char} {percent:2.0%}",
+                    charge_char="󰂄",
+                    discharge_char="󰁹",
+                    empty_char="󰂃",
+                    full_char="󰁹",
+                    show_short_text=False,
+                    not_charging_char="󰁹",
+                    foreground=colors["color2"],
+                ),
+                widget.Backlight(
+                    fmt="󰃚 {}",
+                    backlight_name=get_backlight_device(),
+                    decorations=[
+                        RectDecoration(
+                            colour=colors["background"],
+                            radius=widget_radius,
+                            filled=True,
+                        )
+                    ],
+                    foreground=colors["color3"],
+                ),
+                # widget.Wlan(
+                #     fmt="  {}",
+                #     format="{essid}",
+                #     interface=get_wireless_interface(),
+                #     foreground=colors["background"],
+                # ),
+                # widget.Systray(icon_size=font_size),
+                widget.Clock(
+                    format="󰥔 %I:%M",
+                    decorations=[
+                        RectDecoration(
+                            colour=colors["background"],
+                            radius=widget_radius,
+                            filled=True,
+                        )
+                    ],
+                    foreground=colors["color4"],
+                ),
                 widget.KeyboardLayout(configured_keyboards=['us','ru']),
             ],
             font_size,
@@ -186,13 +267,6 @@ reconfigure_screens = True
 # focus, should we respect this or not?
 auto_minimize = True
 
-# When using the Wayland backend, this can be used to configure input devices.
-wl_input_rules = None
-
-# xcursor theme (string or None) and size (integer) for Wayland backend
-wl_xcursor_theme = None
-wl_xcursor_size = 24
-
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the
 # mailing lists, GitHub issues, and other WM documentation that suggest setting
@@ -208,6 +282,7 @@ def autostart():
     autostartup = [
         'setxkbmap -layout "us,ru"',
         'keymapper -u &',
+        'dunst &',
         'xinput set-prop "ELAN2310:00 04F3:3238 Touchpad" "libinput Tapping Enabled" 1',
         'xinput set-prop "ELAN2310:00 04F3:3238 Touchpad" "libinput Natural Scrolling Enabled" 1',
     ]
