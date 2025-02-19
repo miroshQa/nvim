@@ -1,0 +1,14 @@
+configuration {
+    font: "Hack 48";
+    terminal: "wezterm";
+    timeout {
+        action: "kb-cancel";
+        delay: 0;
+    }
+    filebrowser {
+        directories-first: true;
+        sorting-method: "name";
+  }
+}
+
+@theme "gruvbox-dark"
