@@ -9,7 +9,7 @@
 
 ## Do you want to check it out?) ⭐
 ### Linux
-0. First of all you need to make sure that you have all external [dependencies](https://github.com/nvim-lua/kickstart.nvim) listed here
+0. First of all you need to make sure that you have all external [dependencies](https://github.com/nvim-lua/kickstart.nvim) listed here and your neovim vesion >= 0.11
 1. Clone repo
 ```shell
 git clone https://github.com/mirosQa/nvim.git ~/.config/nvim-m
@@ -18,7 +18,6 @@ git clone https://github.com/mirosQa/nvim.git ~/.config/nvim-m
 ```shell
 NVIM_APPNAME=nvim-m nvim
 ```
-3. Open Mason and install the LSP servers you need. Do :checkhealth if something goes wrong
 
 
 ## Also to understand some of my settings, you may need to know that I use the following keymaps in the system

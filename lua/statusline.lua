@@ -34,11 +34,11 @@ end
 function _G.statusline()
   return table.concat({
     "%f",
-    "%y",
     "%h%w%m%r",
     diagnostics(),
     "%=",
     lsp_status(),
+    "%y",
     " %-14(%l,%c%V%)",
     "%P",
   }, " ")
