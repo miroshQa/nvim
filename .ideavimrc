@@ -1,0 +1,39 @@
+let mapleader = " "
+
+set ignorecase
+set relativenumber
+set clipboard+=unnamed
+set incsearch
+set nohlsearch
+set noshowcmd
+set number
+set smartcase
+set clipboard+=unnamed
+set scrolloff=5
+set incsearch
+
+" Don't use Ex mode, use Q for formatting.
+map Q gq
+
+
+
+" LSP RELATED ACTIONS
+nmap gd <Action>(GotoDeclaration)
+nmap gi <Action>(GotoImplementation)
+nmap gt <Action>(GotoTypeDeclaration)
+nmap <leader>lf <Action>(ReformatCode)
+nmap M <Action>(ShowErrorDescription)
+
+" Fuzzy finding (aka telescope)
+map <leader>f <action>(GotoFile)
+map <leader>/ <action>(FindInPath)
+nmap <leader>j <action>(GotoSymbol)
+
+nmap <leader>r <Action>(Console.Jdbc.Execute)
+
+" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
+Plug 'machakann/vim-highlightedyank'
+Plug 'tpope/vim-commentary'
+Plug 'preservim/nerdtree'
+
+"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
