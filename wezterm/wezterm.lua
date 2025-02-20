@@ -7,7 +7,6 @@ config.color_scheme = "Gruvbox Dark (Gogh)"
 config.hide_tab_bar_if_only_one_tab = true
 config.enable_scroll_bar = true
 config.audible_bell = "Disabled"
-config.window_background_opacity = 1
 config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 config.use_fancy_tab_bar = true
 config.window_background_opacity = 0.99

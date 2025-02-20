@@ -3,20 +3,19 @@ from libqtile.lazy import lazy
 from colors import colors
 import autostart
 
-from keys import mod, keys
+from libqtile.config import Click, Drag, Group, Key, Match, Screen
+
+from keys import mod, keys, groups
 from screens import screens
+
 
 
 layouts = [
     layout.Columns(
-        border_focus_stack=["#d75f5f", "#8f3d3d"],
-        border_width=4,
-        single_border_width=0,
-        margin=8,
+        border_width=5,
+        margin=10,
         border_focus=colors["color7"],
-        border_normal=colors["color8"],
     ),
-    layout.Max(margin=8),
 ]
 
 widget_defaults = dict(
@@ -35,6 +34,8 @@ bring_front_click = False
 floats_kept_above = True
 cursor_warp = False
 floating_layout = layout.Floating(
+    border_focus=colors["color7"],
+    border_width=5,
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
