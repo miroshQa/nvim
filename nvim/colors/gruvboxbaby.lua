@@ -1,3 +1,5 @@
+local transparent_mode = true
+
 local c = {
   foreground = "#fbf1c7",
   soft_green = "#b8bb26",
@@ -30,6 +32,13 @@ local c = {
     text = "#314753",
   }
 }
+
+if transparent_mode then
+  c.background = c.NONE
+  c.background_dark = c.NONE
+  c.background_light = c.NONE
+end
+
 
 local theme = {
   NormalFloat = { fg = c.foreground, bg = c.background },
