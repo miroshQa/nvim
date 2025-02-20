@@ -14,6 +14,7 @@ config.max_fps = 240
 config.initial_rows = 36
 config.initial_cols = 140
 config.adjust_window_size_when_changing_font_size = false
+config.default_cursor_style = 'SteadyBar'
 
 config.window_padding = {
   left = "1cell",

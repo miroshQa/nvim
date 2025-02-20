@@ -9,7 +9,7 @@ from utils import *
 
 widget_radius = 18
 font_size = 48
-wallpaper = "~/.config/wallpapers/ancientcastle.jpg"
+wallpaper = "~/.config/wallpapers/secluded-grove-pixel.png"
 
 sep_config = {
         "size_percent": 0,
@@ -26,6 +26,7 @@ screens = [
                     active=colors["foreground"],
                     inactive=colors["color8"],
                     disable_drag=True,
+                    icon_size=300,
                     radius=True,
                     padding_x=0,
                     margin_x=28,
@@ -68,7 +69,11 @@ screens = [
                 widget.KeyboardLayout(configured_keyboards=['us','ru']),
             ],
             font_size,
-            opacity = 0.9,
+            opacity = 1,
+            # background="#00000000",
+            # border_width=[0, 0, 0, 0],
+            # margin=[0, 0, 0, 0],
+            # border_color=["000000", "000000", "000000", "000000"],
         ),
         x11_drag_polling_rate = 120,
         wallpaper = wallpaper,
