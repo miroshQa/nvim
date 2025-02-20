@@ -31,6 +31,10 @@ screens = [
                     margin_x=28,
                 ),
                 widget.Spacer(),
+                widget.Clock(
+                    format="󰥔 %I:%M",
+                    foreground=colors["color4"],
+                ),
                 widget.Memory(
                     format="󰍛 {MemUsed:.0f}{mm}",
                     foreground=colors["color5"],
@@ -38,6 +42,12 @@ screens = [
                 widget.Sep(**sep_config),
                 widget.CPU(
                     format="󰘚 {load_percent}%",
+                    foreground=colors["color6"],
+                ),
+                widget.Volume(
+                    mute_format='', 
+                    unmute_format='  {volume}%', 
+                    step=5,
                     foreground=colors["color6"],
                 ),
                 widget.Battery(
@@ -53,42 +63,13 @@ screens = [
                 widget.Backlight(
                     fmt="󰃚 {}",
                     backlight_name=get_backlight_device(),
-                    decorations=[
-                        RectDecoration(
-                            colour=colors["background"],
-                            radius=widget_radius,
-                            filled=True,
-                        )
-                    ],
                     foreground=colors["color3"],
-                ),
-                # widget.Wlan(
-                #     fmt="  {}",
-                #     format="{essid}",
-                #     interface=get_wireless_interface(),
-                #     foreground=colors["background"],
-                # ),
-                widget.Clock(
-                    format="󰥔 %I:%M",
-                    decorations=[
-                        RectDecoration(
-                            colour=colors["background"],
-                            radius=widget_radius,
-                            filled=True,
-                        )
-                    ],
-                    foreground=colors["color4"],
                 ),
                 widget.KeyboardLayout(configured_keyboards=['us','ru']),
             ],
             font_size,
-            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
-            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
+            opacity = 0.9,
         ),
-        # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
-        # By default we handle these events delayed to already improve performance, however your system might still be struggling
-        # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
-        background="#000000.3",
         x11_drag_polling_rate = 120,
         wallpaper = wallpaper,
         wallpaper_mode = "fill",
